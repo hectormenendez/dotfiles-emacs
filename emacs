@@ -251,6 +251,11 @@
 ;; Adds a command for restarting emacs
 (use-package restart-emacs :ensure t)
 
+;; Improve emacs' help system
+(use-package help+ :ensure t)
+(use-package help-fns+ :ensure t)
+(use-package help-mode+ :ensure t)
+
 ;; Improve default functionality for dired
 (use-package dired+
     :ensure t
@@ -480,19 +485,6 @@
     :config (progn
         ;; Enable company in any programming mode
         (add-hook 'prog-mode-hook 'company-mode)
-        ;; Enable tern
-        (use-package tern
-            :ensure t
-            :config (progn
-                (add-hook 'js2-mode-hook 'tern-mode)
-                (setq tern-command (append tern-command '("--no-port-file")))
-            )
-        )
-        (use-package company-tern
-            :ensure t
-            :init (add-to-list 'company-backends 'company-tern)
-            :config (setq company-tern-property-marker nil)
-        )
     )
 )
 
@@ -801,16 +793,33 @@
     )
 )
 
+;; Enable Json mode
+(use-package json-mode
+    :ensure t
+    :commands json-mode
+    :mode ("\\.json\\'" . json-mode)
+)
+
 ;; Enable Javascript mode
-(use-package json-mode :ensure t)
 (use-package js2-mode
     :ensure t
     :commands js2-mode
-    :mode (
-        ("\\.js\\'" . js2-mode)
-        ("\\.json\\'" . json-mode)
-    )
+    :mode (("\\.js\\'" . js2-mode))
     :config (progn
+        ;; Enable tern
+        (use-package tern
+            :ensure t
+            :config (progn
+                (add-hook 'js2-mode-hook 'tern-mode)
+                (setq-default tern-command (append tern-command '("--no-port-file")))
+                ;; Add tern to copany backends.
+                (use-package company-tern
+                    :ensure t
+                    :init (add-to-list 'company-backends 'company-tern)
+                    :config (setq company-tern-property-marker nil)
+                )
+            )
+        )
         (setq-default
             js2-basic-offset 4
             js2-highlight-level 3
