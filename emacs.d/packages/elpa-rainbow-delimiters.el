@@ -1,9 +1,13 @@
-;; Use different colors for parenthesis to ease matching
+;;; elpa-rainbow-delimiters.el --- Use different colors for parenthesis to ease matching
+
+;;; Commentary:
+
+;;; Code:
+
 (use-package rainbow-delimiters
     :ensure t
-    :config (progn
-        (add-hook 'prog-mode-hook 'rainbow-delimiters-mode)
-    )
+    :config (rainbow-delimiters-mode 1)
 )
 
 (provide 'elpa-rainbow-delimiters)
+;;; elpa-rainbow-delimiters.el  ends here

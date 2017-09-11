@@ -1,11 +1,16 @@
-;; Add an indicator at the fill-column position.
+;;; elpa-fill-column-indicator.el --- Show a line on the fill-column character.
+
+;;; Commentary:
+
+;;; Code:
 (use-package fill-column-indicator
     :ensure t
     :delight fci-mode
     :config (progn
         (setq fci-rule-width 1)
-        (add-hook 'prog-mode-hook 'fci-mode)
+        (turn-on-fci-mode)
     )
 )
 
 (provide 'elpa-fill-column-indicator)
+;;; elpa-fill-column-indicator ends here

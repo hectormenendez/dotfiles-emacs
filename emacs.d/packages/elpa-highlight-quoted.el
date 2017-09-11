@@ -1,4 +1,9 @@
-;; What? no highlighted quotes for lisp either? c'mon man!
+;;; elpa-highlight-quoted.el --- Highlight lisp-quotes
+
+;;; Commentary:
+;;; What? no highlighted quotes for Lisp? c'mon man!
+
+;;; Code:
 (use-package highlight-quoted
     :ensure t
     :delight highlight-quoted-mode
@@ -6,3 +11,4 @@
 )
 
 (provide 'elpa-highlight-quoted)
+;;; elpa-highlight-quoted.el  ends here

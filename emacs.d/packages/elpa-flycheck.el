@@ -1,20 +1,25 @@
-;; Syntax checking
+;;; elpa-flycheck.el --- Enable syntax checking
+
+;;; Commentary:
+
+;;; Code:
 (use-package flycheck
     :ensure t
-    :init (setq-default flycheck-disabled-checkers (append '(
-        javascript-jshint
-        javascript-jscs
-        javascript-standard
-    )))
     :config (progn
         (setq
+            flycheck-disabled-checkers (append '(
+                javascript-jshint
+                javascript-jscs
+                javascript-standard
+            ))
             flycheck-temp-prefix ".flycheck"
             flycheck-mode-line-prefix " ✖︎"
         )
         (flycheck-add-mode 'javascript-eslint 'rjsx-mode)
         (flycheck-add-mode 'javascript-eslint 'js2-mode)
-        (add-hook 'prog-mode-hook 'global-flycheck-mode)
+        (global-flycheck-mode 1)
     )
 )
 
 (provide 'elpa-flycheck)
+;;; elpa-flycheck.el ends here
