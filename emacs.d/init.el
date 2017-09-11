@@ -55,8 +55,7 @@
 (use-package bind-key :demand t); Allows the  use of :bind
 (use-package delight :ensure t); Diminish alternative, allows to rename mode names
 
-;; ---------------------------------------------------------------------- Packages: Native
-
+;; ---------------------------------------------------------------------- Packages» Native
 (require 'native-simple)
 (require 'native-server)
 (require 'native-files)
@@ -72,49 +71,74 @@
 (require 'native-prog-mode)
 (require 'native-frame)
 
-;; ------------------------------------------------------------------------- ELPA Packages
-
-; (require 'elpa-centered-cursor-mode)
+;; --------------------------------------------------- Packages» Editor» SystemIntegration
 (require 'elpa-exec-path-from-shell)
+(require 'elpa-nvm)
+(require 'elpa-wakatime-mode)
+
+
+;; ----------------------------------------------------------- Packages» Editor» Behaviour
 (require 'elpa-try)
 (require 'elpa-restart-emacs)
-(require 'elpa-help+)
-(require 'elpa-zoom-frm)
-(require 'elpa-rainbow-mode)
-(require 'elpa-smartparens)
-(require 'elpa-rainbow-delimiters)
-(require 'elpa-dired+)
-(require 'elpa-highlight-indent-guides)
-(require 'elpa-highlight-numbers)
-(require 'elpa-highlight-quoted)
-(require 'elpa-hl-todo)
-(require 'elpa-pretty-lambdada)
-(require 'elpa-which-key)
 (require 'elpa-evil)
-(require 'elpa-expand-region)
-(require 'elpa-multiple-cursors)
-(require 'elpa-helm)
-(require 'elpa-persp-mode)
-(require 'elpa-projectile)
+
+
+;; ------------------------------------------------------- Packages» Editor» ExtraFeatures
 (require 'elpa-magit)
-(require 'elpa-company)
-(require 'elpa-undo-tree)
-(require 'elpa-linum-relative)
-(require 'elpa-git-gutter)
-(require 'elpa-fill-column-indicator)
-(require 'elpa-dtrt-indent)
-(require 'elpa-neotree)
+
+
+;; ---------------------------------------------------------- Packages» Editor» Navigation
 (require 'elpa-ace-window)
-(require 'elpa-telephone-line)
-(require 'elpa-nvm)
-(require 'elpa-dumb-jump)
+(require 'elpa-helm)
+(require 'elpa-projectile)
+(require 'elpa-persp-mode)
+(require 'elpa-dired+)
+(require 'elpa-help+)
+(require 'elpa-neotree)
+;; (require 'elpa-undo-tree);; TODO: Undo tree is showing error message
+
+;; ---------------------------------------------------------- Packages» Content» Behaviour
 (require 'elpa-json-mode)
 (require 'elpa-js2-mode)
 (require 'elpa-rjsx-mode)
-(require 'elpa-flycheck)
 (require 'elpa-markdown-mode)
 (require 'elpa-nxml-mode)
-(require 'elpa-wakatime-mode)
+
+;; --------------------------------------------------------- Packages» Content» Navigation
+(require 'elpa-multiple-cursors)
+(require 'elpa-expand-region)
+
+
+;; --------------------------------------------------------- Packages» Content» VisualAids
+(require 'elpa-which-key)
+(require 'elpa-telephone-line)
+(require 'elpa-git-gutter)
+(require 'elpa-zoom-frm)
+(require 'elpa-company)
+(require 'elpa-linum-relative)
+;; NOTE: I'm not that sure that I still like this
+;; (require 'elpa-centered-cursor-mode)
+
+
+;; TODO: All of this shoud be wrapped in a prog-mode hook
+;; ------------------------------------------------ Packages» ProgMode» Editor» VisualAids
+(require 'elpa-flycheck)
+(require 'elpa-highlight-indent-guides)
+(require 'elpa-fill-column-indicator)
+
+;; ----------------------------------------------- Packages» ProgMode» Content» Navigation
+(require 'elpa-dumb-jump)
+(require 'elpa-dtrt-indent)
+
+
+;; ----------------------------------------------- Packages» ProgMode» Content» VisualAids
+(require 'elpa-smartparens)
+(require 'elpa-rainbow-delimiters)
+(require 'elpa-rainbow-mode)
+(require 'elpa-highlight-numbers)
+(require 'elpa-highlight-quoted)
+(require 'elpa-pretty-lambdada)
+(require 'elpa-hl-todo)
 
 (provide 'emacs)
-;;; emacs ends here
+;;; init.el ends here
