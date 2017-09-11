@@ -6,6 +6,7 @@
         ("\\.svg\\'" . nxml-mode)
         ("\\.xml\\'" . nxml-mode)
         ("\\.xslt\\'" . nxml-mode)
+        ("\\.html\\'" . nxml-mode)
     )
     :config (progn
         (setq
@@ -15,7 +16,6 @@
             nxml-child-indent 4
         )
         (fset 'xml-mode 'nxml-mode)
-        (add-hook 'nxml-mode-hook (lambda () (run-hooks 'prog-mode-hook)))
     )
 )
 
