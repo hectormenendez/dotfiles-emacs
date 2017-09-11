@@ -5,7 +5,7 @@
 ;;; Code:
 (use-package flycheck
     :ensure t
-    :config (progn
+    :config (add-hook 'prog-mode-hook (lambda ()
         (setq
             flycheck-disabled-checkers (append '(
                 javascript-jshint
@@ -15,10 +15,8 @@
             flycheck-temp-prefix ".flycheck"
             flycheck-mode-line-prefix " ✖︎"
         )
-        (flycheck-add-mode 'javascript-eslint 'rjsx-mode)
-        (flycheck-add-mode 'javascript-eslint 'js2-mode)
-        (global-flycheck-mode 1)
-    )
+        (flycheck-mode 1)
+    ))
 )
 
 (provide 'elpa-flycheck)

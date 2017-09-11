@@ -6,7 +6,9 @@
 
 (use-package rainbow-delimiters
     :ensure t
-    :config (rainbow-delimiters-mode 1)
+    :config (add-hook 'prog-mode-hook (lambda ()
+        (rainbow-delimiters-mode 1)
+    ))
 )
 
 (provide 'elpa-rainbow-delimiters)

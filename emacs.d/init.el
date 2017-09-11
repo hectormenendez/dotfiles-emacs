@@ -118,28 +118,24 @@
 ;; NOTE: I'm not that sure that I still like this
 ;; (require 'elpa-centered-cursor-mode)
 
-
-(add-hook 'prog-mode-hook (lambda ()
-
 ;; ------------------------------------------------ Packages» ProgMode» Editor» VisualAids
-    (require 'elpa-flycheck)
-    (require 'elpa-highlight-indent-guides)
-    (require 'elpa-fill-column-indicator)
-    (require 'elpa-linum-relative)
+(require 'elpa-highlight-indent-guides)
+(require 'elpa-fill-column-indicator)
+(require 'elpa-linum-relative)
+(require 'elpa-flycheck)
 
 ;; ----------------------------------------------- Packages» ProgMode» Content» Navigation
-    (require 'elpa-dumb-jump)
-    (require 'elpa-dtrt-indent)
+(require 'elpa-dumb-jump)
+(require 'elpa-dtrt-indent)
 
 ;; ----------------------------------------------- Packages» ProgMode» Content» VisualAids
-    (require 'elpa-smartparens)
-    (require 'elpa-rainbow-delimiters)
-    (require 'elpa-rainbow-mode)
-    (require 'elpa-highlight-numbers)
-    (require 'elpa-highlight-quoted)
-    (require 'elpa-pretty-lambdada)
-    (require 'elpa-hl-todo)
-))
+(require 'elpa-pretty-lambdada)
+(require 'elpa-smartparens)
+(require 'elpa-hl-todo)
+(require 'elpa-rainbow-delimiters)
+(require 'elpa-rainbow-mode)
+(require 'elpa-highlight-numbers)
+(require 'elpa-highlight-quoted)
 
 
 (provide 'emacs)

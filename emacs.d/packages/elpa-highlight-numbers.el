@@ -7,7 +7,9 @@
 (use-package highlight-numbers
     :ensure t
     :delight highlight-numbers-mode
-    :config (highlight-numbers-mode 1)
+    :config (add-hook 'prog-mode-hook (lambda ()
+        (highlight-numbers-mode 1)
+    ))
 )
 
 (provide 'elpa-highlight-numbers)

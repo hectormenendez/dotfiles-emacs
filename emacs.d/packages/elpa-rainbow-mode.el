@@ -6,7 +6,9 @@
 (use-package rainbow-mode
     :ensure t
     :if window-system
-    :config (rainbow-mode 1)
+    :config (add-hook 'prog-mode-hook (lambda ()
+        (rainbow-mode 1)
+    ))
 )
 
 (provide 'elpa-rainbow-mode)

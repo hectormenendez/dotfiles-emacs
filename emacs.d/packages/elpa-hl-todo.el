@@ -10,7 +10,9 @@
         ("C-c t p" . hl-todo-previous)
         ("C-c C-t" . hl-todo-occur)
     )
-    :config (hl-todo-mode 1)
+    :config (add-hook 'prog-mode-hook (lambda ()
+        (hl-todo-mode 1)
+    ))
 )
 
 (provide 'elpa-hl-todo)

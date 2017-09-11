@@ -5,8 +5,11 @@
 ;;; Code:
 (use-package pretty-lambdada
     :ensure t
-    :config (pretty-lambda-mode 1)
+    :config (add-hook 'prog-mode-hook (lambda ()
+        (pretty-lambda-mode t)
+    ))
 )
 
 (provide 'elpa-pretty-lambdada)
 ;;; elpa-pretty-lambdada.el ends here
+

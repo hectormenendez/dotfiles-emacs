@@ -6,11 +6,11 @@
 (use-package fill-column-indicator
     :ensure t
     :delight fci-mode
-    :config (progn
+    :config (add-hook 'prog-mode-hook (lambda ()
         (setq fci-rule-width 1)
         (turn-on-fci-mode)
     )
-)
+))
 
 (provide 'elpa-fill-column-indicator)
 ;;; elpa-fill-column-indicator ends here

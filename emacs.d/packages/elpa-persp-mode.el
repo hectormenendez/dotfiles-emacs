@@ -10,7 +10,7 @@
             persp-auto-save-fname "autosave"
             persp-set-last-persp-for-new-frames nil; don't use last persp for new frames
             persp-auto-save-opt 1; Auto-save perspective on buffer kill
-            persp-auto-resume-time 1; Load perspectives on startup
+            ;; persp-auto-resume-time 1; Load perspectives on startup
             persp-nil-hidden t; hide the nil perspective
         )
         ;; Integrate with projectile

@@ -6,10 +6,10 @@
 (use-package smartparens
     :ensure t
     :delight smartparens-mode
-    :config (progn
+    :config (add-hook 'prog-mode-hook (lambda ()
         (require 'smartparens-config); Enable the default config
         (smartparens-mode 1)
-    )
+    ))
 )
 
 (provide 'elpa-smartparens)

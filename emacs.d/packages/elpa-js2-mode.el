@@ -1,41 +1,13 @@
-;; Enable Javascript mode
+;;; elpa-js2-mode.el --- Javascript bindings
+
+;;; Commentary:
+
+;;; Code:
 (use-package js2-mode
     :ensure t
     :interpreter "node"
     :mode (("\\.js\\'" . js2-mode))
     :config (progn
-        (use-package simple-httpd :ensure t)
-        (use-package skewer-mode
-            :ensure t
-            :delight skewer-mode
-            :config (progn
-                (add-hook 'js2-mode-hook 'skewer-mode)
-                (add-hook 'css-mode-hook 'skewer-css-mode)
-                (add-hook 'html-mode-hook 'skewer-html-mode)
-            )
-        )
-        ;; Enable contex-sensitive auto-completion (depends on skewer-mode too)
-        (use-package ac-js2
-            :ensure t
-            :config (progn
-                (setq ac-js2-evaluate-calls t)
-                (add-hook 'js2-mode-hook 'ac-js2-mode)
-            )
-        )
-        ;; Enable tern
-        (use-package tern
-            :ensure t
-            :config (progn
-                (add-hook 'js2-mode-hook 'tern-mode)
-                (setq-default tern-command (append tern-command '("--no-port-file")))
-                ;; Add tern to copany backends.
-                (use-package company-tern
-                    :ensure t
-                    :init (add-to-list 'company-backends 'company-tern)
-                    :config (setq company-tern-property-marker nil)
-                )
-            )
-        )
         (setq-default
             js2-basic-offset 4
             js2-highlight-level 3
@@ -58,4 +30,46 @@
     )
 )
 
+;; Packages dependent on js2-mode
+(add-hook 'js2-mode-hook (lambda ()
+
+    ;; TODO: Why do I needed this again?
+    (use-package simple-httpd :ensure t)
+
+    ;; TODO: And this one too?
+    (use-package skewer-mode
+        :ensure t
+        :delight skewer-mode
+        :config (skewer-mode 1)
+    )
+
+    ;; TODO: Shit, this one too!
+    (use-package ac-js2
+        :ensure t
+        :config (progn
+            (setq ac-js2-evaluate-calls t)
+            (ac-js2-mode 1)
+        )
+    )
+
+    ;; Enable tern
+    (use-package tern
+        :ensure t
+        :config (progn
+            (setq tern-command (append tern-command '("--no-port-file")))
+            (tern-mode 1)
+        )
+    )
+
+))
+
+            ;; Add tern to copany backends.
+            ;; (use-package company-tern
+            ;;     :ensure t
+            ;;     :init (add-to-list 'company-backends 'company-tern)
+            ;;     :config (setq company-tern-property-marker nil)
+            ;; )
+
 (provide 'elpa-js2-mode)
+;;; elpa-js2-mode.el ends here
+
