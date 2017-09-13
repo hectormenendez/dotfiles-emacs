@@ -20,18 +20,29 @@
 (use-package helm-projectile
     :ensure t
     :after (helm projectile)
-    :config (add-hook 'after-init-hook (lambda ()
-        ;; make C-/ trigger helm-ag instead of undo-tree's undo
-        (define-key global-map (kbd "C-/") 'helm-projectile-ag); undo-tree-undo
-        ;; Enable helm-projectile
-        (define-key global-map (kbd "M-f") 'helm-projectile); forward-word
-        ;; Enable finding directories
-        (define-key global-map (kbd "M-F") 'helm-projectile-find-dir)
-        ;; Enable finding buffers
-        (define-key global-map (kbd "M-b") 'helm-projectile-switch-to-buffer); orig: backward-char
-        ;; Enable finding projects
-        (define-key global-map (kbd "M-p") 'helm-projectile-switch-project)
-    ))
+    :config (progn
+
+        (add-hook 'after-init-hook (lambda ()
+            ;; Enable helm-projectile
+            (define-key global-map (kbd "M-f") 'helm-projectile); forward-word
+            ;; Enable finding directories
+            (define-key global-map (kbd "M-F") 'helm-projectile-find-dir)
+            ;; Enable finding buffers
+            (define-key global-map (kbd "M-b") 'helm-projectile-switch-to-buffer); orig: backward-char
+            ;; Enable finding projects
+            (define-key global-map (kbd "M-p") 'helm-projectile-switch-project);
+        ))
+
+        (eval-after-load 'evil-maps (lambda ()
+            (define-key evil-normal-state-map (kbd "C-f") nil)
+            (define-key evil-emacs-state-map (kbd "C-f") nil)
+            (define-key evil-motion-state-map (kbd "C-f") nil)
+            (define-key evil-operator-state-map (kbd "C-f") nil)
+            (define-key evil-visual-state-map (kbd "C-f") nil)
+            (define-key evil-replace-state-map (kbd "C-f") nil)
+            (define-key global-map (kbd "C-f") 'helm-projectile-ag)
+        ))
+    )
 )
 
 (provide 'elpa-projectile)
