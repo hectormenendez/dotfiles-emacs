@@ -1,7 +1,7 @@
 ;; Enable version control using Magit (fugitive alternative)
 (use-package magit
     :ensure t
-    :config (add-hook 'evil-local-mode-hook '(lambda ()
+    :config (add-hook 'evil-leader-mode-hook '(lambda ()
         (evil-leader/set-key "gs" 'magit-status)
         (evil-leader/set-key "gc" 'magit-commit)
         (evil-leader/set-key "gp" 'magit-push)
