@@ -1,4 +1,8 @@
-;; File handling
+;;; native-files.el --- File handling
+
+;;; Commentary:
+
+;;; Code:
 (use-package files
     :demand t
     :config (setq
@@ -14,3 +18,5 @@
 )
 
 (provide 'native-files)
+
+;;; native-files.el ends here

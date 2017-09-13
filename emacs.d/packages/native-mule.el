@@ -1,4 +1,9 @@
-;; Multilingual support (set everything to utf-8, basically)
+;;; native-mule.el --- Multilingual support
+
+;;; Commentary:
+;;; (set everything to utf-8, basically)
+
+;;; Code:
 (use-package mule
     :demand t
     :config (progn
@@ -17,3 +22,5 @@
 )
 
 (provide 'native-mule)
+
+;;; native-mule.el ends here
