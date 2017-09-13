@@ -4,8 +4,23 @@
 
 ;;; Code:
 
+(use-package undo-tree
+    ;; This is a dependency for evil, so we configure it from here.
+    :ensure t
+    :delight undo-tree-mode
+    :bind (
+        ("C-x u" . undo-tree-visualize)
+    )
+    :config (progn
+        (setq undo-tree-auto-save-history t)
+        (setq undo-tree-history-directory-alist '(("." . "~/.emacs.d/_undotree")))
+        (global-undo-tree-mode 1)
+    )
+)
+
 (use-package evil
     :ensure t
+    :after undo-tree
     :config (progn
         (add-hook 'evil-local-mode-hook (lambda ()
             ;; Have <tab> to work as it does on Vim

@@ -95,7 +95,6 @@
 (require 'elpa-dired+)
 (require 'elpa-help+)
 (require 'elpa-neotree)
-;; (require 'elpa-undo-tree);; TODO: Undo tree is showing error message
 
 ;; ---------------------------------------------------------- Packages» Content» Behaviour
 (require 'elpa-json-mode)
