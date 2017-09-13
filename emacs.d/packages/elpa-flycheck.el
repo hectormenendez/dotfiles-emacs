@@ -5,18 +5,42 @@
 ;;; Code:
 (use-package flycheck
     :ensure t
-    :config (add-hook 'prog-mode-hook (lambda ()
-        (setq
-            flycheck-disabled-checkers (append '(
-                javascript-jshint
-                javascript-jscs
-                javascript-standard
-            ))
-            flycheck-temp-prefix ".flycheck"
-            flycheck-mode-line-prefix " ✖︎"
+    :config (progn
+        (add-hook 'prog-mode-hook (lambda ()
+            (setq
+                flycheck-temp-prefix ".flycheck"
+                flycheck-mode-line-prefix " ✖︎"
+                flycheck-disabled-checkers (append '( ;; Disable this checkers
+                    javascript-jshint; normally javascript-eslint should do the dirty work
+                    javascript-jscs
+                    javascript-standard
+                ))
+                flycheck-emacs-lisp-load-path 'inherit; let flycheck know Emacs' loadpath
+            )
+            (flycheck-mode 1)
+        ))
+        (add-hook 'flycheck-mode-hook 'etor/flycheck-eslint-from-project)
+    )
+)
+
+(defun etor/flycheck-eslint-from-project ()
+    "When there's a local eslint available, use it instead of the global one."
+    (let*
+        (
+            (root
+                (locate-dominating-file
+                    (or (buffer-file-name) default-directory)
+                    "node_modules"
+                )
+            )
+            (eslint
+                (and root (expand-file-name "node_modules/.bin/eslint" root))
+            )
         )
-        (flycheck-mode 1)
-    ))
+        (when (and eslint (file-executable-p eslint))
+            (setq-local flycheck-javascript-eslint-executable eslint)
+        )
+    )
 )
 
 (provide 'elpa-flycheck)
