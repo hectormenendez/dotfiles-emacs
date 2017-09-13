@@ -5,13 +5,7 @@
 
 ;;; Code:
 
-;; ---------------------------------------------------------------------- Helper constants
-
-
-(defconst *path-elpa* (expand-file-name "_elpa" user-emacs-directory))
-(defconst *path-packages* (expand-file-name "packages" user-emacs-directory))
-
-;; ----------------------------------------------------------------------- Core settings
+;; ------------------------------------------------------------------------- Core settings
 
 (setq
     ;; Core
@@ -34,13 +28,11 @@
 
 (setq
     package-enable-at-startup nil; Disable the default packaage-manager at startup
-    package-user-dir *path-elpa*; packages dir
+    package-user-dir (expand-file-name "_elpa" user-emacs-directory); packages dir
 )
 
 ;; The repositories to fetch packages-from.
 (add-to-list 'package-archives '("melpa" . "http://melpa.org/packages/"))
-;; The local packages
-(add-to-list 'load-path *path-packages*)
 
 ;; This will be added no matter what, so, add it.
 (package-initialize)
@@ -52,6 +44,8 @@
 )
 (eval-when-compile (require 'use-package))
 
+;; ------------------------------------------------------------------------------ Packages
+(add-to-list 'load-path (expand-file-name "packages" user-emacs-directory))
 (use-package bind-key :demand t); Allows the  use of :bind
 (use-package delight :ensure t); Diminish alternative, allows to rename mode names
 
@@ -107,20 +101,19 @@
 (require 'elpa-multiple-cursors)
 (require 'elpa-expand-region)
 
-
 ;; --------------------------------------------------------- Packages» Content» VisualAids
 (require 'elpa-which-key)
 (require 'elpa-telephone-line)
-(require 'elpa-git-gutter)
 (require 'elpa-zoom-frm)
 (require 'elpa-company)
 ;; NOTE: I'm not that sure that I still like this
 ;; (require 'elpa-centered-cursor-mode)
 
 ;; ------------------------------------------------ Packages» ProgMode» Editor» VisualAids
+(require 'elpa-linum-relative)
+(require 'elpa-git-gutter)
 (require 'elpa-highlight-indent-guides)
 (require 'elpa-fill-column-indicator)
-(require 'elpa-linum-relative)
 (require 'elpa-flycheck)
 
 ;; ----------------------------------------------- Packages» ProgMode» Content» Navigation
@@ -128,9 +121,9 @@
 (require 'elpa-dtrt-indent)
 
 ;; ----------------------------------------------- Packages» ProgMode» Content» VisualAids
+(require 'elpa-hl-todo)
 (require 'elpa-pretty-lambdada)
 (require 'elpa-smartparens)
-(require 'elpa-hl-todo)
 (require 'elpa-rainbow-delimiters)
 (require 'elpa-rainbow-mode)
 (require 'elpa-highlight-numbers)
