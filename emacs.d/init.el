@@ -64,22 +64,20 @@
 (require 'native-paren)
 (require 'native-prog-mode)
 (require 'native-frame)
+(require 'native-menu-bar)
 
 ;; --------------------------------------------------- Packages» Editor» SystemIntegration
 (require 'elpa-exec-path-from-shell)
 (require 'elpa-nvm)
 (require 'elpa-wakatime-mode)
 
-
 ;; ----------------------------------------------------------- Packages» Editor» Behaviour
 (require 'elpa-try)
 (require 'elpa-restart-emacs)
 (require 'elpa-evil)
 
-
 ;; ------------------------------------------------------- Packages» Editor» ExtraFeatures
 (require 'elpa-magit)
-
 
 ;; ---------------------------------------------------------- Packages» Editor» Navigation
 (require 'elpa-ace-window)
