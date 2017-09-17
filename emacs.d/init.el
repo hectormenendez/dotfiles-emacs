@@ -65,6 +65,7 @@
 (require 'native-prog-mode)
 (require 'native-frame)
 (require 'native-menu-bar)
+(require 'native-register)
 
 ;; --------------------------------------------------- Packages» Editor» SystemIntegration
 (require 'elpa-exec-path-from-shell)
