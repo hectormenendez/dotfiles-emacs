@@ -17,6 +17,7 @@
     ;; Startup
     inhibit-startup-screen 1; Don't show the welcome screen
     initial-scratch-message nil; Don't show a message on *scratch* mode
+    create-lockfiles nil; Don't create ".#" files
 )
 
 ; Ask for just one letter when confirmation needed
