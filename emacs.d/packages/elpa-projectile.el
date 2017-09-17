@@ -24,9 +24,9 @@
 
         (add-hook 'after-init-hook (lambda ()
             ;; Enable helm-projectile
-            (define-key global-map (kbd "M-f") 'helm-projectile); forward-word
+            (define-key global-map [(meta f)] 'helm-projectile); forward-word
             ;; Enable finding directories
-            (define-key global-map (kbd "M-F") 'helm-projectile-find-dir)
+            (define-key global-map [(meta shift f)] 'helm-projectile-find-dir)
             ;; Enable finding buffers
             (define-key global-map (kbd "M-b") 'helm-projectile-switch-to-buffer); orig: backward-char
             ;; Enable finding projects
@@ -40,7 +40,8 @@
             (define-key evil-operator-state-map (kbd "C-f") nil)
             (define-key evil-visual-state-map (kbd "C-f") nil)
             (define-key evil-replace-state-map (kbd "C-f") nil)
-            (define-key global-map (kbd "C-f") 'helm-projectile-ag)
+            (define-key global-map [(ctrl f)] 'helm-projectile-ag)
+            (define-key global-map [(ctrl shift f)] 'projectile-replace-regexp)
         ))
     )
 )

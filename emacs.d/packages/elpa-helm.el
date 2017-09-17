@@ -23,6 +23,12 @@
             ;; Map the dynamic kill-ring
             (global-set-key (kbd "C-x c M-y") nil); The original helm-show-kill-ring
             (global-set-key (kbd "M-v") 'helm-show-kill-ring); The scroll-down-command
+            (define-key global-map (kbd "M-d") 'helm-imenu-in-all-buffers)
+        ))
+
+        (add-hook 'undo-tree-mode-hook (lambda ()
+            (define-key undo-tree-map (kbd "C-/") nil)
+            (define-key global-map [(ctrl /)] 'helm-do-ag)
         ))
 
         (require 'helm-config)
