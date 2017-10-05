@@ -29,7 +29,7 @@
     :after company-tern
     :config (add-hook 'js2-mode-hook (lambda ()
         ;; Indent lines using this function.
-        (setq-local indent-line-function 'js-indent-line)
+        (setq-local indent-line-function 'js2-indent-line)
         (setq
             js2-basic-offset 4
             js2-highlight-level 3
