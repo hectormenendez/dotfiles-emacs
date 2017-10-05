@@ -61,7 +61,6 @@
 (require 'native-custom)
 (require 'native-mule)
 (require 'native-whitespace)
-(require 'native-electric)
 (require 'native-paren)
 (require 'native-prog-mode)
 (require 'native-frame)
@@ -77,6 +76,8 @@
 (require 'elpa-try)
 (require 'elpa-restart-emacs)
 (require 'elpa-evil)
+(require 'elpa-web-beautify)
+(require 'elpa-aggressive-indent)
 
 ;; ------------------------------------------------------- Packages» Editor» ExtraFeatures
 (require 'elpa-magit)
@@ -92,7 +93,6 @@
 
 ;; ---------------------------------------------------------- Packages» Content» Behaviour
 (require 'elpa-web-mode)
-(require 'elpa-web-beautify)
 (require 'elpa-json-mode)
 (require 'elpa-js2-mode)
 (require 'elpa-markdown-mode)
