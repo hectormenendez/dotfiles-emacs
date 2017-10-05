@@ -92,6 +92,7 @@
 
 ;; ---------------------------------------------------------- Packages» Content» Behaviour
 (require 'elpa-web-mode)
+(require 'elpa-web-beautify)
 (require 'elpa-json-mode)
 (require 'elpa-js2-mode)
 (require 'elpa-markdown-mode)
