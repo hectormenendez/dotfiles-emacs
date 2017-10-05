@@ -6,7 +6,7 @@
 (use-package fill-column-indicator
     :ensure t
     :delight fci-mode
-    :config (add-hook 'prog-mode-hook (lambda ()
+    :config (add-hook 'prog-mode-hook '(lambda ()
         (setq fci-rule-width 1)
         (turn-on-fci-mode)
     )

@@ -26,7 +26,7 @@
                 (balance-windows)
                 (other-window 1 nil)
             ))
-            (evil-leader/set-key "w-" (lambda ()
+            (evil-leader/set-key "w-" '(lambda ()
                 (interactive)
                 (split-window-vertically)
                 (balance-windows)

@@ -22,7 +22,7 @@
     :ensure t
     :after undo-tree
     :config (progn
-        (add-hook 'evil-local-mode-hook (lambda ()
+        (add-hook 'evil-local-mode-hook '(lambda ()
             ;; Have <tab> to work as it does on Vim
             (define-key evil-insert-state-map (kbd "TAB") 'tab-to-tab-stop)
             (define-key evil-motion-state-map (kbd "C-b") nil); scroll down
@@ -37,7 +37,7 @@
 ; ;; Enable the <leader> key like in Vim
 (use-package evil-leader
     :ensure t
-    :config (add-hook 'evil-local-mode-hook (lambda ()
+    :config (add-hook 'evil-local-mode-hook '(lambda ()
         (evil-leader-mode 1)
         (evil-leader/set-leader "SPC")
         (evil-leader/set-key "?" 'which-key-show-top-level)
@@ -56,7 +56,7 @@
 (use-package evil-surround
     :ensure t
     :delight evil-surround-mode
-    :config (add-hook 'evil-local-mode-hook (lambda ()
+    :config (add-hook 'evil-local-mode-hook '(lambda ()
         (evil-surround-mode 1)
     ))
 )

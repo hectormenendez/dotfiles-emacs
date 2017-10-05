@@ -18,7 +18,7 @@
                 )
             )
         )
-        (add-hook 'evil-leader-mode-hook (lambda ()
+        (add-hook 'evil-leader-mode-hook '(lambda ()
             (evil-leader/set-key "wW" 'etor/window-toggle)
         ))
     )

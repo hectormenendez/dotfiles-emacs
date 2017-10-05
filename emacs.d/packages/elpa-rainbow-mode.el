@@ -7,7 +7,7 @@
     :ensure t
     :delight rainbow-mode
     :if window-system
-    :config (add-hook 'prog-mode-hook (lambda ()
+    :config (add-hook 'prog-mode-hook '(lambda ()
         (rainbow-mode 1)
     ))
 )

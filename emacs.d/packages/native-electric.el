@@ -3,7 +3,7 @@
     ;; TODO: Find out more about this module so it actually does something.
     :demand t
     :config (progn
-        (electric-indent-mode -1); when pressing return auto-indent will be disabled
+        (electric-indent-mode t); when pressing return auto-indent will be disabled
     )
 )
 

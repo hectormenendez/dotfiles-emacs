@@ -9,7 +9,7 @@
         (use-package find-file-in-project
             :ensure t
             :config (add-hook 'evil-local-mode-hook '(lambda ()
-                (evil-leader/set-key "RET" (lambda ()
+                (evil-leader/set-key "RET" '(lambda ()
                     (interactive)
                     (let
                         (

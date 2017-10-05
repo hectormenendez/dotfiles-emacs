@@ -6,7 +6,7 @@
 (use-package linum-relative
     :ensure t
     :delight linum-relative-mode
-    :config (add-hook 'prog-mode-hook (lambda ()
+    :config (add-hook 'prog-mode-hook '(lambda ()
         (setq
             linum-relative-current-symbol ""; Show the current line-number
             linum-relative-format " %3s"; Add some spaces to numbers

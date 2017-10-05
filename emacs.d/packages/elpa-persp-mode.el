@@ -4,11 +4,11 @@
     :delight persp-mode
     :config (progn
 
-        (add-hook 'evil-leader-mode-hook (lambda ()
+        (add-hook 'evil-leader-mode-hook '(lambda ()
             (evil-leader/set-key "TAB" 'persp-switch);; quick perspective switch
         ))
 
-        (add-hook 'after-init-hook (lambda ()
+        (add-hook 'after-init-hook '(lambda ()
             (define-key global-map (kbd "M-B") 'persp-kill-buffer)
             ;; always kill buffer using persp-mode
             (substitute-key-definition 'kill-buffer 'persp-kill-buffer global-map)

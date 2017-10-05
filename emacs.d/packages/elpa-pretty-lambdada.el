@@ -5,7 +5,7 @@
 ;;; Code:
 (use-package pretty-lambdada
     :ensure t
-    :config (add-hook 'prog-mode-hook (lambda ()
+    :config (add-hook 'prog-mode-hook '(lambda ()
         (pretty-lambda-mode t)
     ))
 )

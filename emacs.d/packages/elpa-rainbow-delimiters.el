@@ -6,7 +6,7 @@
 
 (use-package rainbow-delimiters
     :ensure t
-    :config (add-hook 'prog-mode-hook (lambda ()
+    :config (add-hook 'prog-mode-hook '(lambda ()
         (rainbow-delimiters-mode 1)
     ))
 )

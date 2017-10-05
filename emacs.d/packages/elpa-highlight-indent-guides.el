@@ -6,7 +6,7 @@
 (use-package highlight-indent-guides
     :ensure t
     :delight highlight-indent-guides-mode
-    :config (add-hook 'prog-mode-hook (lambda ()
+    :config (add-hook 'prog-mode-hook '(lambda ()
         (setq
             ;; use a | character for the indentation lines.
             highlight-indent-guides-method 'character
