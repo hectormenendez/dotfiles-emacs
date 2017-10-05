@@ -91,9 +91,9 @@
 (require 'elpa-neotree)
 
 ;; ---------------------------------------------------------- Packages» Content» Behaviour
+(require 'elpa-web-mode)
 (require 'elpa-json-mode)
 (require 'elpa-js2-mode)
-(require 'elpa-rjsx-mode)
 (require 'elpa-markdown-mode)
 (require 'elpa-nxml-mode)
 
