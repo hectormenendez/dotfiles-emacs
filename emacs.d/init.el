@@ -66,6 +66,7 @@
 (require 'native-frame)
 (require 'native-menu-bar)
 (require 'native-register)
+(require 'native-electric)
 
 ;; --------------------------------------------------- Packages» Editor» SystemIntegration
 (require 'elpa-exec-path-from-shell)
@@ -77,7 +78,6 @@
 (require 'elpa-restart-emacs)
 (require 'elpa-evil)
 (require 'elpa-web-beautify)
-(require 'elpa-aggressive-indent)
 
 ;; ------------------------------------------------------- Packages» Editor» ExtraFeatures
 (require 'elpa-magit)
