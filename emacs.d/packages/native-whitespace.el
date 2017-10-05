@@ -19,9 +19,10 @@
         )
         (defvaralias 'c-basic-offset 'tab-width)
         (defvaralias 'cperl-indent-level 'tab-width)
-        ;; I don't like the default indent funtion for elisp, disable it.
+        ;; I don't follow Lisp indenting guidelines, so the default indentation breaks 4me
         (add-hook 'emacs-lisp-mode-hook (lambda ()
             (setq-local indent-line-function 'indent-relative)
+            (setq lisp-body-indent tab-width)
         ))
         (global-whitespace-mode 1)
     )
