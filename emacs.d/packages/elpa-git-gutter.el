@@ -6,7 +6,7 @@
 (use-package git-gutter
     :ensure t
     :delight git-gutter-mode
-    :config (add-hook 'prog-mode-hook '(lambda ()
+    :config (add-hook 'prog-mode-hook (lambda ()
         (setq
             git-gutter:update-interval 2; Update git gutter after n secs idle
             git-gutter:ask-p nil; Don't ask confirmation when committing or reverting

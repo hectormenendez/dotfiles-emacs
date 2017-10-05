@@ -11,7 +11,7 @@
     )
     :config (progn
 
-        (add-hook 'after-init-hook '(lambda ()
+        (add-hook 'after-init-hook (lambda ()
             "Load last frame geometry from a a file."
             (let
                 (
@@ -21,7 +21,7 @@
             )
         ))
 
-        (add-hook 'kill-emacs-hook '(lambda ()
+        (add-hook 'kill-emacs-hook (lambda ()
             "Save current frame geometry to a file."
             (let
                 (

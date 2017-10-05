@@ -22,7 +22,7 @@
     :after (helm projectile)
     :config (progn
 
-        (add-hook 'after-init-hook '(lambda ()
+        (add-hook 'after-init-hook (lambda ()
             ;; Enable helm-projectile
             (define-key global-map [(meta f)] 'helm-projectile); forward-word
             ;; Enable finding directories
@@ -33,7 +33,7 @@
             (define-key global-map (kbd "M-p") 'helm-projectile-switch-project);
         ))
 
-        (eval-after-load 'evil-maps '(lambda ()
+        (eval-after-load 'evil-maps (lambda ()
             (define-key evil-normal-state-map (kbd "C-f") nil)
             (define-key evil-emacs-state-map (kbd "C-f") nil)
             (define-key evil-motion-state-map (kbd "C-f") nil)

@@ -10,12 +10,12 @@
     :delight helm-mode
     :config (progn
 
-        (add-hook 'evil-leader-mode-hook '(lambda ()
+        (add-hook 'evil-leader-mode-hook (lambda ()
             (evil-leader/set-key "DEL" 'helm-mini)
             (evil-leader/set-key "SPC" 'helm-M-x)
         ))
 
-        (add-hook 'after-init-hook '(lambda ()
+        (add-hook 'after-init-hook (lambda ()
             ;; Map the helm help
             (global-set-key (kbd "C-x c a") nil); The original helm-apropos binding
             (global-set-key (kbd "C-h C-h") nil); The emacs help for help
@@ -26,7 +26,7 @@
             (define-key global-map (kbd "M-d") 'helm-imenu-in-all-buffers)
         ))
 
-        (add-hook 'undo-tree-mode-hook '(lambda ()
+        (add-hook 'undo-tree-mode-hook (lambda ()
             (define-key undo-tree-map (kbd "C-/") nil)
             (define-key global-map [(ctrl /)] 'helm-do-ag)
         ))

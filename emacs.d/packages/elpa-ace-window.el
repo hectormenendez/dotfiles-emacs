@@ -11,7 +11,7 @@
                 :height 3.0))
             ))
         )
-        (add-hook 'evil-local-mode-hook '(lambda ()
+        (add-hook 'evil-local-mode-hook (lambda ()
             ;; Replace "other-window"
             (global-set-key [remap other-window] 'ace-window)
             ;; Disable the usual bindings for window management
@@ -20,13 +20,13 @@
             (global-set-key (kbd "C-x 2") nil); splits window horizontally
             (global-set-key (kbd "C-x 3") nil); splits window vertically
             ;; when splitting windows, always balance windows
-            (evil-leader/set-key "w|" '(lambda ()
+            (evil-leader/set-key "w|" (lambda ()
                 (interactive)
                 (split-window-horizontally)
                 (balance-windows)
                 (other-window 1 nil)
             ))
-            (evil-leader/set-key "w-" '(lambda ()
+            (evil-leader/set-key "w-" (lambda ()
                 (interactive)
                 (split-window-vertically)
                 (balance-windows)

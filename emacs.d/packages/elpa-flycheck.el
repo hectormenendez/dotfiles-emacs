@@ -6,7 +6,7 @@
 (use-package flycheck
     :ensure t
     :config (progn
-        (add-hook 'prog-mode-hook '(lambda ()
+        (add-hook 'prog-mode-hook (lambda ()
             (setq
                 flycheck-temp-prefix ".flycheck"
                 flycheck-mode-line-prefix " ✖︎"

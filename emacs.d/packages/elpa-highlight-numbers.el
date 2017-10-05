@@ -7,7 +7,7 @@
 (use-package highlight-numbers
     :ensure t
     :delight highlight-numbers-mode
-    :config (add-hook 'prog-mode-hook '(lambda ()
+    :config (add-hook 'prog-mode-hook (lambda ()
         (highlight-numbers-mode 1)
     ))
 )

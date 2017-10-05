@@ -2,7 +2,7 @@
     :ensure t
     :after elixir-mode
     :delight alchemist-mode "α"
-    :config (add-hook 'elixir-mode-hook '(lambda ()
+    :config (add-hook 'elixir-mode-hook (lambda ()
         (setq
             alchemist-mix-command "/usr/local/bin/mix"; Use locally installed mix
             alchemist-key-command-prefix (kbd "C-x x"); Default C-c a

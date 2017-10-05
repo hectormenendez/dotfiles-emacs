@@ -8,8 +8,8 @@
         ;; Use ffip to determine the project root and open neotree relative to it.
         (use-package find-file-in-project
             :ensure t
-            :config (add-hook 'evil-local-mode-hook '(lambda ()
-                (evil-leader/set-key "RET" '(lambda ()
+            :config (add-hook 'evil-local-mode-hook (lambda ()
+                (evil-leader/set-key "RET" (lambda ()
                     (interactive)
                     (let
                         (
@@ -53,7 +53,7 @@
                 )
             )
         )
-        (add-hook 'evil-local-mode-hook '(lambda ()
+        (add-hook 'evil-local-mode-hook (lambda ()
             ;; Allow to use evil mode with neotree
             (evil-define-key 'normal neotree-mode-map (kbd "RET") 'neotree-enter)
             (evil-define-key 'normal neotree-mode-map (kbd "<f5>") 'neotree-refresh)

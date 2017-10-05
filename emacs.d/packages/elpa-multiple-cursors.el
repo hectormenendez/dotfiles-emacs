@@ -7,7 +7,7 @@
     :ensure t
     :config (progn
 
-        (add-hook 'evil-leader-mode-hook '(lambda ()
+        (add-hook 'evil-leader-mode-hook (lambda ()
             (evil-leader/set-key "c*" 'mc/mark-all-like-this)
             (evil-leader/set-key "cc" 'mc/edit-lines)
             (evil-leader/set-key "c$" 'mc/edit-ends-of-lines)
@@ -19,7 +19,7 @@
             (evil-leader/set-key "cX" 'mc/skip-to-previous-like-this)
         ))
 
-        (eval-after-load 'evil-maps '(lambda ()
+        (eval-after-load 'evil-maps (lambda ()
             ;; <C-n> & <C-p> are in the evil-keymap.
             ;; - First, remove them, otherwise the global map wouldn't override it.
             ;; - Overrride the global map withe the correct command.
@@ -29,7 +29,7 @@
             (define-key global-map (kbd "C-p") 'mc/mark-previous-like-this-symbol)
         ))
 
-        (add-hook 'after-init-hook '(lambda ()
+        (add-hook 'after-init-hook (lambda ()
             ;; New global keymaps
             (define-key global-map (kbd "<C-down>") 'mc/mark-next-like-this)
             (define-key global-map (kbd "<C-up>") 'mc/mark-previous-like-this)

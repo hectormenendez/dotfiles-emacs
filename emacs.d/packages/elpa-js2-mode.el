@@ -7,7 +7,7 @@
 ;; Enable tern
 (use-package tern
     :ensure t
-    :config (add-hook 'js2-mode-hook '(lambda ()
+    :config (add-hook 'js2-mode-hook (lambda ()
         (setq tern-flash-timeout 30); Wait 30 seconds before removing the function helper
         (tern-mode 1)
     ))
@@ -17,7 +17,7 @@
 (use-package company-tern
     :ensure t
     :after tern
-    :config (add-hook 'company-mode-hook '(lambda ()
+    :config (add-hook 'company-mode-hook (lambda ()
         (add-to-list 'company-backends 'company-tern)
     ))
 )
@@ -27,7 +27,7 @@
     :interpreter "node"
     :mode (("\\.js\\'" . js2-mode))
     :after company-tern
-    :config (add-hook 'js2-mode-hook '(lambda ()
+    :config (add-hook 'js2-mode-hook (lambda ()
         ;; Indent lines using this function.
         (setq-local indent-line-function 'js-indent-line)
         (setq
@@ -61,7 +61,7 @@
     :ensure t
     :after js2-mode
     :mode (("\\.jsx\\'" . rjsx-mode))
-    :config (add-hook 'rjsx-mode-hook '(lambda ()
+    :config (add-hook 'rjsx-mode-hook (lambda ()
         (define-key rjsx-mode-map "<" nil); This behaviour made emacs hang, so disabled it
         (setq-local indent-line-function 'js2-jsx-indent-line)
         (setq

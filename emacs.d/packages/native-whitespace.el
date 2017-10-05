@@ -20,7 +20,7 @@
         (defvaralias 'c-basic-offset 'tab-width)
         (defvaralias 'cperl-indent-level 'tab-width)
         ;; I don't like the default indent funtion for elisp, disable it.
-        (add-hook 'emacs-lisp-mode-hook '(lambda ()
+        (add-hook 'emacs-lisp-mode-hook (lambda ()
             (setq-local indent-line-function 'indent-relative)
         ))
         (global-whitespace-mode 1)
