@@ -10,8 +10,10 @@
             (setq
                 flycheck-temp-prefix ".flycheck"
                 flycheck-mode-line-prefix " ✖︎"
-                flycheck-disabled-checkers (append '( ;; Disable this checkers
-                    javascript-jshint; normally javascript-eslint should do the dirty work
+                flycheck-disabled-checkers (append '(
+                    ;; normally javascript-eslint should do the dirty work
+                    ;; so these checkers have no purpose.
+                    javascript-jshint
                     javascript-jscs
                     javascript-standard
                 ))

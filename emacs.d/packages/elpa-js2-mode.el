@@ -8,6 +8,7 @@
 (use-package tern
     :ensure t
     :config (add-hook 'js2-mode-hook (lambda ()
+        (setq tern-flash-timeout 30); Wait 30 seconds before removing the function helper
         (tern-mode 1)
     ))
 )
