@@ -10,13 +10,6 @@
             (setq
                 flycheck-temp-prefix ".flycheck"
                 flycheck-mode-line-prefix " ✖︎"
-                flycheck-disabled-checkers (append '(
-                    ;; normally javascript-eslint should do the dirty work
-                    ;; so these checkers have no purpose.
-                    javascript-jshint
-                    javascript-jscs
-                    javascript-standard
-                ))
                 flycheck-emacs-lisp-load-path 'inherit; let flycheck know Emacs' loadpath
             )
             (flycheck-mode 1)

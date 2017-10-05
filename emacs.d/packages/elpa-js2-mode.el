@@ -42,6 +42,29 @@
             js2-strict-inconsistent-return-warning nil
             js2-strict-var-hides-function-arg-warning nil
             js2-strict-var-redeclaration-warning nil
+            ;; Enable only eslint on flycheck
+            flycheck-disabled-checkers (append '(
+                javascript-jshint
+                javascript-jscs
+                javascript-standard
+            ))
+            flycheck-enabled-checkers (append '(
+                javascript-eslint
+            ))
+        )
+    ))
+)
+
+(use-package rjsx-mode
+    :ensure t
+    :after js2-mode
+    :mode (("\\.jsx\\'" . rjsx-mode))
+    :config (add-hook 'rjsx-mode-hook (lambda ()
+        (define-key rjsx-mode-map "<" nil); This behaviour made emacs hang, so disabled it
+        (setq-local indent-line-function 'js2-jsx-indent-line)
+        (setq
+            sgml-basic-offset tab-width; Indent tags like everything else
+            sgml-attribute-offset 0; use the same spacing as the basic offset
         )
     ))
 )
