@@ -97,6 +97,7 @@
 (require 'elpa-js2-mode)
 (require 'elpa-markdown-mode)
 (require 'elpa-nxml-mode)
+(require 'elpa-elixir-mode)
 
 ;; --------------------------------------------------------- Packages» Content» Navigation
 (require 'elpa-multiple-cursors)
