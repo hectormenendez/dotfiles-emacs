@@ -4,12 +4,16 @@
     :delight (global-whitespace-mode)
     :config (progn
         (setq-default ;; These are core & indent vars
+            ; Use 4 spaces for indentation
+            tab-width 4
+            c-basic-offset 4
+            cperl-indent-level 4
+
             fill-column 90
-            tab-width 4; Use 4 spaces for indentation
             indent-tabs-mode nil; Use spaces for tabs
             tab-always-indent t; The tab key will always indent (duh)
             tab-stop-list '(4 8 12 16 20 24 28 32 36 40 44 48 52 56 60 64 68 72 76 80 84)
-            indent-line-function 'insert-tab; insert a tab after each RET
+            indent-line-function 'indent-relative
             whitespace-style '(face tabs tab-mark trailing lines-tail); Highlight these
             whitespace-line-column fill-column; Use the fill-column to mark overflowed
             whitespace-display-mappings '(; Customize the look of these character
@@ -17,8 +21,6 @@
                 (newline-mark 10  [36 10])
             )
         )
-        (defvaralias 'c-basic-offset 'tab-width)
-        (defvaralias 'cperl-indent-level 'tab-width)
         ;; I don't follow Lisp indenting guidelines, so the default indentation breaks 4me
         (add-hook 'emacs-lisp-mode-hook (lambda ()
             (setq-local indent-line-function 'indent-relative)
