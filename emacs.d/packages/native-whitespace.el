@@ -30,7 +30,7 @@
     )
 )
 
-(defun my/backspace-to-tab-stop ()
+(defun etor/backspace-to-tab-stop ()
     "Delete whitespace backwards to the next tab-stop, otherwise delete one character."
     (interactive)
     (if

@@ -25,7 +25,7 @@
         (add-hook 'evil-local-mode-hook (lambda ()
             ;; Have <tab> to work as it does on Vim
             (define-key evil-insert-state-map (kbd "TAB") 'tab-to-tab-stop)
-            (define-key evil-insert-state-map (kbd "DEL") 'my/backspace-to-tab-stop)
+            (define-key evil-insert-state-map (kbd "DEL") 'etor/backspace-to-tab-stop)
             (define-key evil-motion-state-map (kbd "C-b") nil); scroll down
             ;; Auto indent after paste
             (fset 'indent-pasted-text "`[v`]=")
