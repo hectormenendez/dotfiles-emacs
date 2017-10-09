@@ -1,4 +1,5 @@
-;;; elpa-hl-todo.el --- Highlight TODO and NOTE in code.
+;;; elpa-hl-todo.el --- Highlights:
+;;; HOLD PROG OKAY NOTE KLUDGE TODO NEXT THEM DONT DONE HACK FIXME XXX XXXX ???
 
 ;;; Commentary:
 
@@ -7,7 +8,6 @@
     :ensure t
     :config (add-hook 'prog-mode-hook (lambda ()
         (hl-todo-mode 1)
-
         ;; TODO: Set evil leader bindings for this.
 
         ;; :bind (
