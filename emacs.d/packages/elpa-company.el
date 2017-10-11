@@ -3,6 +3,9 @@
     :ensure t
     :delight company-mode
     :config (progn
+        (setq-default
+            company-dabbrev-downcase nil; don't make candidates lowercase
+        )
         (setq
             ;; Whenever you type two letters show a possible completion
             company-idle-delay 0
