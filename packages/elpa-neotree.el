@@ -29,8 +29,6 @@
         )
         ;; (evil-define-ket 'normal neotree-mode-map (kbd "|") 'neotree-)
         (setq neo-smart-open t); let neotree find the current file and jump to it.
-        ;; work along with projectile
-        (setq projectile-switch-project-action 'neotree-projectile-action)
         ;; Don't show hidden files (they will be excluded by git)
         (setq-default neo-show-hidden-files nil)
         ;; overwrite the default hidden file filter, so it uses .gitignore
