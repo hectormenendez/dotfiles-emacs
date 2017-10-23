@@ -102,6 +102,7 @@
 ;; --------------------------------------------------------- Packages» Content» Navigation
 (require 'elpa-multiple-cursors)
 (require 'elpa-expand-region)
+(require 'elpa-origami)
 
 ;; --------------------------------------------------------- Packages» Content» VisualAids
 (require 'elpa-which-key)

@@ -35,7 +35,7 @@
     )
 )
 
-; ;; Enable the <leader> key like in Vim
+;; Enable the <leader> key like in Vim
 (use-package evil-leader
     :ensure t
     :config (add-hook 'evil-local-mode-hook (lambda ()
