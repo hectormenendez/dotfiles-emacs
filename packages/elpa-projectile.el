@@ -154,6 +154,7 @@
     (let
         (
             (buffers (buffer-list (selected-frame)))
+            (curproj (projectile-project-p))
         )
         (dolist (buffer buffers) (with-current-buffer buffer
             (let
@@ -161,10 +162,9 @@
                     (name (buffer-name buffer))
                 )
                 (when
-                    (null (projectile-project-p))
-                    (unless
-                        (string-match "^\\*\\(\\scratch\\|Messages\\)" name)
-                        (message "Killing Buffer: %s" name)
+                    (not (eq curproj (projectile-project-p)))
+                    (unless (string-match "^\s*\\*\\\(Messages\\|scratch\\\)" name)
+                        (message "projectile-buffers-kill: %s" name)
                         (kill-buffer name)
                     )
                 )

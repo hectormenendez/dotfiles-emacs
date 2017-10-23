@@ -37,5 +37,4 @@
     )
 )
 
-
 (provide 'elpa-persp-mode)
