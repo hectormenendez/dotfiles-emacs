@@ -22,12 +22,6 @@
             projectile-known-projects-file
                 (expand-file-name "known_projects" etor/projectile-dir)
         )
-
-        ;; Mark projects in "top-down" so that each submodule can be a project
-        (setq projectile-project-root-files-bottom-up
-            (delete ".git" projectile-project-root-files-bottom-up)
-        )
-        (add-to-list 'projectile-project-root-files ".git")
         (setq projectile-project-root-files-functions '(
             projectile-root-local
             projectile-root-top-down
@@ -35,13 +29,14 @@
         ))
 
 
+        ;; TODO: These aren't working grea,t, how about moving the to persp-mode hooks?
         ;; Everytime the project is changed, remove/restore projects
         (add-hook 'projectile-before-switch-project-hook (lambda ()
             (etor/projectile-buffers-save)
         ))
         (add-hook 'projectile-after-switch-project-hook (lambda ()
-            (etor/projectile-buffers-kill)
             (etor/projectile-buffers-load)
+            (etor/projectile-buffers-kill)
         ))
 
         (projectile-mode 1)
@@ -177,6 +172,5 @@
         ))
     )
 )
-
 (provide 'elpa-projectile)
 
