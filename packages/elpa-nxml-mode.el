@@ -9,6 +9,9 @@
         ("\\.html\\'" . nxml-mode)
     )
     :config (progn
+        (add-hook 'nxml-mode-hook (lambda ()
+            (linum-mode 1)
+        ))
         (setq
             magic-mode-alist (cons '("<\\?xml " . nxml-mode) magic-mode-alist)
             nxml-slash-auto-complete-flag t
