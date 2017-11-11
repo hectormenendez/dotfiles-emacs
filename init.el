@@ -19,6 +19,9 @@
     initial-scratch-message nil; Don't show a message on *scratch* mode
     create-lockfiles nil; Don't create ".#" files
 )
+(setq-default
+    line-spacing 1; The spacing between lines vertically
+)
 
 ; Ask for just one letter when confirmation needed
 (defalias 'yes-or-no-p 'y-or-n-p)
