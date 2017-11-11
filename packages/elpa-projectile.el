@@ -31,13 +31,13 @@
 
         ;; TODO: These aren't working grea,t, how about moving the to persp-mode hooks?
         ;; Everytime the project is changed, remove/restore projects
-        (add-hook 'projectile-before-switch-project-hook (lambda ()
-            (etor/projectile-buffers-save)
-        ))
-        (add-hook 'projectile-after-switch-project-hook (lambda ()
-            (etor/projectile-buffers-load)
-            (etor/projectile-buffers-kill)
-        ))
+        ;; (add-hook 'projectile-before-switch-project-hook (lambda ()
+        ;;     (etor/projectile-buffers-save)
+        ;; ))
+        ;; (add-hook 'projectile-after-switch-project-hook (lambda ()
+        ;;     (etor/projectile-buffers-load)
+        ;;     (etor/projectile-buffers-kill)
+        ;; ))
 
         (projectile-mode 1)
     )
