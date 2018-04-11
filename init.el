@@ -41,12 +41,22 @@
 ;; This will be added no matter what, so, add it.
 (package-initialize)
 
-;; Enable the 'use-package' package manager (install it if not available)
-(unless (package-installed-p 'use-package)
+;; Install quelpa so packages can be compiled from source.
+;; Also, install quelpa-use-package so those packages can be loaded using use-package
+;; (use-package is a dependecy so it won't be necessary to explicitly install it)
+(unless (package-installed-p 'quelpa)
     (package-refresh-contents)
-    (package-install 'use-package)
+    (package-install 'quelpa)
+    (quelpa '(quelpa-use-package
+        :fetcher github
+        :repo "quelpa/quelpa-use-package"
+    ))
 )
-(eval-when-compile (require 'use-package))
+
+(setq-default quelpa-dir (expand-file-name "_quelpa" user-emacs-directory))
+
+;; Enable use-package with quelpa support.
+(require 'quelpa-use-package)
 
 ;; ------------------------------------------------------------------------------ Packages
 (add-to-list 'load-path (expand-file-name "packages" user-emacs-directory))
@@ -91,7 +101,6 @@
 (require 'elpa-projectile)
 (require 'elpa-persp-mode)
 (require 'elpa-dired+)
-(require 'elpa-help+)
 (require 'elpa-neotree)
 
 ;; ---------------------------------------------------------- Packages» Content» Behaviour
@@ -110,7 +119,6 @@
 ;; --------------------------------------------------------- Packages» Content» VisualAids
 (require 'elpa-which-key)
 (require 'elpa-telephone-line)
-(require 'elpa-zoom-frm)
 (require 'elpa-company)
 ;; NOTE: I'm not that sure that I still like this
 ;; (require 'elpa-centered-cursor-mode)
@@ -128,7 +136,6 @@
 
 ;; ----------------------------------------------- Packages» ProgMode» Content» VisualAids
 (require 'elpa-hl-todo)
-(require 'elpa-pretty-lambdada)
 (require 'elpa-smartparens)
 (require 'elpa-rainbow-delimiters)
 (require 'elpa-rainbow-mode)
