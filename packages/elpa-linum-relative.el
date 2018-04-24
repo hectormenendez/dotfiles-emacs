@@ -10,9 +10,9 @@
         (setq
             linum-relative-current-symbol ""; Show the current line-number
             linum-relative-format " %3s"; Add some spaces to numbers
+            linum-relative-backend 'display-line-number-mode
         )
-        (linum-relative-mode 1)
-        (linum-mode 1)
+        (linum-relative-on)
     ))
 )
 
