@@ -101,8 +101,8 @@
 (require 'elpa-helm)
 (require 'elpa-projectile)
 (require 'elpa-persp-mode)
-(require 'elpa-dired+)
 (require 'elpa-neotree)
+(require 'elpa-dired+)
 
 ;; ---------------------------------------------------------- Packages» Content» Behaviour
 (require 'elpa-web-mode)

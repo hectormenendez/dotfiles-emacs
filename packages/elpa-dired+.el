@@ -1,6 +1,6 @@
 ;; Improve default functionality for dired
 (use-package dired+
-    :quelpa (dired+ :fetcher url :url "https://www.emacswiki.org/emacs/download/dired%2b.el")
+    :quelpa (dired+ :fetcher url :url "https://www.emacswiki.org/emacs/download/dired+.el")
     :config (progn
         (add-hook 'evil-local-mode-hook (lambda ()
             ;; Add jump to current file's folder
