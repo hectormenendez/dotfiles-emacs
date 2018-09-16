@@ -1,6 +1,5 @@
 ;; Customisations (mostly themes)
 (use-package custom
-    ;; TODO: validate the existence of the theme before trying to load it
     :demand t
     :init (defvar etor/themes-dir
         (expand-file-name "_themes" user-emacs-directory)

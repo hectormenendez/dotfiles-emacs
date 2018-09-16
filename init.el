@@ -1,15 +1,15 @@
 ;;; init.el --- Personal emac configuration of Héctor Menéndez
 
 ;;; Commentary:
-;;; Hey, don't judge, this is a work in progresss, damn it!
+;;; Hey, don't judge, this is a work in progresss!
 
 ;;; Code:
 
 ;; ------------------------------------------------------------------------- Core settings
-
 (setq
-    ;; Core
-    visible-bell t; don't make sounds, show bells.
+    ; don't show the big-ass notification that appears on MacOS
+    ring-bell-function 'ignore
+    visible-bell nil
     message-log-max 10000
     load-prefer-newer t; Don't load outdated byte code
     gc-cons-threshold 2000000; no need of garbage collect that often
@@ -38,12 +38,15 @@
 ;; The repositories to fetch packages-from.
 (add-to-list 'package-archives '("melpa" . "http://melpa.org/packages/"))
 
-;; This will be added no matter what, so, add it.
+;; This will be added to this file no matter what, so, add it.
 (package-initialize)
 
-;; Install quelpa so packages can be compiled from source.
-;; Also, install quelpa-use-package so those packages can be loaded using use-package
+;; if quelpa not present, download and install it so packages can be compiled from source.
+;; Also, install quelpa-use-package so those packages can be loaded using "use-package"
 ;; (use-package is a dependecy so it won't be necessary to explicitly install it)
+(setq-default
+    quelpa-dir (expand-file-name "_quelpa" user-emacs-directory)
+)
 (unless (package-installed-p 'quelpa)
     (package-refresh-contents)
     (package-install 'quelpa)
@@ -52,8 +55,6 @@
         :repo "quelpa/quelpa-use-package"
     ))
 )
-
-(setq-default quelpa-dir (expand-file-name "_quelpa" user-emacs-directory))
 
 ;; Enable use-package with quelpa support.
 (require 'quelpa-use-package)
@@ -140,7 +141,3 @@
 (require 'elpa-rainbow-mode)
 (require 'elpa-highlight-numbers)
 (require 'elpa-highlight-quoted)
-
-
-(provide 'emacs)
-;;; init.el ends here
