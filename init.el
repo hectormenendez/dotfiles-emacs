@@ -80,11 +80,12 @@
 (require 'native-menu-bar)
 (require 'native-register)
 (require 'native-electric)
+(require 'native-line-numbers)
 
 ;; --------------------------------------------------- Packages» Editor» SystemIntegration
 (require 'elpa-exec-path-from-shell)
 (require 'elpa-nvm)
-(require 'elpa-wakatime-mode)
+; (require 'elpa-wakatime-mode); Disabled it because issues with local python installation
 
 ;; ----------------------------------------------------------- Packages» Editor» Behaviour
 (require 'elpa-try)
@@ -120,11 +121,9 @@
 (require 'elpa-which-key)
 (require 'elpa-telephone-line)
 (require 'elpa-company)
-;; NOTE: I'm not that sure that I still like this
-;; (require 'elpa-centered-cursor-mode)
+(require 'elpa-centered-cursor-mode)
 
 ;; ------------------------------------------------ Packages» ProgMode» Editor» VisualAids
-(require 'elpa-linum-relative)
 (require 'elpa-git-gutter)
 (require 'elpa-highlight-indent-guides)
 (require 'elpa-fill-column-indicator)
