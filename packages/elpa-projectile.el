@@ -51,7 +51,7 @@
 
         (add-hook 'after-init-hook (lambda ()
             ;; Enable helm-projectile
-            (define-key global-map [(meta f)] 'helm-projectile); forward-word
+            (define-key global-map [(meta f)] 'helm-projectile-find-file); forward-word
             ;; Enable finding directories
             (define-key global-map [(meta shift f)] 'helm-projectile-find-dir)
             ;; Enable finding buffers
