@@ -112,6 +112,7 @@
 (require 'elpa-markdown-mode)
 (require 'elpa-nxml-mode)
 (require 'elpa-elixir-mode)
+(require 'elpa-graphql-mode)
 
 ;; --------------------------------------------------------- Packages» Content» Navigation
 (require 'elpa-multiple-cursors)
