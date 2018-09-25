@@ -67,7 +67,7 @@
             (define-key evil-operator-state-map (kbd "C-f") nil)
             (define-key evil-visual-state-map (kbd "C-f") nil)
             (define-key evil-replace-state-map (kbd "C-f") nil)
-            (define-key global-map [(ctrl f)] 'helm-projectile-ag)
+            (define-key global-map [(ctrl f)] 'helm-do-ag)
             (define-key global-map [(ctrl shift f)] 'projectile-replace-regexp)
         ))
 
