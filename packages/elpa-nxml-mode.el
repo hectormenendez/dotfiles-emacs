@@ -3,10 +3,8 @@
     :defer t
     :mode (
         ("\\.plist\\'" . nxml-mode)
-        ("\\.svg\\'" . nxml-mode)
         ("\\.xml\\'" . nxml-mode)
         ("\\.xslt\\'" . nxml-mode)
-        ("\\.html\\'" . nxml-mode)
     )
     :config (progn
         (add-hook 'nxml-mode-hook (lambda ()

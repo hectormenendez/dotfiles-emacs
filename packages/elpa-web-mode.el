@@ -2,6 +2,8 @@
     :ensure t
     :mode (
         ("\\.hbs\\'" . web-mode)
+        ("\\.html\\'" . web-mode)
+        ("\\.svg\\'" . web-mode)
     )
 )
 
