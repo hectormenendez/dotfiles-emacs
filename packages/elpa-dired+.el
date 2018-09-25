@@ -1,4 +1,15 @@
 ;; Improve default functionality for dired
+(use-package dired-x
+    :demand t
+)
+
+(use-package ignoramus
+    :ensure t
+    :config (progn
+        (ignoramus-setup)
+    )
+)
+
 (use-package dired+
     :quelpa (dired+ :fetcher url :url "https://www.emacswiki.org/emacs/download/dired+.el")
     :config (progn
@@ -36,3 +47,4 @@
 )
 
 (provide 'elpa-dired+)
+
