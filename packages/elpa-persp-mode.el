@@ -4,6 +4,19 @@
     :delight persp-mode
     :config (progn
 
+        (setq
+            persp-autokill-buffer-on-remove 'kill ; kill the buffer when closed
+            persp-kill-foreign-buffer-behaviour 'kill ; don't ask for confirmation
+            persp-remove-buffers-from-nil-persp-behaviour 'kill
+            persp-nil-name "none"; The name of the default perspective
+            persp-save-dir (expand-file-name "_persp/" user-emacs-directory)
+            persp-switch-to-added-buffer nil; don't switch window when new buffers added
+            persp-auto-save-opt 1; Auto save only if persp-mode is active when exiting.
+            persp-auto-resume-time 1; how many secs to wait before resuming? <=0 no resume
+            persp-nil-hidden nil; set to true to hide the "nil" perspective
+            persp-set-last-persp-for-new-frames t; always use current persp on new frames
+        )
+
         (add-hook 'evil-leader-mode-hook (lambda ()
             (evil-leader/set-key "TAB" 'persp-switch);; quick perspective switch
             ;; always kill buffer using persp-mode
@@ -12,6 +25,7 @@
         ))
 
         (add-hook 'after-init-hook (lambda ()
+            (persp-mode 1)
             ;; Load the last-saved perspective state
             ;; NOTE: The persp-auto-resume-time, not always work, this does.
             (persp-load-state-from-file
@@ -19,21 +33,6 @@
             )
         ))
 
-        (setq
-            persp-autokill-buffer-on-remove 'kill ; kill the buffer when closed
-            persp-kill-foreign-buffer-behaviour 'kill ; don't ask for confirmation
-            persp-nil-name "none"; The name of the default perspective
-            persp-save-dir (expand-file-name "_perspectives/" user-emacs-directory)
-            persp-auto-save-fname "persp-autosave"
-            persp-set-last-persp-for-new-frames t
-            persp-switch-to-added-buffer nil; don't switch window to new buffers
-            persp-auto-save-opt 1; Auto-save perspective on buffer kill
-            persp-auto-resume-time -1; Don't auto resume perspective on startup
-            persp-nil-hidden nil; set to true to hide the "nil" perspective
-            persp-remove-buffers-from-nil-persp-behaviour 'kill
-        )
-
-        (persp-mode 1)
     )
 )
 
