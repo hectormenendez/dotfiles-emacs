@@ -105,15 +105,6 @@
 (require 'elpa-neotree)
 (require 'elpa-dired+)
 
-;; ---------------------------------------------------------- Packages» Content» Behaviour
-(require 'elpa-web-mode)
-(require 'elpa-json-mode)
-(require 'elpa-js2-mode)
-(require 'elpa-markdown-mode)
-(require 'elpa-nxml-mode)
-(require 'elpa-elixir-mode)
-(require 'elpa-graphql-mode)
-
 ;; --------------------------------------------------------- Packages» Content» Navigation
 (require 'elpa-multiple-cursors)
 (require 'elpa-expand-region)
@@ -125,20 +116,32 @@
 (require 'elpa-company)
 (require 'elpa-centered-cursor-mode)
 
-;; ------------------------------------------------ Packages» ProgMode» Editor» VisualAids
+;; ----------------------------------------------------------------------- Packages» Modes
+(require 'elpa-web-mode)
+(require 'elpa-json-mode)
+(require 'elpa-ecmascript)
+(require 'elpa-markdown-mode)
+(require 'elpa-nxml-mode)
+(require 'elpa-elixir-mode)
+(require 'elpa-graphql-mode)
+
+;; -------------------------------------------------------- Packages» ProgMode» Navigation
+(require 'elpa-dumb-jump)
+
+;; ------------------------------------------------ Packages» ProgMode» Behaviour» Content
+(require 'elpa-dtrt-indent)
+
+;; ------------------------------------------------ Packages» ProgMode» VisualAids» Editor
 (require 'elpa-git-gutter)
 (require 'elpa-highlight-indent-guides)
 (require 'elpa-fill-column-indicator)
 (require 'elpa-flycheck)
 
-;; ----------------------------------------------- Packages» ProgMode» Content» Navigation
-(require 'elpa-dumb-jump)
-(require 'elpa-dtrt-indent)
-
-;; ----------------------------------------------- Packages» ProgMode» Content» VisualAids
+; ;; --------------------------------------------- Packages» ProgMode» VisualAids» Content
 (require 'elpa-hl-todo)
 (require 'elpa-smartparens)
 (require 'elpa-rainbow-delimiters)
 (require 'elpa-rainbow-mode)
 (require 'elpa-highlight-numbers)
 (require 'elpa-highlight-quoted)
+
