@@ -11,6 +11,7 @@
 )
 
 (use-package dired+
+    :unless (package-installed-p 'dired+)
     :quelpa (dired+ :fetcher url :url "https://www.emacswiki.org/emacs/download/dired+.el")
     :config (progn
 
