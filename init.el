@@ -52,7 +52,7 @@
     (package-install 'quelpa)
     (quelpa '(quelpa-use-package
         :fetcher github
-        :repo "quelpa/quelpa-use-package"
+        :repo "https://framagit.org/steckerhalter/quelpa-use-package.git"
     ))
 )
 
