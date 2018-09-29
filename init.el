@@ -86,7 +86,7 @@
 ;; --------------------------------------------------- Packages» Editor» SystemIntegration
 (require 'elpa-exec-path-from-shell)
 (require 'elpa-nvm)
-; (require 'elpa-wakatime-mode); Disabled it because issues with local python installation
+(require 'elpa-wakatime-mode); Disabled it because issues with local python installation
 
 ;; ----------------------------------------------------------- Packages» Editor» Behaviour
 (require 'elpa-try)

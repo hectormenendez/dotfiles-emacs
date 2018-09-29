@@ -3,10 +3,20 @@
     :ensure t
     :delight wakatime-mode " Ϣ"
     :config (progn
-        (setq
-            wakatime-cli-path "/usr/local/bin/wakatime"
-            wakatime-python-bin "/usr/local/bin/python"
+        (let
+            (
+                (path (replace-regexp-in-string
+                    "\n$"
+                    ""
+                    (shell-command-to-string "which wakatime")
+                ))
+            )
+            (setq
+                wakatime-cli-path path
+                wakatime-python-bin path
+            )
         )
+
         (global-wakatime-mode 1)
     )
 ))
