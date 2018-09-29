@@ -16,7 +16,6 @@
             (_savefile (etor/projectile-buffers-get-filename))
             (_filenames (list (buffer-file-name (current-buffer))))
         )
-        (kill-current-buffer)
         (dolist (buffer (buffer-list))
             (let
                 (
@@ -25,7 +24,6 @@
                 )
                 (when (and (not (string-match-p "^\\\s*\\*" _name)) _path)
                     (add-to-list '_filenames _path)
-                    (kill-buffer _name)
                 )
             )
         )
@@ -36,7 +34,8 @@
             )
             (error "Could not write to projectile savefile")
         )
-        (print (concat "Saved and killed " (number-to-string (length _filenames)) " buffers."))
+        (desktop-clear)
+        (print (concat "Saved " (number-to-string (length _filenames)) " buffers."))
     )
 )
 
