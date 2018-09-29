@@ -99,9 +99,10 @@
 
 ;; ---------------------------------------------------------- Packages» Editor» Navigation
 (require 'elpa-ace-window)
+(require 'elpa-psession)
 (require 'elpa-helm)
 (require 'elpa-projectile)
-(require 'elpa-persp-mode)
+;; (require 'elpa-persp-mode)
 (require 'elpa-neotree)
 (require 'elpa-dired+)
 
