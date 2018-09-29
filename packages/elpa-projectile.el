@@ -1,4 +1,64 @@
 ;; Quick switching files
+
+(defun etor/projectile-buffers-get-filename ()
+    "Retrieve the location for the sevefile."
+    (expand-file-name
+        (replace-regexp-in-string "/" "#" (projectile-project-root))
+        etor/projectile-dir
+    )
+)
+
+(defun etor/projectile-buffers-save-and-kill ()
+    "Save currently open buffers to a file."
+    (interactive)
+    (let
+        (
+            (_savefile (etor/projectile-buffers-get-filename))
+            (_filenames (list (buffer-file-name (current-buffer))))
+        )
+        (kill-current-buffer)
+        (dolist (buffer (buffer-list))
+            (let
+                (
+                    (_path (buffer-file-name buffer))
+                    (_name (buffer-name buffer))
+                )
+                (when (and (not (string-match-p "^\\\s*\\*" _name)) _path)
+                    (add-to-list '_filenames _path)
+                    (kill-buffer _name)
+                )
+            )
+        )
+        (if (file-writable-p _savefile)
+            (with-temp-file _savefile
+                (insert (let (print-length) (prin1-to-string _filenames)))
+                (write-file _savefile)
+            )
+            (error "Could not write to projectile savefile")
+        )
+        (print (concat "Saved and killed " (number-to-string (length _filenames)) " buffers."))
+    )
+)
+
+(defun etor/projectile-buffers-load ()
+    "Load previously open buffers from a file."
+    (interactive)
+    (let
+        (
+            (_currname (buffer-file-name (current-buffer)))
+            (_filename (etor/projectile-buffers-get-filename))
+        )
+        (when (file-exists-p _filename)
+            (with-temp-buffer (insert-file-contents _filename)
+                (dolist (_path (read (buffer-string)))
+                    (when (file-exists-p _path) (find-file _path))
+                )
+                (find-file _currname)
+            )
+        )
+    )
+)
+
 (use-package projectile
     :ensure t
     :delight projectile-mode
@@ -21,6 +81,10 @@
                 (expand-file-name "cache" etor/projectile-dir)
             projectile-known-projects-file
                 (expand-file-name "known_projects" etor/projectile-dir)
+            ;; ignore these folders when trying to add as project
+            projectile-ignored-project-function (lambda (project-root)
+                (f-descendant-of? project-root (expand-file-name ".git"))
+            )
         )
         (setq projectile-project-root-files-functions '(
             projectile-root-local
@@ -28,16 +92,9 @@
             projectile-root-bottom-up
         ))
 
-
-        ;; TODO: These aren't working grea,t, how about moving the to persp-mode hooks?
         ;; Everytime the project is changed, remove/restore projects
-        ;; (add-hook 'projectile-before-switch-project-hook (lambda ()
-        ;;     (etor/projectile-buffers-save)
-        ;; ))
-        ;; (add-hook 'projectile-after-switch-project-hook (lambda ()
-        ;;     (etor/projectile-buffers-load)
-        ;;     (etor/projectile-buffers-kill)
-        ;; ))
+        (add-hook 'projectile-before-switch-project-hook 'etor/projectile-buffers-save-and-kill)
+        (add-hook 'projectile-after-switch-project-hook 'etor/projectile-buffers-load)
 
         (projectile-mode 1)
     )
@@ -76,101 +133,5 @@
     )
 )
 
-
-(defun etor/projectile-buffers-savefile ()
-    "Retrieve the location for the sevefile."
-    (expand-file-name
-        (replace-regexp-in-string "/" "#" (projectile-project-root))
-        etor/projectile-dir
-    )
-)
-
-(defun etor/projectile-buffers-load ()
-    "Load previously open buffers from a file."
-    (interactive)
-    (let
-        (
-            (savefile (etor/projectile-buffers-savefile))
-        )
-        (when
-            (file-exists-p savefile)
-            (with-temp-buffer
-                (insert-file-contents savefile)
-                (let
-                    (
-                        (paths (read (buffer-string)))
-                        (buffers (remove nil (mapcar
-                            (lambda (buffer) (buffer-file-name buffer))
-                            (buffer-list (selected-frame))
-                        )))
-                    )
-                    (dolist
-                        (path paths)
-                        (when
-                            (and
-                                (file-exists-p path)
-                                (not (member path buffers))
-                            )
-                            (find-file path)
-                        )
-                    )
-                )
-            )
-        )
-    )
-)
-
-(defun etor/projectile-buffers-save ()
-    "Save currently open buffers to a file."
-    (interactive)
-    (let
-        (
-            (savefile (etor/projectile-buffers-savefile))
-            (buffers (buffer-list (selected-frame)))
-            (results '())
-        )
-        (dolist
-            (buffer buffers)
-            (let
-                (
-                    (path (buffer-file-name buffer))
-                )
-                (unless (not path) (add-to-list 'results path))
-            )
-        )
-        (when
-            (file-writable-p savefile)
-            (with-temp-file savefile
-                (insert (let (print-length) (prin1-to-string results)))
-                (write-file savefile)
-            )
-        )
-    )
-)
-
-(defun etor/projectile-buffers-kill ()
-    "Kill buffers that don't belong to a projectile project."
-    (interactive)
-    (let
-        (
-            (buffers (buffer-list (selected-frame)))
-            (curproj (projectile-project-p))
-        )
-        (dolist (buffer buffers) (with-current-buffer buffer
-            (let
-                (
-                    (name (buffer-name buffer))
-                )
-                (when
-                    (not (eq curproj (projectile-project-p)))
-                    (unless (string-match "^\s*\\*\\\(Messages\\|scratch\\\)" name)
-                        (message "projectile-buffers-kill: %s" name)
-                        (kill-buffer name)
-                    )
-                )
-            )
-        ))
-    )
-)
 (provide 'elpa-projectile)
 

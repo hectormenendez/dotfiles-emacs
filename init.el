@@ -102,7 +102,6 @@
 (require 'elpa-psession)
 (require 'elpa-helm)
 (require 'elpa-projectile)
-;; (require 'elpa-persp-mode)
 (require 'elpa-neotree)
 (require 'elpa-dired+)
 
