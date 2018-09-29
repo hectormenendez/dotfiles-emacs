@@ -12,8 +12,17 @@
         ("C-x u" . undo-tree-visualize)
     )
     :config (progn
-        (setq undo-tree-auto-save-history t)
-        (setq undo-tree-history-directory-alist '(("." . "~/.emacs.d/_undotree")))
+        ;; Apparently these values help undotree not to choke on large files.
+        (setq-default
+            print-circle t
+            print-length nil
+            print-level nil
+        )
+        (setq
+            undo-tree-auto-save-history t
+            undo-tree-history-directory-alist
+                `(("." . ,(expand-file-name "_undotree" user-emacs-directory)))
+        )
         (global-undo-tree-mode 1)
     )
 )
