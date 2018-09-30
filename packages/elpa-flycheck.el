@@ -11,6 +11,7 @@
                 flycheck-temp-prefix ".flycheck"
                 flycheck-mode-line-prefix " ✖︎"
                 flycheck-emacs-lisp-load-path 'inherit; let flycheck know Emacs' loadpath
+                flycheck-check-syntax-automatically '(save mode-enabled)
             )
             (flycheck-mode 1)
         ))
