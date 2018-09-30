@@ -4,29 +4,10 @@
 
 ;;; Code:
 
-;; (use-package tern
-;;     ;; Enable tern
-;;     :ensure t
-;;     :config (add-hook 'js2-mode-hook (lambda ()
-
-;;         (setq tern-flash-timeout 30); Wait 30 seconds before removing the function helper
-;;         (tern-mode 1)
-;;     ))
-;; )
-
-;; (use-package company-tern
-;;     ;; Add tern to copany backends.
-;;     :ensure t
-;;     :after tern
-;;     :config (add-hook 'js2-mode-hook (lambda ()
-;;         (add-to-list 'company-backends 'company-tern)
-;;     ))
-;; )
-
-;; (use-package js2-highlight-vars
-;;     :ensure t
-;;     :after js2-mode
-;; )
+(use-package js2-highlight-vars
+    :ensure t
+    :after js2-mode
+)
 
 (use-package rjsx-mode
     :ensure t
@@ -76,6 +57,7 @@
             )
         ))
         (add-hook 'js2-mode-hook (lambda ()
+            (js2-imenu-extras-mode 1)
             (setq
                 js2-highlight-level 3; Add syntax highlighting to everything
                 js2-include-browser-externs t
@@ -93,7 +75,7 @@
             (setq-local indent-line-function 'indent-relative-maybe)
 
             ;; Highlight matching vars
-            ;; (js2-highlight-vars-mode 1)
+            (js2-highlight-vars-mode 1)
         ))
     )
 )
