@@ -23,7 +23,7 @@
             undo-tree-history-directory-alist
                 `(("." . ,(expand-file-name "_undotree" user-emacs-directory)))
         )
-        (global-undo-tree-mode 1)
+        (global-undo-tree-mode -1)
     )
 )
 

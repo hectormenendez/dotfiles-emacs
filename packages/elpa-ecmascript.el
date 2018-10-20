@@ -32,7 +32,7 @@
     :config (add-hook 'js2-mode-hook (lambda ()
         (tide-setup)
         (eldoc-mode +1)
-        (tide-hl-identifier-mode +1)
+        (tide-hl-identifier-mode -1)
     ))
 )
 
