@@ -46,17 +46,32 @@
 ;; (use-package is a dependecy so it won't be necessary to explicitly install it)
 (setq-default
     quelpa-dir (expand-file-name "_quelpa" user-emacs-directory)
-)
-(unless (package-installed-p 'quelpa)
-    (package-refresh-contents)
-    (package-install 'quelpa)
-    (quelpa '(quelpa-use-package
-        :fetcher github
-        :repo "https://framagit.org/steckerhalter/quelpa-use-package.git"
-    ))
+    etor/deltofetch(expand-file-name "_deltofetch" user-emacs-directory)
 )
 
-;; Enable use-package with quelpa support.
+(unless (file-exists-p etor/deltofetch) (progn
+    ; make sure packages are up-to-date
+    (package-refresh-contents)
+    ; Install quelpa for additional packages
+    (if (require 'quelpa nil t)
+        ;; only upgrade if already fetched
+        (quelpa-self-upgrade)
+        ;; not installed, fetch and install.
+        (with-temp-buffer
+            (url-insert-file-contents
+                "https://framagit.org/steckerhalter/quelpa/raw/master/bootstrap.el")
+            (eval-buffer)
+        )
+    )
+    ;; Add use-package with quelpa support
+    (quelpa '(quelpa-use-package
+        :fetcher git
+        :url "https://framagit.org/steckerhalter/quelpa-use-package.git")
+    ))
+    (write-region "" nil etor/deltofetch)
+)
+
+;; initialize use-package with quelpa support
 (require 'quelpa-use-package)
 
 ;; ------------------------------------------------------------------------------ Packages
@@ -137,7 +152,7 @@
 (require 'elpa-fill-column-indicator)
 (require 'elpa-flycheck)
 
-; ;; --------------------------------------------- Packages» ProgMode» VisualAids» Content
+;; --------------------------------------------- Packages» ProgMode» VisualAids» Content
 (require 'elpa-hl-todo)
 (require 'elpa-smartparens)
 (require 'elpa-rainbow-delimiters)
