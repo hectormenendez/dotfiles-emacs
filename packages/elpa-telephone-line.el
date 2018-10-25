@@ -4,9 +4,9 @@
     :config (progn
         (require 'telephone-line-utils)
 
-        (telephone-line-defsegment* telephone-line-project-segment () (telephone-line-raw
-            (concat persp-last-persp-name ":" (projectile-project-name) "  ")
-        ))
+        (telephone-line-defsegment* telephone-line-project-segment ()
+            (telephone-line-raw (projectile-project-name))
+        )
 
         (setq
             telephone-line-height 20
