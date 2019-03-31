@@ -4,11 +4,11 @@
 
 *** [[./sections/native.org][Native functionality]]
 These are the settings for the functionality currently bundled with Emacs.
-#+BEGIN_SRC emacs-lisp :hidden
+#+BEGIN_SRC emacs-lisp :hidden +n
 (org-babel-load-file (concat etor/path "native.org"))
 #+END_SRC
 
-#+INCLUDE: "./sections/system-integration.org"
+#+INCLUDE: "system-integration.org"
 
 #+BEGIN_SRC emacs-lisp
 ;; ;; ------------------------------------------------------------------------------ Packages
