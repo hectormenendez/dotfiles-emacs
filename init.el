@@ -1,4 +1,4 @@
-;;; init.el --- Personal emac configuration of Héctor Menéndez
+;;; init.el --- Hector Menendez' Emacs configuration.
 
 ;;; Commentary:
 ;;; Hey, don't judge, this is a work in progresss!
@@ -6,6 +6,9 @@
 ;;; Code:
 
 ;; ------------------------------------------------------------------------- Core settings
+
+(defvar etor/time (current-time)); will help determining loading time.
+
 (setq
     ; don't show the big-ass notification that appears on MacOS
     ring-bell-function 'ignore
@@ -74,89 +77,18 @@
 ;; initialize use-package with quelpa support
 (require 'quelpa-use-package)
 
-;; ------------------------------------------------------------------------------ Packages
-(add-to-list 'load-path (expand-file-name "packages" user-emacs-directory))
-(use-package bind-key :demand t); Allows the  use of :bind
-(use-package delight :ensure t); Diminish alternative, allows to rename mode names
+;; from now on, use org-mode to declare everything.
+(require 'ob)
+(require 'org)
+(message "ORG version:" (org-version))
+(org-babel-load-file (expand-file-name "README.org" user-emacs-directory))
 
-;; ---------------------------------------------------------------------- Packages» Native
-(require 'native-simple)
-(require 'native-server)
-(require 'native-files)
-(require 'native-recentf)
-(require 'native-savehist)
-;; (require 'native-saveplace)
-(require 'native-autorevert)
-(require 'native-custom)
-(require 'native-mule)
-(require 'native-whitespace)
-(require 'native-paren)
-(require 'native-prog-mode)
-;; (require 'native-frame)
-(require 'native-menu-bar)
-(require 'native-register)
-(require 'native-electric)
-(require 'native-line-numbers)
+;; -------------------------------------------------------------------------- Loading Time
 
-;; --------------------------------------------------- Packages» Editor» SystemIntegration
-(require 'elpa-exec-path-from-shell)
-(require 'elpa-nvm)
-(require 'elpa-wakatime-mode); Disabled it because issues with local python installation
-
-;; ----------------------------------------------------------- Packages» Editor» Behaviour
-(require 'elpa-try)
-(require 'elpa-restart-emacs)
-(require 'elpa-evil)
-(require 'elpa-web-beautify)
-
-;; ------------------------------------------------------- Packages» Editor» ExtraFeatures
-(require 'elpa-magit)
-
-;; ---------------------------------------------------------- Packages» Editor» Navigation
-(require 'elpa-ace-window)
-(require 'elpa-psession)
-(require 'elpa-helm)
-(require 'elpa-projectile)
-(require 'elpa-neotree)
-(require 'elpa-dired+)
-
-;; --------------------------------------------------------- Packages» Content» Navigation
-(require 'elpa-multiple-cursors)
-(require 'elpa-expand-region)
-(require 'elpa-origami)
-
-;; --------------------------------------------------------- Packages» Content» VisualAids
-(require 'elpa-which-key)
-(require 'elpa-telephone-line)
-(require 'elpa-company)
-(require 'elpa-centered-cursor-mode)
-
-;; ----------------------------------------------------------------------- Packages» Modes
-(require 'elpa-web-mode)
-(require 'elpa-json-mode)
-(require 'elpa-ecmascript)
-(require 'elpa-markdown-mode)
-(require 'elpa-nxml-mode)
-(require 'elpa-elixir-mode)
-(require 'elpa-graphql-mode)
-
-;; -------------------------------------------------------- Packages» ProgMode» Navigation
-(require 'elpa-dumb-jump)
-
-;; ------------------------------------------------ Packages» ProgMode» Behaviour» Content
-(require 'elpa-dtrt-indent)
-
-;; ------------------------------------------------ Packages» ProgMode» VisualAids» Editor
-(require 'elpa-git-gutter)
-(require 'elpa-highlight-indent-guides)
-(require 'elpa-fill-column-indicator)
-(require 'elpa-flycheck)
-
-;; --------------------------------------------- Packages» ProgMode» VisualAids» Content
-(require 'elpa-hl-todo)
-(require 'elpa-smartparens)
-(require 'elpa-rainbow-delimiters)
-(require 'elpa-rainbow-mode)
-(require 'elpa-highlight-numbers)
-(require 'elpa-highlight-quoted)
-
+(message "Loading Time: %d"
+    (destructuring-bind
+        (hi lo ms ps)
+        (current-time)
+        (- (+ hi lo) (+ (first etor/time) (second etor/time)))
+    )
+)
