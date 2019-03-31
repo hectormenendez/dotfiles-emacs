@@ -1,14 +1,19 @@
 #+TITLE: My emacs configuration.
 #+DESCRIPTION: This is just a description which eventually is going to make sense.
 #+LANGUAGE: en
+#+OPTIONS: toc:t
 
 *** [[./sections/native.org][Native functionality]]
 These are the settings for the functionality currently bundled with Emacs.
-#+BEGIN_SRC emacs-lisp :hidden +n
+#+BEGIN_SRC emacs-lisp
 (org-babel-load-file (concat etor/path "native.org"))
 #+END_SRC
 
-#+INCLUDE: "system-integration.org"
+*** System Integration
+These are some external features available on the system that will be integrated to Emacs.
+#+BEGIN_SRC emacs-lisp
+(org-babel-load-file (concat etor/path "system-integration.org"))
+#+END_SRC
 
 #+BEGIN_SRC emacs-lisp
 ;; ;; ------------------------------------------------------------------------------ Packages

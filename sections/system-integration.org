@@ -1,4 +1,4 @@
-** System Integration
+* System Integration
 These are some external features available on the system that will be integrated to Emacs.
 
 #+BEGIN_SRC emacs-lisp
