@@ -3,33 +3,17 @@
 #+LANGUAGE: en
 #+PROPERTY: results silent
 
-* Packages
-This is just a test.
+** Native functionality
+These are the settings for the functionality currently bundled with Emacs.
+#+BEGIN_SRC emacs-lisp
+(org-babel-load-file (concat etor/path "native.org"))
+#+END_SRC
 
 #+BEGIN_SRC emacs-lisp
 ;; ;; ------------------------------------------------------------------------------ Packages
 ;; (add-to-list 'load-path (expand-file-name "packages" user-emacs-directory))
 ;; (use-package bind-key :demand t); Allows the  use of :bind
 ;; (use-package delight :ensure t); Diminish alternative, allows to rename mode names
-
-;; ;; ---------------------------------------------------------------------- Packages» Native
-;; (require 'native-simple)
-;; (require 'native-server)
-;; (require 'native-files)
-;; (require 'native-recentf)
-;; (require 'native-savehist)
-;; ;; (require 'native-saveplace)
-;; (require 'native-autorevert)
-;; (require 'native-custom)
-;; (require 'native-mule)
-;; (require 'native-whitespace)
-;; (require 'native-paren)
-;; (require 'native-prog-mode)
-;; ;; (require 'native-frame)
-;; (require 'native-menu-bar)
-;; (require 'native-register)
-;; (require 'native-electric)
-;; (require 'native-line-numbers)
 
 ;; ;; --------------------------------------------------- Packages» Editor» SystemIntegration
 ;; (require 'elpa-exec-path-from-shell)
