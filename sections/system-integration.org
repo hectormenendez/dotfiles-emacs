@@ -1,0 +1,9 @@
+** System Integration
+These are some external features available on the system that will be integrated to Emacs.
+
+#+BEGIN_SRC emacs-lisp
+;; ;; --------------------------------------------------- Packages» Editor» SystemIntegration
+;; (require 'elpa-exec-path-from-shell)
+;; (require 'elpa-nvm)
+;; (require 'elpa-wakatime-mode); Disabled it because issues with local python installation
+#+END_SRC

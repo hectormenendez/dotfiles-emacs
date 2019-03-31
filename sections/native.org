@@ -1,7 +1,5 @@
-#+TITLE: Native
-#+DESCRIPTION: These are the settings for the functionality currently bundled with Emacs.
-#+LANGUAGE: en
-#+PROPERTY: results silent
+** Native functionality
+These are the settings for the functionality currently bundled with Emacs.
 
 #+BEGIN_SRC emacs-lisp
 ;; ;; ---------------------------------------------------------------------- Packages» Native

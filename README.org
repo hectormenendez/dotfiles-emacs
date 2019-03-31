@@ -2,22 +2,17 @@
 #+DESCRIPTION: This is just a description which eventually is going to make sense.
 #+LANGUAGE: en
 
-** [[./sections/native.org][Native functionality]]
+*** [[./sections/native.org][Native functionality]]
 These are the settings for the functionality currently bundled with Emacs.
-#+BEGIN_SRC emacs-lisp
+#+BEGIN_SRC emacs-lisp :hidden
 (org-babel-load-file (concat etor/path "native.org"))
 #+END_SRC
+
+#+INCLUDE: "./sections/system-integration.org"
 
 #+BEGIN_SRC emacs-lisp
 ;; ;; ------------------------------------------------------------------------------ Packages
 ;; (add-to-list 'load-path (expand-file-name "packages" user-emacs-directory))
-;; (use-package bind-key :demand t); Allows the  use of :bind
-;; (use-package delight :ensure t); Diminish alternative, allows to rename mode names
-
-;; ;; --------------------------------------------------- Packages» Editor» SystemIntegration
-;; (require 'elpa-exec-path-from-shell)
-;; (require 'elpa-nvm)
-;; (require 'elpa-wakatime-mode); Disabled it because issues with local python installation
 
 ;; ;; ----------------------------------------------------------- Packages» Editor» Behaviour
 ;; (require 'elpa-try)
@@ -35,6 +30,13 @@ These are the settings for the functionality currently bundled with Emacs.
 ;; (require 'elpa-projectile)
 ;; (require 'elpa-neotree)
 ;; (require 'elpa-dired+)
+
+;; ;; ------------------------------------------------ Packages» ProgMode» VisualAids» Editor
+;; (require 'elpa-git-gutter)
+;; (require 'elpa-highlight-indent-guides)
+;; (require 'elpa-fill-column-indicator)
+;; (require 'elpa-flycheck)
+;; (use-package delight :ensure t); Diminish alternative, allows to rename mode names
 
 ;; ;; --------------------------------------------------------- Packages» Content» Navigation
 ;; (require 'elpa-multiple-cursors)
@@ -61,12 +63,6 @@ These are the settings for the functionality currently bundled with Emacs.
 
 ;; ;; ------------------------------------------------ Packages» ProgMode» Behaviour» Content
 ;; (require 'elpa-dtrt-indent)
-
-;; ;; ------------------------------------------------ Packages» ProgMode» VisualAids» Editor
-;; (require 'elpa-git-gutter)
-;; (require 'elpa-highlight-indent-guides)
-;; (require 'elpa-fill-column-indicator)
-;; (require 'elpa-flycheck)
 
 ;; ;; --------------------------------------------- Packages» ProgMode» VisualAids» Content
 ;; (require 'elpa-hl-todo)
