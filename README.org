@@ -1,80 +1,28 @@
-#+TITLE: My emacs configuration.
-#+DESCRIPTION: This is just a description which eventually is going to make sense.
 #+LANGUAGE: en
-#+OPTIONS: toc:t
 
-*** [[./sections/native.org][Native functionality]]
-These are the settings for the functionality currently bundled with Emacs.
-#+BEGIN_SRC emacs-lisp
-(org-babel-load-file (concat etor/path "native.org"))
-#+END_SRC
+* My emacs configuration.
+This is just a description which eventually is going to make sense.
 
-*** System Integration
+*** [[./sections/system/README.org][System integration]]
 These are some external features available on the system that will be integrated to Emacs.
 #+BEGIN_SRC emacs-lisp
-(org-babel-load-file (concat etor/path "system-integration.org"))
+(org-babel-load-file (concat etor/path/system "README.org"))
 #+END_SRC
 
+*** [[./sections/bundled-features/README.org][Bundled features]]
+These are the settings for the functionality currently bundled with Emacs.
 #+BEGIN_SRC emacs-lisp
-;; ;; ------------------------------------------------------------------------------ Packages
-;; (add-to-list 'load-path (expand-file-name "packages" user-emacs-directory))
+(org-babel-load-file (concat etor/path/bundled "README.org"))
+#+END_SRC
 
-;; ;; ----------------------------------------------------------- Packages» Editor» Behaviour
-;; (require 'elpa-try)
-;; (require 'elpa-restart-emacs)
-;; (require 'elpa-evil)
-;; (require 'elpa-web-beautify)
+*** [[./sections/editor/README.org][Editor features]]
+These features add new capabilities to Emacs, they don't depend on specific syntax/modes.
+#+BEGIN_SRC emacs-lisp
+(org-babel-load-file (concat etor/path/editor "README.org"))
+#+END_SRC
 
-;; ;; ------------------------------------------------------- Packages» Editor» ExtraFeatures
-;; (require 'elpa-magit)
-
-;; ;; ---------------------------------------------------------- Packages» Editor» Navigation
-;; (require 'elpa-ace-window)
-;; (require 'elpa-psession)
-;; (require 'elpa-helm)
-;; (require 'elpa-projectile)
-;; (require 'elpa-neotree)
-;; (require 'elpa-dired+)
-
-;; ;; ------------------------------------------------ Packages» ProgMode» VisualAids» Editor
-;; (require 'elpa-git-gutter)
-;; (require 'elpa-highlight-indent-guides)
-;; (require 'elpa-fill-column-indicator)
-;; (require 'elpa-flycheck)
-;; (use-package delight :ensure t); Diminish alternative, allows to rename mode names
-
-;; ;; --------------------------------------------------------- Packages» Content» Navigation
-;; (require 'elpa-multiple-cursors)
-;; (require 'elpa-expand-region)
-;; (require 'elpa-origami)
-
-;; ;; --------------------------------------------------------- Packages» Content» VisualAids
-;; (require 'elpa-which-key)
-;; (require 'elpa-telephone-line)
-;; (require 'elpa-company)
-;; (require 'elpa-centered-cursor-mode)
-
-;; ;; ----------------------------------------------------------------------- Packages» Modes
-;; (require 'elpa-web-mode)
-;; (require 'elpa-json-mode)
-;; (require 'elpa-ecmascript)
-;; (require 'elpa-markdown-mode)
-;; (require 'elpa-nxml-mode)
-;; (require 'elpa-elixir-mode)
-;; (require 'elpa-graphql-mode)
-
-;; ;; -------------------------------------------------------- Packages» ProgMode» Navigation
-;; (require 'elpa-dumb-jump)
-
-;; ;; ------------------------------------------------ Packages» ProgMode» Behaviour» Content
-;; (require 'elpa-dtrt-indent)
-
-;; ;; --------------------------------------------- Packages» ProgMode» VisualAids» Content
-;; (require 'elpa-hl-todo)
-;; (require 'elpa-smartparens)
-;; (require 'elpa-rainbow-delimiters)
-;; (require 'elpa-rainbow-mode)
-;; (require 'elpa-highlight-numbers)
-;; (require 'elpa-highlight-quoted)
-
+*** [[./sections/content/README.org][Content features]]
+These add functionality to the content, depending on its type.
+#+BEGIN_SRC emacs-lisp
+(org-babel-load-file (concat etor/path/content "README.org"))
 #+END_SRC

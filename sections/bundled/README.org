@@ -1,0 +1,24 @@
+* Bundled featues
+These are the settings for the functionality currently bundled with Emacs.
+
+#+BEGIN_SRC emacs-lisp
+  ;; ;; ---------------------------------------------------------------------- Packages» Native
+  ;; (require 'native-simple)
+  ;; (require 'native-server)
+  ;; (require 'native-files)
+  ;; (require 'native-recentf)
+  ;; (require 'native-savehist)
+  ;; (require 'native-saveplace)
+  ;; (require 'native-autorevert)
+  ;; (require 'native-custom)
+  ;; (require 'native-mule)
+  ;; (require 'native-whitespace)
+  ;; (require 'native-paren)
+  ;; (require 'native-prog-mode)
+  ;; (require 'native-frame)
+  ;; (require 'native-menu-bar)
+  ;; (require 'native-register)
+  ;; (require 'native-electric)
+  ;; (require 'native-line-numbers)
+#+END_SRC
+

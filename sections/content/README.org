@@ -1,0 +1,29 @@
+*** [[./sections/content/README.org][Content features]]
+These add functionality to the content, depending on its type.
+#+BEGIN_SRC emacs-lisp
+;; PROGMODE NAVIGATION, SELECTION & MODIFIERS
+;; (require 'elpa-dumb-jump)
+;; (require 'elpa-dtrt-indent)
+;; (require 'elpa-flycheck)
+;; (require 'elpa-web-beautify)
+
+;; PROGMODE VISUAL AIDS
+;; (require 'elpa-hl-todo)
+;; (require 'elpa-smartparens)
+;; (require 'elpa-rainbow-delimiters)
+;; (require 'elpa-rainbow-mode)
+;; (require 'elpa-highlight-numbers)
+;; (require 'elpa-highlight-quoted)
+
+;; PROGMODE SYNTAXES
+;; (require 'elpa-web-mode)
+;; (require 'elpa-json-mode)
+;; (require 'elpa-ecmascript)
+;; (require 'elpa-graphql-mode)
+
+;; (require 'elpa-markdown-mode)
+;; (require 'elpa-nxml-mode)
+
+;; (require 'elpa-elixir-mode)
+
+#+END_SRC

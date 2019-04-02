@@ -39,6 +39,10 @@
             ;; Auto indent after paste
             (fset 'indent-pasted-text "`[v`]=")
         ))
+        (add-hook 'evil-leader-mode-hook (lambda ()
+            ;; Define a function that allows to maximise and restore a window
+            (evil-leader/set-key "wW" 'etor/window-toggle)
+        ))
         ;; Enable evil-mode baby!
         (evil-mode 1)
     )
@@ -71,6 +75,17 @@
     ))
 )
 
+(defun etor/window-toggle ()
+    "Allows to maximize current buffer"
+    (interactive)
+    (if (= 1 (length (window-list)))
+        (jump-to-register '_)
+        (progn
+            (window-configuration-to-register '_)
+            (delete-other-windows)
+        )
+    )
+)
 
 (provide 'elpa-evil)
 ;;; elpa-evil.el ends here
