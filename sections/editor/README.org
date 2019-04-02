@@ -29,5 +29,4 @@ These features add new capabilities to Emacs, they don't depend on specific synt
 ;; (require 'elpa-fill-column-indicator)
 ;; (require 'elpa-highlight-indent-guides)
 ;; (require 'elpa-telephone-line)
-;; (use-package delight :ensure t); Diminish alternative, allows to rename mode names
 #+END_SRC

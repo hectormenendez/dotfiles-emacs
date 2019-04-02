@@ -78,12 +78,14 @@
 ;; initialize use-package with quelpa support
 (require 'quelpa-use-package)
 
-; Allows the  use of :bind when using use-package
-(use-package bind-key :demand t)
+(use-package bind-key :demand t); Enables :bind (key binding) on use-package
+(use-package delight :ensure t); Enables :delight (custom mode name) on use-package
+
+;; ------------------------------------------------------------------------------ ORG Mode
 
 ;; from now on, use org-mode to declare everything.
-(use-package ob :demand t)
-(use-package org :demand t :after ob)
+(use-package org :demand t)
+(use-package ob :demand t :after org)
 (org-babel-load-file (expand-file-name "README.org" user-emacs-directory))
 
 ;; ---------------------------------------------------------------------------------- DONE
