@@ -9,7 +9,7 @@ These are some external features available on the system that will be integrated
 (org-babel-load-file (concat etor/path/system "README.org"))
 #+END_SRC
 
-*** [[./sections/bundled-features/README.org][Bundled features]]
+*** [[./sections/bundled/README.org][Bundled features]]
 These are the settings for the functionality currently bundled with Emacs.
 #+BEGIN_SRC emacs-lisp
 (org-babel-load-file (concat etor/path/bundled "README.org"))
@@ -26,3 +26,4 @@ These add functionality to the content, depending on its type.
 #+BEGIN_SRC emacs-lisp
 (org-babel-load-file (concat etor/path/content "README.org"))
 #+END_SRC
+
