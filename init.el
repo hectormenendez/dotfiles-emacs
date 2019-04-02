@@ -42,9 +42,13 @@
     package-enable-at-startup nil; Disable the default packaage-manager at startup
     package-user-dir (expand-file-name "_elpa" user-emacs-directory); packages dir
 )
+(setq-default
+    quelpa-dir (expand-file-name "_quelpa" user-emacs-directory)
+)
 
 ;; The repositories to fetch packages-from.
 (add-to-list 'package-archives '("melpa" . "http://melpa.org/packages/"))
+(add-to-list 'package-archives '("org" . "https://orgmode.org/elpa/") t)
 
 ;; This will be added to this file no matter what, so, add it.
 (package-initialize)
@@ -52,7 +56,6 @@
 ;; if quelpa not present, download and install it so packages can be compiled from source.
 ;; Also, install quelpa-use-package so those packages can be loaded using "use-package"
 ;; (use-package is a dependecy so it won't be necessary to explicitly install it)
-(setq-default quelpa-dir (expand-file-name "_quelpa" user-emacs-directory))
 (unless (file-exists-p etor/path/deltofetch) (progn
     ; make sure packages are up-to-date
     (package-refresh-contents)
@@ -83,9 +86,7 @@
 
 ;; ------------------------------------------------------------------------------ ORG Mode
 
-;; from now on, use org-mode to declare everything.
-(use-package org :demand t)
-(use-package ob :demand t :after org)
+(use-package org :ensure org-plus-contrib); Use the latest contrib version of org.
 (org-babel-load-file (expand-file-name "README.org" user-emacs-directory))
 
 ;; ---------------------------------------------------------------------------------- DONE

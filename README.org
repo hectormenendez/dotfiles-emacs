@@ -3,16 +3,16 @@
 * My emacs configuration.
 This is just a description which eventually is going to make sense.
 
-*** [[./sections/system/README.org][System integration]]
-These are some external features available on the system that will be integrated to Emacs.
-#+BEGIN_SRC emacs-lisp
-(org-babel-load-file (concat etor/path/system "README.org"))
-#+END_SRC
-
 *** [[./sections/bundled/README.org][Bundled features]]
 These are the settings for the functionality currently bundled with Emacs.
 #+BEGIN_SRC emacs-lisp
 (org-babel-load-file (concat etor/path/bundled "README.org"))
+#+END_SRC
+
+*** [[./sections/system/README.org][System integration]]
+These are some external features available on the system that will be integrated to Emacs.
+#+BEGIN_SRC emacs-lisp
+(org-babel-load-file (concat etor/path/system "README.org"))
 #+END_SRC
 
 *** [[./sections/editor/README.org][Editor features]]
