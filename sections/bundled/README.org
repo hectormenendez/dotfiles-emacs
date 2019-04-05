@@ -1,8 +1,8 @@
 * Bundled featues
 These are the settings for the functionality currently bundled with Emacs.
 
-** [[https://github.com/emacs-mirror/emacs/blob/master/lisp/simple.el][simple.el
-]]Emacs commands not specifically related to some major mode or to file-handling.
+** [[https://github.com/emacs-mirror/emacs/blob/master/lisp/simple.el][simple.el]]
+Emacs commands not specifically related to some major mode or to file-handling.
 #+BEGIN_SRC emacs-lisp
   (use-package simple
       :demand t
