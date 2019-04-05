@@ -35,16 +35,24 @@ Defines most of Emacs's file-handling functions.
   (use-package files
       :demand t
       :config
-          (setq
-              make-backup-files t
-              delete-old-versions t
-              require-final-newline nil; Don't end files with newline
-              version-control t; Keep control of backups
-              vc-follow-symlinks t; Don't ask to follow symlinks, just do it.
-              backup-directory-alist '(("." . "~/.emacs.d/_backups"))
-              auto-save-default nil; Disable auto-saving
-              auto-save-file-name-transforms'((".*" "~/.emacs.d/_auto-save/" t))
+      (setq
+          ;; Handle backups
+          make-backup-files t
+          delete-old-versions t
+          backup-directory-alist '(
+              ("." . (expand-file-name "_backups/" user-emacs-directory))
           )
+          ;; Handle backup version control
+          version-control t; Keep control of backups
+          vc-follow-symlinks t; Don't ask to follow symlinks, just do it.
+          ;; Handle AutoSave
+          auto-save-default nil; Disable auto-saving
+          auto-save-file-name-transforms'(
+              (".*" (expand-file-name "_auto-save/" user-emacs-directory) t)
+          )
+          ;; Misc
+          require-final-newline nil; Don't end files with newline
+      )
   )
 #+END_SRC
 
@@ -56,7 +64,7 @@ The recentf file list automatically saved across Emacs sessions.
       :demand t
       :config
       (setq
-          recentf-save-file "~/.emacs.d/_recentf"
+          recentf-save-file (expand-file-name "_recentf" user-emacs-directory)
           recentf-filename-handlers '(abbreviate-file-name)
       )
       (recentf-mode 1)
@@ -71,7 +79,7 @@ file after exit.  This package provides the same feature in Emacs.
       :demand t
       :config
           (setq
-              savehist-file "~/.emacs.d/_history"
+              savehist-file (expand-file-name "_history" user-emacs-directory)
               savehist-save-minibuffer-history 1
               history-length t
               history-delete-duplicates t
@@ -87,7 +95,7 @@ to the saved position, when the file is first found.
   (use-package saveplace
       :demand t
       :config
-          (setq save-place-file "~/.emacs.d/_saveplace")
+          (setq save-place-file (expand-file-name "_saveplace" user-emacs-directory))
           (save-place-mode 1)
   )
 #+END_SRC
