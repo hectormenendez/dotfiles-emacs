@@ -18,6 +18,17 @@ Emacs commands not specifically related to some major mode or to file-handling.
 )
 #+END_SRC
 
+** Server.el
+Once it finishes loading, enable Emacs server so other instances can connect to it.
+#+BEGIN_SRC emacs-lisp
+(use-package server
+    :demand t
+    :config (add-hook 'after-init-hook (lambda ()
+        (unless (server-running-p) (server-start))
+    ))
+)
+#+END_SRC
+
 #+BEGIN_SRC emacs-lisp
   ;; ;; ---------------------------------------------------------------------- Packages» Native
   ;; (require 'native-server)
