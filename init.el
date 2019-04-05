@@ -102,6 +102,14 @@
         org-hide-leading-stars nil; Always show stars in headings
     )
 )
+
+;; Allows the generation of a Table of Contents for Github
+(use-package toc-org
+    :ensure t
+    :hook org-mode
+    :commands toc-org-mode
+)
+
 ;; Load the initialization
 (org-babel-load-file (expand-file-name "README.org" user-emacs-directory))
 

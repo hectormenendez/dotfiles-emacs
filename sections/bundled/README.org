@@ -1,6 +1,8 @@
 * Bundled featues
 These are the settings for the functionality currently bundled with Emacs.
 
+:TOC:
+
 ** Editor
 Controls how the editor work and handle extra (but native) functionality.
 
@@ -127,6 +129,7 @@ Whenever a file is changed externally, auto update it if it's opened.
 # (require 'native-electric)
 # (require 'native-line-numbers)
 # (require 'native-custom)
+
 
 ** Content
 Controls how the content behaves inside the editor.
