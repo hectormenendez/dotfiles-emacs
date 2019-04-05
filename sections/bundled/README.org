@@ -3,97 +3,83 @@ These are the settings for the functionality currently bundled with Emacs.
 
 ** Simple.el
    Emacs commands not specifically related to some major mode or to file-handling.
-#+BEGIN_SRC emacs-lisp
-(use-package simple
-    :demand t
-    :config
-        ;; the location for auto-save files
-        (setq auto-save-list-file-prefix
-            (expand-file-name "_auto-save-list/" user-emacs-directory)
-        )
-        (auto-save-mode 1); Enable auto saving files
-        (column-number-mode 1); Show the current-column number
-        (global-hl-line-mode 1); Highlight the current line
-)
-#+END_SRC
+   #+BEGIN_SRC emacs-lisp
+   (use-package simple
+       :demand t
+       :config
+       ;; the location for auto-save files
+       (setq auto-save-list-file-prefix
+           (expand-file-name "_auto-save-list/" user-emacs-directory)
+       )
+       (auto-save-mode 1); Enable auto saving files
+       (column-number-mode 1); Show the current-column number
+       (global-hl-line-mode 1); Highlight the current line
+   )
+   #+END_SRC
 
 ** Server.el
    Once it finishes loading, enable Emacs server so other instances can connect to it.
-#+BEGIN_SRC emacs-lisp
-(use-package server
-    :demand t
-    :config
-        (add-hook 'after-init-hook (lambda ()
-            (unless (server-running-p) (server-start))
-        ))
-)
-#+END_SRC
+   #+BEGIN_SRC emacs-lisp
+   (use-package server
+       :demand t
+       :init
+       (add-hook 'after-init-hook (lambda ()
+           (unless (server-running-p) (server-start))
+       ))
+   )
+   #+END_SRC
 
 ** Files.el
    Defines most of Emacs's file-handling functions.
-#+BEGIN_SRC emacs-lisp
-(use-package files
-    :demand t
-    :config
-        (setq
-            make-backup-files t
-            delete-old-versions t
-            require-final-newline nil; Don't end files with newline
-            version-control t; Keep control of backups
-            vc-follow-symlinks t; Don't ask to follow symlinks, just do it.
-            backup-directory-alist '(("." . "~/.emacs.d/_backups"))
-            auto-save-default nil; Disable auto-saving
-            auto-save-file-name-transforms'((".*" "~/.emacs.d/_auto-save/" t))
-        )
-)
-#+END_SRC
+   #+BEGIN_SRC emacs-lisp
+   (use-package files
+       :demand t
+       :config
+           (setq
+               make-backup-files t
+               delete-old-versions t
+               require-final-newline nil; Don't end files with newline
+               version-control t; Keep control of backups
+               vc-follow-symlinks t; Don't ask to follow symlinks, just do it.
+               backup-directory-alist '(("." . "~/.emacs.d/_backups"))
+               auto-save-default nil; Disable auto-saving
+               auto-save-file-name-transforms'((".*" "~/.emacs.d/_auto-save/" t))
+           )
+   )
+   #+END_SRC
 
-** Recentf.el
-   Maintains a menu for visiting files that were operated on recently. The recentf file
-   list automatically saved across Emacs sessions.
-#+BEGIN_SRC emacs-lisp
-(use-package recentf
-    :demand t
-    :config
-        (setq
-            recentf-save-file "~/.emacs.d/_recentf"
-            recentf-filename-handlers '(abbreviate-file-name)
-        )
-        (recentf-mode 1)
-)
-#+END_SRC
-
+** Recentf.el Maintains a menu for visiting files that were operated on recently. The recentf file list automatically saved across Emacs sessions. #+BEGIN_SRC emacs-lisp (use-package recentf :demand t :config (setq recentf-save-file "~/.emacs.d/_recentf" recentf-filename-handlers '(abbreviate-file-name)) (recentf-mode 1)) #+END_SRC
 ** Savehist.el
    Many editors (e.g. Vim) have the feature of saving minibuffer history to an external
    file after exit.  This package provides the same feature in Emacs.
-#+BEGIN_SRC emacs-lisp
-(use-package savehist
-    :demand t
-    :config
-        (setq
-            savehist-file "~/.emacs.d/_history"
-            savehist-save-minibuffer-history 1
-            history-length t
-            history-delete-duplicates t
-        )
-        (savehist-mode 1)
-)
-#+END_SRC
+   #+BEGIN_SRC emacs-lisp
+   (use-package savehist
+       :demand t
+       :config
+           (setq
+               savehist-file "~/.emacs.d/_history"
+               savehist-save-minibuffer-history 1
+               history-length t
+               history-delete-duplicates t
+           )
+           (savehist-mode 1)
+   )
+   #+END_SRC
 
 ** Saveplace.el
    Automatically save place in files, so that visiting them later (even during a different
    Emacs session) automatically moves point to the saved position, when the file is first
    found.
-#+BEGIN_SRC emacs-lisp
-(use-package saveplace
-    :demand t
-    :config
-        (setq save-place-file "~/.emacs.d/_saveplace")
-        (save-place-mode 1)
-)
-#+END_SRC
+   #+BEGIN_SRC emacs-lisp
+   (use-package saveplace
+       :demand t
+       :config
+           (setq save-place-file "~/.emacs.d/_saveplace")
+           (save-place-mode 1)
+   )
+   #+END_SRC
 
-** Autorever
+
 #+BEGIN_SRC emacs-lisp
   ;; ;; ---------------------------------------------------------------------- Packages» Native
   ;; (require 'native-autorevert)
