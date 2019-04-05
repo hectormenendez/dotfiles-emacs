@@ -34,7 +34,6 @@ Once it finishes loading, enable Emacs server so other instances can connect to 
   )
 #+END_SRC
 
-
 *** [[https://github.com/emacs-mirror/emacs/blob/master/lisp/files.el][files.el]]
 Defines most of Emacs's file-handling functions.
 #+BEGIN_SRC emacs-lisp
@@ -53,9 +52,9 @@ Defines most of Emacs's file-handling functions.
           vc-follow-symlinks t; Don't ask to follow symlinks, just do it.
           ;; Handle AutoSave
           auto-save-default nil; Disable auto-saving
-          auto-save-file-name-transforms'(
-              (".*" (expand-file-name "_auto-save/" user-emacs-directory) t)
-          )
+          auto-save-file-name-transforms `((
+              ".*" (expand-file-name "_auto-save-list/" user-emacs-directory) t
+          ))
           ;; Misc
           require-final-newline nil; Don't end files with newline
       )
@@ -105,7 +104,6 @@ to the saved position, when the file is first found.
           (save-place-mode 1)
   )
 #+END_SRC
-
 
 *** [[https://github.com/emacs-mirror/emacs/blob/master/lisp/autorevert.el][autorevert.el]]
 Whenever a file is changed externally, auto update it if it's opened.
