@@ -14,21 +14,27 @@
 (defvar etor/path/content (concat etor/path (file-name-as-directory "content")))
 (defvar etor/path/deltofetch (expand-file-name "_deltofetch" user-emacs-directory))
 
+; set GC to something big to optimize loading time, restore it after load.
+(setq gc-cons-threshold 64000000)
+(add-hook 'after-init-hook #'(lambda () (setq gc-cons-threshold 800000)))
+
+;; C Source code
+;; these are the absolute first thing that should be setup.
 (setq
-    ; don't show the big-ass notification that appears on MacOS
-    ring-bell-function 'ignore
-    visible-bell nil
-    message-log-max 10000
+    create-lockfiles nil; Don't create ".#" files
+    ring-bell-function 'ignore; don't run any function when alerting
+    visible-bell nil; don't show the visual que when alerting
+    message-log-max 10000; max number of lines to keep in logfile.
     load-prefer-newer t; Don't load outdated byte code
-    gc-cons-threshold 2000000; no need of garbage collect that often
     max-mini-window-height 0.5; Use up to 50% of frame height for mini-buffer window.
-    ;; Startup
+    line-spacing 1; The spacing between lines vertically
+)
+
+;; Startup.el
+;; This file parses the command line and gets Emacs running.
+(setq
     inhibit-startup-screen 1; Don't show the welcome screen
     initial-scratch-message nil; Don't show a message on *scratch* mode
-    create-lockfiles nil; Don't create ".#" files
-)
-(setq-default
-    line-spacing 1; The spacing between lines vertically
 )
 
 ; Ask for just one letter when confirmation needed
@@ -90,6 +96,8 @@
 (org-babel-load-file (expand-file-name "README.org" user-emacs-directory))
 
 ;; ---------------------------------------------------------------------------------- DONE
-(emacs-init-time)
+(switch-to-buffer "*Messages*")
+(message (concat "Emacs took " (emacs-init-time) " to load."))
+
 (provide 'init)
 ;;; init.el ends here
