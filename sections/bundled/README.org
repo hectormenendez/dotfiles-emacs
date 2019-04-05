@@ -100,9 +100,23 @@ to the saved position, when the file is first found.
   )
 #+END_SRC
 
+** [[https://github.com/emacs-mirror/emacs/blob/master/lisp/autorevert.el][autorevert.el]]
+Whenever a file is changed externally, auto update it if it's opened.
+#+BEGIN_SRC emacs-lisp
+  (use-package autorevert
+      :demand t
+      :delight (auto-revert-mode); don't show the mode-line
+      :config
+      (setq
+          auto-revert-verbose nil; no need of advertise the revert
+          global-auto-revert-non-file-buffers t; Enable autorevert on dired buffers
+      )
+      (global-auto-revert-mode 1)
+  )
+#+END_SRC
+
 #+BEGIN_SRC emacs-lisp
   ;; ;; ---------------------------------------------------------------------- Packages» Native
-  ;; (require 'native-autorevert)
   ;; (require 'native-custom)
   ;; (require 'native-mule)
   ;; (require 'native-whitespace)
