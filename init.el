@@ -92,7 +92,17 @@
 
 ;; ------------------------------------------------------------------------------ ORG Mode
 
-(use-package org :ensure org-plus-contrib); Use the latest contrib version of org.
+;; Use the latest contrib version of org.
+;; TODO: maybe use defer instead of demand? does org-babel-load-file need this?
+(use-package org
+    :ensure org-plus-contrib
+    :demand t
+    :config
+    (setq
+        org-hide-leading-stars nil; Always show stars in headings
+    )
+)
+;; Load the initialization
 (org-babel-load-file (expand-file-name "README.org" user-emacs-directory))
 
 ;; ---------------------------------------------------------------------------------- DONE

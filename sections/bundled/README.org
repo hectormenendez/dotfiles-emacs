@@ -1,8 +1,8 @@
 * Bundled featues
 These are the settings for the functionality currently bundled with Emacs.
 
-** Simple.el
-   Emacs commands not specifically related to some major mode or to file-handling.
+** simple.el
+Emacs commands not specifically related to some major mode or to file-handling.
 #+BEGIN_SRC emacs-lisp
   (use-package simple
       :demand t
@@ -17,8 +17,8 @@ These are the settings for the functionality currently bundled with Emacs.
   )
 #+END_SRC
 
-** Server.el
-   Once it finishes loading, enable Emacs server so other instances can connect to it.
+** server.el
+Once it finishes loading, enable Emacs server so other instances can connect to it.
 #+BEGIN_SRC emacs-lisp
   (use-package server
       :demand t
@@ -29,8 +29,8 @@ These are the settings for the functionality currently bundled with Emacs.
   )
 #+END_SRC
 
-** Files.el
-   Defines most of Emacs's file-handling functions.
+** files.el
+Defines most of Emacs's file-handling functions.
 #+BEGIN_SRC emacs-lisp
   (use-package files
       :demand t
@@ -48,8 +48,9 @@ These are the settings for the functionality currently bundled with Emacs.
   )
 #+END_SRC
 
-** Recentf.el Maintains a menu for visiting files that were operated on recently.
-   The recentf file list automatically saved across Emacs sessions.
+** recentf.el
+Maintains a menu for visiting files that were operated on recently.
+The recentf file list automatically saved across Emacs sessions.
 #+BEGIN_SRC emacs-lisp
   (use-package recentf
       :demand t
@@ -62,9 +63,9 @@ These are the settings for the functionality currently bundled with Emacs.
   )
 #+END_SRC
 
-** Savehist.el
-   Many editors (e.g. Vim) have the feature of saving minibuffer history to an external
-   file after exit.  This package provides the same feature in Emacs.
+** savehist.el
+Many editors (e.g. Vim) have the feature of saving minibuffer history to an external
+file after exit.  This package provides the same feature in Emacs.
 #+BEGIN_SRC emacs-lisp
   (use-package savehist
       :demand t
@@ -79,10 +80,10 @@ These are the settings for the functionality currently bundled with Emacs.
   )
 #+END_SRC
 
-** Saveplace.el
-   Automatically save place in files, so that visiting them later (even during a different
-   Emacs session) automatically moves point to the saved position, when the file is first
-   found.
+** saveplace.el
+Automatically save place in files, so that visiting them later (even during a different
+Emacs session) automatically moves point to the saved position, when the file is first
+found.
 #+BEGIN_SRC emacs-lisp
   (use-package saveplace
       :demand t
