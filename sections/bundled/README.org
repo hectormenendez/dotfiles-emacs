@@ -120,16 +120,28 @@ Whenever a file is changed externally, auto update it if it's opened.
           auto-revert-verbose nil; no need of advertise the revert
           global-auto-revert-non-file-buffers t; Enable autorevert on dired buffers
       )
-      (global-auto-revert-mode 1)
   )
 #+END_SRC
 
+*** [[https://github.com/emacs-mirror/emacs/blob/master/lisp/display-line-numbers.el][display-line-numbers.el]]
+Handles line-numbers display on the editor.
+#+BEGIN_SRC emacs-lisp
+  (use-package display-line-numbers
+      :commands display-line-numbers-mode
+      ;; Enable it for all modes
+      :init (add-hook 'after-init-hook #'global-display-line-numbers-mode)
+      :config
+      (setq
+          ;; Format the numbers bar
+          display-line-numbers "%4d \u2502 "
+          ;; Use relative numbers
+          display-line-numbers-type 'relative
+      )
+  )
+#+END_SRC
 
-# (require 'native-frame)
 # (require 'native-menu-bar)
-# (require 'native-register)
-# (require 'native-electric)
-# (require 'native-line-numbers)
+# (require 'native-frame)
 # (require 'native-custom)
 
 
