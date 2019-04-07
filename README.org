@@ -25,3 +25,49 @@ These add functionality to the content, depending on its type.
 (org-babel-load-file (concat etor/path/content "README.org"))
 #+END_SRC
 
+
+*** Custom commands
+These are some custom commands that I use.
+#+BEGIN_SRC emacs-lisp
+  (defun etor/frame-load ()
+      "Load last frame geometry from a a file."
+      (interactive)
+      (let
+          (
+              (framesave-file (expand-file-name "_framesave" user-emacs-directory))
+          )
+          (when (file-readable-p framesave-file) (load-file framesave-file))
+      )
+  )
+
+  ;; TODO: In Mac, save Desktop Name (or identifier)
+  (defun etor/frame-save ()
+      "Save current frame geometry to a file."
+      (interactive)
+      (let
+          (
+              (framesave-left (frame-parameter (selected-frame) 'left))
+              (framesave-top (frame-parameter (selected-frame) 'top))
+              (framesave-width (frame-parameter (selected-frame) 'width))
+              (framesave-height (frame-parameter (selected-frame) 'height))
+              (framesave-file (expand-file-name "_framesave" user-emacs-directory))
+          )
+          (when (not (number-or-marker-p framesave-left)) (setq framesave-left 0))
+          (when (not (number-or-marker-p framesave-top)) (setq framesave-top 0))
+          (when (not (number-or-marker-p framesave-width)) (setq framesave-width 0))
+          (when (not (number-or-marker-p framesave-height)) (setq framesave-height 0))
+          (with-temp-buffer
+              (insert
+                  "(setq initial-frame-alist '(\n"
+                  (format "    (top . %d)\n" (max framesave-top 0))
+                  (format "    (left . %d)\n" (max framesave-left 0))
+                  (format "    (width . %d)\n" (max framesave-width 0))
+                  (format "    (height . %d)\n" (max framesave-height 0))
+                  "))\n"
+              )
+              (when (file-writable-p framesave-file) (write-file framesave-file))
+          )
+      )
+  )
+
+#+END_SRC
