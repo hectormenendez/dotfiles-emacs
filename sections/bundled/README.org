@@ -4,35 +4,16 @@ These are the settings for the functionality currently bundled with Emacs.
 :TOC:
 
 ** [[./editor#bundled-editor-features][Editor]]
-Controls how the editor work and handle extra (but native) functionality.
+Controls how the editor works and handles bundled functionality.
 #+BEGIN_SRC emacs-lisp
-  (expand-file-name "README.org" (concat etor/path/bundled "editor"))
+  (org-babel-load-file (concat etor/path:bundled-editor etor/path:index))
 #+END_SRC
 
-** Content
-Controls how the content behaves inside the editor.
+# ** Content
+# Controls how the bundled content features behave.
+# #+BEGIN_SRC emacs-lisp
+#   (expand-file-name "README.org" (concat etor/path/bundled "content"))
+# #+END_SRC
 
-*** [[https://github.com/emacs-mirror/emacs/blob/master/lisp/international/mule.el][mule.el]]
-Internationalization package. Set everything to UTF-8.
-#+BEGIN_SRC emacs-lisp
-  (use-package mule
-      :demand t
-      :config
-      (setq
-          locale-coding-system 'utf-8
-          buffer-file-coding-system 'utf-8
-      )
-      (prefer-coding-system 'utf-8)
-      (set-charset-priority 'unicode)
-      (set-language-environment 'utf-8)
-      (set-default-coding-systems 'utf-8)
-      (set-terminal-coding-system 'utf-8)
-      (set-keyboard-coding-system 'utf-8)
-      (set-selection-coding-system 'utf-8)
-  )
-#+END_SRC
-
-# (require 'native-whitespace)
-# (require 'native-paren)
-# (require 'native-prog-mode)
+# # (require 'native-custom)
 

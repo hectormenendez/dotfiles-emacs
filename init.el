@@ -1,18 +1,20 @@
 ;;; init.el --- Hector Menendez' Emacs configuration.
 
 ;;; Commentary:
-;;; Hey, don't judge, this is a work in progresss!
+;;; This is the main entry point for my Emacs's config, it loads README.org afterwards.
 
 ;;; Code:
 
 ;; ------------------------------------------------------------------------- Core settings
 
 (defvar etor/path (expand-file-name (file-name-as-directory "sections") user-emacs-directory))
-(defvar etor/path/bundled (concat etor/path (file-name-as-directory "bundled")))
-(defvar etor/path/system (concat etor/path (file-name-as-directory "system")))
-(defvar etor/path/editor (concat etor/path (file-name-as-directory "editor")))
-(defvar etor/path/content (concat etor/path (file-name-as-directory "content")))
-(defvar etor/path/deltofetch (expand-file-name "_deltofetch" user-emacs-directory))
+(defvar etor/path:index "README.org")
+(defvar etor/path:bundled (concat etor/path (file-name-as-directory "bundled")))
+(defvar etor/path:bundled-editor (concat etor/path:bundled (file-name-as-directory "editor")))
+(defvar etor/path:system (concat etor/path (file-name-as-directory "system")))
+(defvar etor/path:editor (concat etor/path (file-name-as-directory "editor")))
+(defvar etor/path:content (concat etor/path (file-name-as-directory "content")))
+(defvar etor/path:deltofetch (expand-file-name "_deltofetch" user-emacs-directory))
 
 ; set GC to something big to optimize loading time, restore it after load.
 (setq gc-cons-threshold 64000000)
@@ -62,7 +64,7 @@
 ;; if quelpa not present, download and install it so packages can be compiled from source.
 ;; Also, install quelpa-use-package so those packages can be loaded using "use-package"
 ;; (use-package is a dependecy so it won't be necessary to explicitly install it)
-(unless (file-exists-p etor/path/deltofetch) (progn
+(unless (file-exists-p etor/path:deltofetch) (progn
     ; make sure packages are up-to-date
     (package-refresh-contents)
     ; Install quelpa for additional packages
@@ -81,7 +83,7 @@
         :fetcher git
         :url "https://framagit.org/steckerhalter/quelpa-use-package.git")
     ))
-    (write-region "" nil etor/path/deltofetch)
+    (write-region "" nil etor/path:deltofetch)
 )
 
 ;; initialize use-package with quelpa support
@@ -103,18 +105,18 @@
     )
 )
 
+;; TODO: This is not working for whatever reason.
 ;; Allows the generation of a Table of Contents for Github
-(use-package toc-org
-    :ensure t
-    :hook org-mode
-    :commands toc-org-mode
-)
+;; (use-package toc-org
+;;     :ensure t
+;;     :hook org-mode
+;;     :commands toc-org-mode
+;; )
 
 ;; Load the initialization
-(org-babel-load-file (expand-file-name "README.org" user-emacs-directory))
+(org-babel-load-file (expand-file-name etor/path:index user-emacs-directory))
 
 ;; ---------------------------------------------------------------------------------- DONE
-(switch-to-buffer "*Messages*")
 (message (concat "Emacs took " (emacs-init-time) " to load."))
 
 (provide 'init)

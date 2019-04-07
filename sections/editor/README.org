@@ -1,32 +1,36 @@
 * Editor features
 These features add new capabilities to Emacs, they don't depend on specific syntax/modes.
-
 #+BEGIN_SRC emacs-lisp
-;; COMMANDS
-;; (require 'elpa-try)
-;; (require 'elpa-restart-emacs)
-;; (require 'elpa-which-key)
-;; (require 'elpa-psession)
-
-;; FUNCTIONALITY
-;; (require 'elpa-evil)
-;; (require 'elpa-magit)
-;; (require 'elpa-neotree)
-;; (require 'elpa-helm)
-;; (require 'elpa-dired+)
-
-;; NAVIGATION & SELECTION
-;; (require 'elpa-origami)
-;; (require 'elpa-ace-window)
-;; (require 'elpa-projectile)
-;; (require 'elpa-company)
-;; (require 'elpa-centered-cursor-mode)
-;; (require 'elpa-multiple-cursors)
-;; (require 'elpa-expand-region)
-
-;; VISUAL AIDS
-;; (require 'elpa-git-gutter)
-;; (require 'elpa-fill-column-indicator)
-;; (require 'elpa-highlight-indent-guides)
-;; (require 'elpa-telephone-line)
+(message "Hola mundo mundial")
 #+END_SRC
+
+
+# #+BEGIN_SRC emacs-lisp
+# ;; COMMANDS
+# ;; (require 'elpa-try)
+# ;; (require 'elpa-restart-emacs)
+# ;; (require 'elpa-which-key)
+# ;; (require 'elpa-psession)
+
+# ;; FUNCTIONALITY
+# ;; (require 'elpa-evil)
+# ;; (require 'elpa-magit)
+# ;; (require 'elpa-neotree)
+# ;; (require 'elpa-helm)
+# ;; (require 'elpa-dired+)
+
+# ;; NAVIGATION & SELECTION
+# ;; (require 'elpa-origami)
+# ;; (require 'elpa-ace-window)
+# ;; (require 'elpa-projectile)
+# ;; (require 'elpa-company)
+# ;; (require 'elpa-centered-cursor-mode)
+# ;; (require 'elpa-multiple-cursors)
+# ;; (require 'elpa-expand-region)
+
+# ;; VISUAL AIDS
+# ;; (require 'elpa-git-gutter)
+# ;; (require 'elpa-fill-column-indicator)
+# ;; (require 'elpa-highlight-indent-guides)
+# ;; (require 'elpa-telephone-line)
+# #+END_SRC
