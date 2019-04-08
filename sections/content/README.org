@@ -1,5 +1,6 @@
 *** [[./sections/content/README.org][Content features]]
 These add functionality to the content, depending on its type.
+
 #+BEGIN_SRC emacs-lisp
 ;; PROGMODE NAVIGATION, SELECTION & MODIFIERS
 ;; (require 'elpa-dumb-jump)

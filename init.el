@@ -11,6 +11,7 @@
 (defvar etor/path:index "README.org")
 (defvar etor/path:bundled (concat etor/path (file-name-as-directory "bundled")))
 (defvar etor/path:bundled-editor (concat etor/path:bundled (file-name-as-directory "editor")))
+(defvar etor/path:bundled-content (concat etor/path:bundled (file-name-as-directory "content")))
 (defvar etor/path:system (concat etor/path (file-name-as-directory "system")))
 (defvar etor/path:editor (concat etor/path (file-name-as-directory "editor")))
 (defvar etor/path:content (concat etor/path (file-name-as-directory "content")))
@@ -30,6 +31,8 @@
     load-prefer-newer t; Don't load outdated byte code
     max-mini-window-height 0.5; Use up to 50% of frame height for mini-buffer window.
     line-spacing 1; The spacing between lines vertically
+    tab-width 4; Use 4 spaces for indentation
+    fill-column 90; word-wrap after the 90th character
 )
 
 ;; Startup.el

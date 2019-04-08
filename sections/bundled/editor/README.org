@@ -1,205 +1,202 @@
 * Bundled editor features
   Controls how the editor works and handles native functionality.
+
+  :TOC:
+
+** [[https://github.com/emacs-mirror/emacs/blob/master/lisp/simple.el][simple.el]]
+Emacs commands not specifically related to some major mode or to file-handling.
 #+BEGIN_SRC emacs-lisp
-(message "hola mundo!!!!")
+  (use-package simple
+      :defer t
+      :init
+      (add-hook 'after-init-hook (lambda ()
+          (auto-save-mode 1); Enable auto saving files
+          (column-number-mode 1); Show the current-column number
+          (global-hl-line-mode 1); Highlight the current line
+      ))
+      :config
+      ;; the location for auto-save files
+      (setq auto-save-list-file-prefix
+          (expand-file-name "_auto-save-list/" user-emacs-directory)
+      )
+  )
 #+END_SRC
 
-#   :TOC:
+** [[https://github.com/emacs-mirror/emacs/blob/master/lisp/server.el][server.el]]
+Once it finishes loading, enable Emacs server so other instances can connect to it.
+#+BEGIN_SRC emacs-lisp
+  (use-package server
+      :demand t
+      :init
+      (add-hook 'after-init-hook (lambda ()
+          (unless (server-running-p) (server-start))
+      ))
+  )
+#+END_SRC
 
-# ** [[https://github.com/emacs-mirror/emacs/blob/master/lisp/simple.el][simple.el]]
-# Emacs commands not specifically related to some major mode or to file-handling.
-# #+BEGIN_SRC emacs-lisp
-#   (use-package simple
-#       :defer t
-#       :init
-#       (add-hook 'after-init-hook (lambda ()
-#           (auto-save-mode 1); Enable auto saving files
-#           (column-number-mode 1); Show the current-column number
-#           (global-hl-line-mode 1); Highlight the current line
-#       ))
-#       :config
-#       ;; the location for auto-save files
-#       (setq auto-save-list-file-prefix
-#           (expand-file-name "_auto-save-list/" user-emacs-directory)
-#       )
-#   )
-# #+END_SRC
+** [[https://github.com/emacs-mirror/emacs/blob/master/lisp/files.el][files.el]]
+Defines most of Emacs's file-handling functions.
+#+BEGIN_SRC emacs-lisp
+  (use-package files
+      :demand t
+      :config
+      (setq
+          ;; Handle backups
+          make-backup-files t
+          delete-old-versions t
+          backup-directory-alist (list
+              (cons "." (expand-file-name "_backups/" user-emacs-directory))
+          )
+          ;; Handle backup version control
+          version-control t; Keep control of backups
+          vc-follow-symlinks t; Don't ask to follow symlinks, just do it.
+          ;; Handle AutoSave
+          auto-save-default nil; Disable auto-saving
+          auto-save-file-name-transforms (list
+              (list ".*" (expand-file-name "_auto-save-list" user-emacs-directory) t)
+          )
+          ;; Misc
+          require-final-newline nil; Don't end files with newline
+      )
+  )
 
-# ** [[https://github.com/emacs-mirror/emacs/blob/master/lisp/server.el][server.el]]
-# Once it finishes loading, enable Emacs server so other instances can connect to it.
-# #+BEGIN_SRC emacs-lisp
-#   (use-package server
-#       :demand t
-#       :init
-#       (add-hook 'after-init-hook (lambda ()
-#           (unless (server-running-p) (server-start))
-#       ))
-#   )
-# #+END_SRC
+#+END_SRC
 
-# ** [[https://github.com/emacs-mirror/emacs/blob/master/lisp/files.el][files.el]]
-# Defines most of Emacs's file-handling functions.
-# #+BEGIN_SRC emacs-lisp
-#   (use-package files
-#       :demand t
-#       :config
-#       (setq
-#           ;; Handle backups
-#           make-backup-files t
-#           delete-old-versions t
-#           backup-directory-alist (list
-#               (cons "." (expand-file-name "_backups/" user-emacs-directory))
-#           )
-#           ;; Handle backup version control
-#           version-control t; Keep control of backups
-#           vc-follow-symlinks t; Don't ask to follow symlinks, just do it.
-#           ;; Handle AutoSave
-#           auto-save-default nil; Disable auto-saving
-#           auto-save-file-name-transforms (list
-#               (list ".*" (expand-file-name "_auto-save-list" user-emacs-directory) t)
-#           )
-#           ;; Misc
-#           require-final-newline nil; Don't end files with newline
-#       )
-#   )
+** [[https://github.com/emacs-mirror/emacs/blob/master/lisp/recentf.el][recentf.el]]
+Maintains a menu for visiting files that were operated on recently.
+The recentf file list automatically saved across Emacs sessions.
+#+BEGIN_SRC emacs-lisp
+  (use-package recentf
+      :commands recentf-mode
+      :init (add-hook 'after-init-hook #'recentf-mode)
+      :config
+      (setq
+          recentf-save-file (expand-file-name "_recentf" user-emacs-directory)
+          recentf-filename-handlers '(abbreviate-file-name)
+      )
+  )
+#+END_SRC
 
-# #+END_SRC
+** [[https://github.com/emacs-mirror/emacs/blob/master/lisp/savehist.el][savehist.el]]
+Many editors (e.g. Vim) have the feature of saving minibuffer history to an external
+file after exit.  This package provides the same feature in Emacs.
+#+BEGIN_SRC emacs-lisp
+  (use-package savehist
+      :commands savehist-mode
+      :init (add-hook 'after-init-hook #'savehist-mode)
+      :config
+      (setq
+          savehist-file (expand-file-name "_history" user-emacs-directory)
+          savehist-save-minibuffer-history 1
+          history-length t
+          history-delete-duplicates t
+      )
+  )
+#+END_SRC
 
-# ** [[https://github.com/emacs-mirror/emacs/blob/master/lisp/recentf.el][recentf.el]]
-# Maintains a menu for visiting files that were operated on recently.
-# The recentf file list automatically saved across Emacs sessions.
-# #+BEGIN_SRC emacs-lisp
-#   (use-package recentf
-#       :commands recentf-mode
-#       :init (add-hook 'after-init-hook #'recentf-mode)
-#       :config
-#       (setq
-#           recentf-save-file (expand-file-name "_recentf" user-emacs-directory)
-#           recentf-filename-handlers '(abbreviate-file-name)
-#       )
-#   )
-# #+END_SRC
+** [[https://github.com/emacs-mirror/emacs/blob/master/lisp/saveplace.el][saveplace.el]]
+Automatically save place in files, so that visiting them later automatically moves point
+to the saved position, when the file is first found.
+#+BEGIN_SRC emacs-lisp
+  (use-package saveplace
+      :commands save-place-mode
+      :init (add-hook 'after-init-hook #'save-place-mode)
+      :config (setq save-place-file (expand-file-name "_saveplace" user-emacs-directory))
+  )
+#+END_SRC
 
-# ** [[https://github.com/emacs-mirror/emacs/blob/master/lisp/savehist.el][savehist.el]]
-# Many editors (e.g. Vim) have the feature of saving minibuffer history to an external
-# file after exit.  This package provides the same feature in Emacs.
-# #+BEGIN_SRC emacs-lisp
-#   (use-package savehist
-#       :commands savehist-mode
-#       :init (add-hook 'after-init-hook #'savehist-mode)
-#       :config
-#       (setq
-#           savehist-file (expand-file-name "_history" user-emacs-directory)
-#           savehist-save-minibuffer-history 1
-#           history-length t
-#           history-delete-duplicates t
-#       )
-#   )
-# #+END_SRC
+** [[https://github.com/emacs-mirror/emacs/blob/master/lisp/autorevert.el][autorevert.el]]
+Whenever a file is changed externally, auto update it if it's opened.
+#+BEGIN_SRC emacs-lisp
+  (use-package autorevert
+      :commands auto-revert-mode
+      :delight (auto-revert-mode); don't show the mode-line
+      :init (add-hook 'after-init-hook #'global-auto-revert-mode)
+      :config
+      (setq
+          auto-revert-verbose nil; no need of advertise the revert
+          global-auto-revert-non-file-buffers t; Enable autorevert on dired buffers
+      )
+  )
+#+END_SRC
 
-# ** [[https://github.com/emacs-mirror/emacs/blob/master/lisp/saveplace.el][saveplace.el]]
-# Automatically save place in files, so that visiting them later automatically moves point
-# to the saved position, when the file is first found.
-# #+BEGIN_SRC emacs-lisp
-#   (use-package saveplace
-#       :commands save-place-mode
-#       :init (add-hook 'after-init-hook #'save-place-mode)
-#       :config (setq save-place-file (expand-file-name "_saveplace" user-emacs-directory))
-#   )
-# #+END_SRC
+** [[https://github.com/emacs-mirror/emacs/blob/master/lisp/display-line-numbers.el][display-line-numbers.el]]
+Handles line-numbers display on the editor.
+#+BEGIN_SRC emacs-lisp
+  (use-package display-line-numbers
+      :commands display-line-numbers-mode
+      ;; Enable it for all modes
+      :init (add-hook 'after-init-hook #'global-display-line-numbers-mode)
+      :config
+      (setq
+          ;; Format the numbers bar
+          display-line-numbers "%4d \u2502 "
+          ;; Use relative numbers
+          display-line-numbers-type 'relative
+      )
+  )
+#+END_SRC
 
-# ** [[https://github.com/emacs-mirror/emacs/blob/master/lisp/autorevert.el][autorevert.el]]
-# Whenever a file is changed externally, auto update it if it's opened.
-# #+BEGIN_SRC emacs-lisp
-#   (use-package autorevert
-#       :commands auto-revert-mode
-#       :delight (auto-revert-mode); don't show the mode-line
-#       :init (add-hook 'after-init-hook #'global-auto-revert-mode)
-#       :config
-#       (setq
-#           auto-revert-verbose nil; no need of advertise the revert
-#           global-auto-revert-non-file-buffers t; Enable autorevert on dired buffers
-#       )
-#   )
-# #+END_SRC
+** [[https://github.com/emacs-mirror/emacs/blob/master/lisp/frame.el][frame.el]]
+Everything related to the frame (window in OS' terms)
+#+BEGIN_SRC emacs-lisp
+  (use-package frame
+      :bind (
+          ("M-RET" . toggle-frame-fullscreen)
+      )
+      :config (setq frame-title-format "emacs")
+  )
+#+END_SRC
 
-# ** [[https://github.com/emacs-mirror/emacs/blob/master/lisp/display-line-numbers.el][display-line-numbers.el]]
-# Handles line-numbers display on the editor.
-# #+BEGIN_SRC emacs-lisp
-#   (use-package display-line-numbers
-#       :commands display-line-numbers-mode
-#       ;; Enable it for all modes
-#       :init (add-hook 'after-init-hook #'global-display-line-numbers-mode)
-#       :config
-#       (setq
-#           ;; Format the numbers bar
-#           display-line-numbers "%4d \u2502 "
-#           ;; Use relative numbers
-#           display-line-numbers-type 'relative
-#       )
-#   )
-# #+END_SRC
+** [[https://github.com/emacs-mirror/emacs/blob/master/lisp/tool-bar.el][tool-bar.el]]
+Shouldn't this be part of the frame? well it isn't.
+#+BEGIN_SRC emacs-lisp
+  (use-package tool-bar
+      :commands tool-bar-mode
+      :init (add-hook 'after-init-hook #'(lambda () (tool-bar-mode -1)))
+  )
+#+END_SRC
 
-# ** [[https://github.com/emacs-mirror/emacs/blob/master/lisp/frame.el][frame.el]]
-# Everything related to the frame (window in OS' terms)
-# #+BEGIN_SRC emacs-lisp
-#   (use-package frame
-#       :bind (
-#           ("M-RET" . toggle-frame-fullscreen)
-#       )
-#       :config (setq frame-title-format "emacs")
-#   )
-# #+END_SRC
+*** [[https://github.com/emacs-mirror/emacs/blob/master/lisp/scroll-bar.el][scroll-bar.el]]
+Yeah, this is most definitely part of the frame. 🙄
+#+BEGIN_SRC emacs-lisp
+  (use-package scroll-bar
+      :commands scroll-bar-mode
+      :init (add-hook 'after-init-hook #'(lambda () (scroll-bar-mode -1)))
+  )
+#+END_SRC
 
-# ** [[https://github.com/emacs-mirror/emacs/blob/master/lisp/tool-bar.el][tool-bar.el]]
-# Shouldn't this be part of the frame? well it isn't.
-# #+BEGIN_SRC emacs-lisp
-#   (use-package tool-bar
-#       :commands tool-bar-mode
-#       :init (add-hook 'after-init-hook #'(lambda () (tool-bar-mode -1)))
-#   )
-# #+END_SRC
+** [[https://github.com/emacs-mirror/emacs/blob/master/lisp/menu-bar.el][menu-bar.el]]
+You've got to be kidding, this is a part of the frame!
+#+BEGIN_SRC emacs-lisp
+  (use-package menu-bar
+      :commands menu-bar-mode
+      :init (add-hook 'after-init-hook #'(lambda () (menu-bar-mode -1)))
+      ;; this is as good place as any to put this bindings.
+      ;; TODO: think of a better place to put these.
+      :config
 
-# *** [[https://github.com/emacs-mirror/emacs/blob/master/lisp/scroll-bar.el][scroll-bar.el]]
-# Yeah, this is most definitely part of the frame. 🙄
-# #+BEGIN_SRC emacs-lisp
-#   (use-package scroll-bar
-#       :commands scroll-bar-mode
-#       :init (add-hook 'after-init-hook #'(lambda () (scroll-bar-mode -1)))
-#   )
-# #+END_SRC
+      ;; File > Close
+      (define-key global-map (kbd "M-w") 'kill-this-buffer)
 
-# ** [[https://github.com/emacs-mirror/emacs/blob/master/lisp/menu-bar.el][menu-bar.el]]
-# You've got to be kidding, this is a part of the frame!
-# #+BEGIN_SRC emacs-lisp
-#   (use-package menu-bar
-#       :commands menu-bar-mode
-#       :init (add-hook 'after-init-hook #'(lambda () (menu-bar-mode -1)))
-#       ;; this is as good place as any to put this bindings.
-#       ;; TODO: think of a better place to put these.
-#       :config
+      ;; File > Save
+      (define-key global-map (kbd "C-x C-s") nil)
+      (define-key global-map (kbd "M-s") 'save-buffer); orig: isearch prefix
 
-#       ;; File > Close
-#       (define-key global-map (kbd "M-w") 'kill-this-buffer)
+      ;; File > Save As ...
+      (define-key global-map (kbd "C-x C-w") nil)
+      (define-key global-map (kbd "M-S") 'write-file); orig: same as M-s
 
-#       ;; File > Save
-#       (define-key global-map (kbd "C-x C-s") nil)
-#       (define-key global-map (kbd "M-s") 'save-buffer); orig: isearch prefix
+      ;; File > Quit
+      (define-key global-map (kbd "C-x C-c") nil)
+      (define-key global-map (kbd "M-q") 'save-buffers-kill-terminal); orig: fill-paragraph
 
-#       ;; File > Save As ...
-#       (define-key global-map (kbd "C-x C-w") nil)
-#       (define-key global-map (kbd "M-S") 'write-file); orig: same as M-s
+      ;; Edit > Undo
+      (define-key global-map (kbd "C-_") nil)
+      (define-key global-map (kbd "M-z") 'undo-tree-undo); orig: zap-to-char
 
-#       ;; File > Quit
-#       (define-key global-map (kbd "C-x C-c") nil)
-#       (define-key global-map (kbd "M-q") 'save-buffers-kill-terminal); orig: fill-paragraph
-
-#       ;; Edit > Undo
-#       (define-key global-map (kbd "C-_") nil)
-#       (define-key global-map (kbd "M-z") 'undo-tree-undo); orig: zap-to-char
-
-#       ;; Edit > Undo
-#       (define-key global-map (kbd "M-_") nil)
-#       (define-key global-map (kbd "M-Z") 'undo-tree-redo); orig: same as M-z
-#   )
-# #+END_SRC
+      ;; Edit > Undo
+      (define-key global-map (kbd "M-_") nil)
+      (define-key global-map (kbd "M-Z") 'undo-tree-redo); orig: same as M-z
+  )
+#+END_SRC

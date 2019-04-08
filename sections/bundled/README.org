@@ -9,11 +9,11 @@ Controls how the editor works and handles bundled functionality.
   (org-babel-load-file (concat etor/path:bundled-editor etor/path:index))
 #+END_SRC
 
-# ** Content
-# Controls how the bundled content features behave.
-# #+BEGIN_SRC emacs-lisp
-#   (expand-file-name "README.org" (concat etor/path/bundled "content"))
-# #+END_SRC
+** [[./editor#bundled-content-features][Content]]
+Controls how the bundled content features behave.
+#+BEGIN_SRC emacs-lisp
+  (org-babel-load-file (concat etor/path:bundled-content etor/path:index))
+#+END_SRC
 
 # # (require 'native-custom)
 
