@@ -1,0 +1,34 @@
+* Content packages
+
+
+#+BEGIN_SRC emacs-lisp
+(message "LOADED-> CONTENT PACKAGES")
+#+END_SRC
+
+# PROGMODE NAVIGATION, SELECTION & MODIFIERS
+# (require 'elpa-company)
+# (require 'elpa-flycheck)
+# (require 'elpa-dumb-jump)
+# (require 'elpa-dtrt-indent)
+# (require 'elpa-multiple-cursors)
+# (require 'elpa-expand-region)
+# (require 'elpa-web-beautify)
+
+# PROGMODE VISUAL AIDS
+# (require 'elpa-hl-todo)
+# (require 'elpa-smartparens)
+# (require 'elpa-rainbow-delimiters)
+# (require 'elpa-rainbow-mode)
+# (require 'elpa-highlight-numbers)
+# (require 'elpa-highlight-quoted)
+
+# PROGMODE SYNTAXES
+# (require 'elpa-web-mode)
+# (require 'elpa-json-mode)
+# (require 'elpa-ecmascript)
+# (require 'elpa-graphql-mode)
+
+# (require 'elpa-markdown-mode)
+# (require 'elpa-nxml-mode)
+
+# (require 'elpa-elixir-mode)

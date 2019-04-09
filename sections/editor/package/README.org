@@ -1,0 +1,38 @@
+* Editor packages
+These packages add extra functionality to the editor.
+
+** Commands
+These packages add a new simple isolated functionality.
+#+BEGIN_SRC emacs-lisp
+  (org-babel-load-file (concat etor/path:editor-package-commands etor/init:index))
+#+END_SRC
+
+** Wrappers
+These packages add a complex, highly integrated functionality to the editor.
+#+BEGIN_SRC emacs-lisp
+  (org-babel-load-file (concat etor/path:editor-package-wrappers etor/init:index))
+#+END_SRC
+
+# ** Navigation Helpers
+# These packages either extend or provide new navigation functionality to the editor.
+# #+BEGIN_SRC emacs-lisp
+#   (org-babel-load-file (concat file- etor/path:editor-package-navigation etor/init:index))
+# #+END_SRC
+# ;; (require 'elpa-dired+)
+# ;; (require 'elpa-neotree)
+# ;; (require 'elpa-helm)
+# ;; (require 'elpa-projectile)
+# ;; (require 'elpa-origami)
+# ;; (require 'elpa-ace-window)
+
+# ** Visual helpers
+# These packges provide visual cues to ease interacting with the editor visually.
+# #+BEGIN_SRC emacs-lisp
+#   (org-babel-load-file (concat file- etor/path:editor-package-visual etor/init:index))
+# #+END_SRC
+# ;; (require 'elpa-centered-cursor-mode)
+# ;; (require 'elpa-which-key)
+# ;; (require 'elpa-git-gutter)
+# ;; (require 'elpa-fill-column-indicator)
+# ;; (require 'elpa-highlight-indent-guides)
+# ;; (require 'elpa-telephone-line)

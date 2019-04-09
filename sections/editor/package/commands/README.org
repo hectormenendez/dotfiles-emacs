@@ -1,0 +1,21 @@
+* Commands
+These packages add a new simple isolated functionality.
+
+** Try
+Allows to try a package on the current session, before actually installing it.
+#+BEGIN_SRC emacs-lisp
+  (use-package try
+      :ensure t
+      :commands try; load it until it's actually called
+  )
+#+END_SRC
+
+** Restart Emacs
+enables Emacs to be quickly restarted
+#+BEGIN_SRC emacs-lisp
+  (use-package restart-emacs
+      :ensure t
+      :commands restart-emacs
+  )
+
+#+END_SRC
