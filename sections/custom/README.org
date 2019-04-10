@@ -1,6 +1,24 @@
 * [[./custom#customization][Customization]]
 Variables, functions and commands that should not be included if you're not me.
 
+** window-toggle
+Toggle current buffer using the whole screen.
+#+BEGIN_SRC emacs-lisp
+  (defun etor/window-toggle ()
+      "Allows to maximize current buffer"
+      (interactive)
+      (if (= 1 (length (window-list)))
+          (jump-to-register '_)
+          (progn
+              (window-configuration-to-register '_)
+              (delete-other-windows)
+          )
+      )
+  )
+#+END_SRC
+
+** frame-load
+Loads frame configuration settings from file (if available).
 #+BEGIN_SRC emacs-lisp
   (defun etor/frame-load ()
       "Load last frame geometry from a a file."
@@ -13,6 +31,11 @@ Variables, functions and commands that should not be included if you're not me.
       )
   )
 
+#+END_SRC
+
+** frame-save
+Writes frame configuration settings to a file (so they can be later loaded).
+#+BEGIN_SRC emacs-lisp
   ;; TODO: In Mac, save Desktop Name (or identifier)
   (defun etor/frame-save ()
       "Save current frame geometry to a file."

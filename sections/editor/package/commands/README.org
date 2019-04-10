@@ -17,5 +17,19 @@ enables Emacs to be quickly restarted
       :ensure t
       :commands restart-emacs
   )
+#+END_SRC
 
+** Macro Step
+Allows to expand macros to peek into their content.
+This is specially useful when instrospecting use-package's statements.
+#+BEGIN_SRC emacs-lisp
+  (use-package macrostep
+      :ensure t
+      :commands macrostep-expand
+      :bind
+          (:map emacs-lisp-mode-map
+              ("C-+" . 'macrostep-expand)
+              ("C--" . 'macrostep-collapse-all)
+          )
+  )
 #+END_SRC

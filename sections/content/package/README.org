@@ -1,8 +1,32 @@
 * Content packages
+These packages add extra functionality to the content.
 
-
+** UndoTree
+Keeps a state of changes which allow you to restore them afterwards.
+*NOTE:* `evil-mode` depends on this.
 #+BEGIN_SRC emacs-lisp
-(message "LOADED-> CONTENT PACKAGES")
+  (use-package undo-tree
+      :ensure t
+      :delight undo-tree-mode
+      :bind (("C-x u" . undo-tree-visualize))
+      :init
+          (add-hook 'after-init-hook #'global-undo-tree-mode)
+          ;; Apparently these values help undotree not to choke on large files.
+          ;; TODO: Shouldn't these be moved to `init.el`
+          (setq-default
+              print-circle t
+              print-length nil
+              print-level nil
+          )
+      :config
+          (setq
+              undo-tree-auto-save-history t
+              undo-tree-visualizer-diff t; show diff when visualizing
+              undo-tree-visualizer-timestamps t; show time of undos
+              undo-tree-history-directory-alist
+                  `(("." . ,(expand-file-name "_undotree" user-emacs-directory)))
+          )
+  )
 #+END_SRC
 
 # PROGMODE NAVIGATION, SELECTION & MODIFIERS

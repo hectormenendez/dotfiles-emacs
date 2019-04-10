@@ -1,93 +1,64 @@
 * Wrappers
 These packages add a complex, highly integrated functionality to the editor.
 
-** UndoTree
-Keeps a state of changes which allow you to restore them afterwards.
-#+BEGIN_SRC emacs-lisp
-  (use-package undo-tree
-      :ensure t
-      :delight undo-tree-mode
-      :bind (("C-x u" . undo-tree-visualize))
-      :init
-          (add-hook 'after-init-hook #'global-undo-tree-mode)
-          ;; Apparently these values help undotree not to choke on large files.
-          ;; TODO: Shouldn't these be moved to `init.el`
-          (setq-default
-              print-circle t
-              print-length nil
-              print-level nil
-          )
-      :config
-          (setq
-              undo-tree-auto-save-history t
-              undo-tree-visualizer-diff t; show diff when visualizing
-              undo-tree-visualizer-timestamps t; show time of undos
-              undo-tree-history-directory-alist
-                  `(("." . ,(expand-file-name "_undotree" user-emacs-directory)))
-          )
-  )
-#+END_SRC
-
 ** Evil
 A layer on top of Emacs which allows Vim to be emulated.
+NOTE: it requires undo-tree for linear undo and undo branches. (?)
 #+BEGIN_SRC emacs-lisp
   (use-package evil
       :ensure t
-      :after undo-tree; make sure undo-tree is loaded before loading this
-      :init
-          (add-hook 'after-init-hook #'evil-mode)
-          (add-hook 'evil-local-mode-hook (lambda ()
-              ;; Have <tab> to work as it does on Vim
-              (define-key evil-insert-state-map (kbd "TAB") 'tab-to-tab-stop)
-              (define-key evil-insert-state-map (kbd "DEL") 'etor/backspace-to-tab-stop)
-              (define-key evil-motion-state-map (kbd "C-b") nil); scroll down
-              ;; Auto indent after paste
-              (fset 'indent-pasted-text "`[v`]=")
-          ))
-          (add-hook 'evil-leader-mode-hook (lambda ()
-              ;; Define a function that allows to maximise and restore a window
-              (evil-leader/set-key "wW" 'etor/window-toggle)
-          ))
+      :commands evil-mode
+      :init (add-hook 'after-init-hook #'evil-mode)
+      :bind (
+          :map evil-insert-state-map
+              ("TAB" . tab-to-tab-stop); Have <tab> to work as it does on Vim
+              ("DEL" . etor/backspace-to-tab-stop); Make <del> delete tabs)
+          :map evil-motion-state-map
+              ("C-b" . nil); no more scroll down
+       )
+      :config
+          ;; Auto indent after paste
+          (fset 'indent-pasted-text "`[v`]=")
   )
+
 #+END_SRC
+
 ** Evil Plugins
 These are further Vim functionality ported.
 
-;; Enable the <leader> key like in Vim
-(use-package evil-leader
-    :ensure t
-    :config (add-hook 'evil-local-mode-hook (lambda ()
-        (evil-leader-mode 1)
-        (evil-leader/set-leader "SPC")
-        (evil-leader/set-key "?" 'which-key-show-top-level)
-        (evil-leader/set-key "y" 'copy-region-as-kill); copy selection
-        (evil-leader/set-key "p" 'yank-rectangle); paste selection
-    ))
-)
-;; Enable tpope's vim-commentary port
-(use-package evil-commentary
-    :ensure t
-    :delight evil-commentary-mode
-    :config (add-hook 'prog-mode-hook 'evil-commentary-mode)
-)
+*** Evil Leader
+Enable the <leader> key like in Vim
+#+BEGIN_SRC emacs-lisp
+  (use-package evil-leader
+      :ensure t
+      :commands evil-leader-mode
+      :init (add-hook 'evil-mode-hook #'evil-leader-mode)
+      :config
+          (evil-leader/set-leader "SPC")
+          ;; TODO: this should be set on the which-key package
+          (evil-leader/set-key "?" 'which-key-show-top-level)
+          (evil-leader/set-key "wW" 'etor/window-toggle); allows toggling full-screen
+  )
+#+END_SRC
 
+*** Evil commentary
+A port of tpope's vim-commentary
+#+BEGIN_SRC emacs-lisp
+  (use-package evil-commentary
+      :ensure t
+      :delight evil-commentary-mode
+      :commands evil-commentary-mode
+      :init (add-hook 'prog-mode-hook #'evil-commentary-mode)
+  )
+#+END_SRC
+
+*** Evil surround
 ;; Enable tpope's vim-surround port (globally)
-(use-package evil-surround
-    :ensure t
-    :delight evil-surround-mode
-    :config (add-hook 'evil-local-mode-hook (lambda ()
-        (evil-surround-mode 1)
-    ))
-)
-
-(defun etor/window-toggle ()
-    "Allows to maximize current buffer"
-    (interactive)
-    (if (= 1 (length (window-list)))
-        (jump-to-register '_)
-        (progn
-            (window-configuration-to-register '_)
-            (delete-other-windows)
-        )
-    )
-)
+#+BEGIN_SRC emacs-lisp
+  (use-package evil-surround
+      :ensure t
+      :delight evil-surround-mode
+      :commands evil-surround-mode
+      :init (add-hook 'prog-mode-hook #'evil-surround-mode)
+  )
+#+END_SRC
