@@ -1,9 +1,9 @@
-* Wrappers
+* Major modes
 These packages add a complex, highly integrated functionality to the editor.
 
 ** Evil
 A layer on top of Emacs which allows Vim to be emulated.
-NOTE: it requires undo-tree for linear undo and undo branches. (?)
+- it requires undo-tree for linear undo and undo branches. (?)
 
 *** Main Configuration
 It will load until evil-mode will run, which is right after init.
@@ -65,3 +65,5 @@ Enable tpope's vim-surround port (globally)
       :init (add-hook 'prog-mode-hook #'evil-surround-mode)
   )
 #+END_SRC
+
+** Magit

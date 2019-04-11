@@ -18,9 +18,9 @@
 
 (defvar etor/path:editor-bundled (concat etor/path:editor (file-name-as-directory "bundled")))
 (defvar etor/path:editor-package (concat etor/path:editor (file-name-as-directory "package")))
-(defvar etor/path:editor-package-visual (concat etor/path:editor-package (file-name-as-directory "visual")))
 (defvar etor/path:editor-package-commands (concat etor/path:editor-package (file-name-as-directory "commands")))
-(defvar etor/path:editor-package-wrappers (concat etor/path:editor-package (file-name-as-directory "wrappers")))
+(defvar etor/path:editor-package-majormodes (concat etor/path:editor-package (file-name-as-directory "majormodes")))
+(defvar etor/path:editor-package-visual (concat etor/path:editor-package (file-name-as-directory "visual")))
 (defvar etor/path:editor-package-navigation (concat etor/path:editor-package (file-name-as-directory "navigation")))
 
 (defvar etor/path:content-bundled (concat etor/path:content (file-name-as-directory "bundled")))

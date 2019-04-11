@@ -7,10 +7,10 @@ These packages add a new simple isolated functionality.
   (org-babel-load-file (concat etor/path:editor-package-commands etor/init:index))
 #+END_SRC
 
-** Wrappers
+** Major modes
 These packages add a complex, highly integrated functionality to the editor.
 #+BEGIN_SRC emacs-lisp
-  (org-babel-load-file (concat etor/path:editor-package-wrappers etor/init:index))
+  (org-babel-load-file (concat etor/path:editor-package-majormodes etor/init:index))
 #+END_SRC
 
 # ** Navigation Helpers
