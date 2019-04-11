@@ -4,6 +4,9 @@ These packages add a complex, highly integrated functionality to the editor.
 ** Evil
 A layer on top of Emacs which allows Vim to be emulated.
 NOTE: it requires undo-tree for linear undo and undo branches. (?)
+
+*** Main Configuration
+It will load until evil-mode will run, which is right after init.
 #+BEGIN_SRC emacs-lisp
   (use-package evil
       :ensure t
@@ -23,10 +26,10 @@ NOTE: it requires undo-tree for linear undo and undo branches. (?)
 
 #+END_SRC
 
-** Evil Plugins
-These are further Vim functionality ported.
+*** Plugins
+Further Vim functionality ported.
 
-*** Evil Leader
+**** Evil Leader
 Enable the <leader> key like in Vim
 #+BEGIN_SRC emacs-lisp
   (use-package evil-leader
@@ -41,7 +44,7 @@ Enable the <leader> key like in Vim
   )
 #+END_SRC
 
-*** Evil commentary
+**** Evil commentary
 A port of tpope's vim-commentary
 #+BEGIN_SRC emacs-lisp
   (use-package evil-commentary
@@ -52,8 +55,8 @@ A port of tpope's vim-commentary
   )
 #+END_SRC
 
-*** Evil surround
-;; Enable tpope's vim-surround port (globally)
+**** Evil surround
+Enable tpope's vim-surround port (globally)
 #+BEGIN_SRC emacs-lisp
   (use-package evil-surround
       :ensure t
