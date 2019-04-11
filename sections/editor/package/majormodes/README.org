@@ -21,7 +21,7 @@ An interface to GIT (and the main reason I cannot quit using Emacs).
               (evil-leader/set-key "gd" 'magit-diff-dwim)
               (evil-leader/set-key "gl" 'magit-log-all-branches)
           ))
-  )
+      )
 #+END_SRC
 
 ** Evil
@@ -57,8 +57,8 @@ Enable the <leader> key like in Vim
 #+BEGIN_SRC emacs-lisp
   (use-package evil-leader
       :ensure t
-      :commands evil-leader-mode
-      :init (add-hook 'evil-mode-hook #'evil-leader-mode)
+      :commands global-evil-leader-mode
+      :init (add-hook 'evil-mode-hook #'global-evil-leader-mode)
       :config
           (evil-leader/set-leader "SPC")
           ;; TODO: this should be set on the which-key package
