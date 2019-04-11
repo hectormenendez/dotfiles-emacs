@@ -15,22 +15,6 @@ Emacs commands not specifically related to some major mode or to file-handling.
           (global-hl-line-mode 1); Highlight the current line
       ))
       :config
-      ;; the location for auto-save files
-      (setq auto-save-list-file-prefix
-          (expand-file-name "_auto-save-list/" user-emacs-directory)
-      )
-  )
-#+END_SRC
-
-** [[https://github.com/emacs-mirror/emacs/blob/master/lisp/server.el][server.el]]
-Once it finishes loading, enable Emacs server so other instances can connect to it.
-#+BEGIN_SRC emacs-lisp
-  (use-package server
-      :demand t
-      :init
-      (add-hook 'after-init-hook (lambda ()
-          (unless (server-running-p) (server-start))
-      ))
   )
 #+END_SRC
 
@@ -120,6 +104,17 @@ Whenever a file is changed externally, auto update it if it's opened.
   )
 #+END_SRC
 
+** [[https://github.com/emacs-mirror/emacs/blob/master/lisp/frame.el][frame.el]]
+Everything related to the frame (window in OS' terms)
+#+BEGIN_SRC emacs-lisp
+  (use-package frame
+      :bind (
+          ("M-RET" . toggle-frame-fullscreen)
+      )
+      :config (setq frame-title-format "emacs")
+  )
+#+END_SRC
+
 ** [[https://github.com/emacs-mirror/emacs/blob/master/lisp/display-line-numbers.el][display-line-numbers.el]]
 Handles line-numbers display on the editor.
 #+BEGIN_SRC emacs-lisp
@@ -134,17 +129,6 @@ Handles line-numbers display on the editor.
           ;; Use relative numbers
           display-line-numbers-type 'relative
       )
-  )
-#+END_SRC
-
-** [[https://github.com/emacs-mirror/emacs/blob/master/lisp/frame.el][frame.el]]
-Everything related to the frame (window in OS' terms)
-#+BEGIN_SRC emacs-lisp
-  (use-package frame
-      :bind (
-          ("M-RET" . toggle-frame-fullscreen)
-      )
-      :config (setq frame-title-format "emacs")
   )
 #+END_SRC
 
@@ -200,3 +184,15 @@ You've got to be kidding, this is a part of the frame!
       (define-key global-map (kbd "M-Z") 'undo-tree-redo); orig: same as M-z
   )
 #+END_SRC
+** [[https://github.com/emacs-mirror/emacs/blob/master/lisp/server.el][server.el]]
+Once it finishes loading, enable Emacs server so other instances can connect to it.
+#+BEGIN_SRC emacs-lisp
+  (use-package server
+      :demand t
+      :init
+      (add-hook 'after-init-hook (lambda ()
+          (unless (server-running-p) (server-start))
+      ))
+  )
+#+END_SRC
+

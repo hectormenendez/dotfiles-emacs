@@ -1,6 +1,29 @@
 * Major modes
 These packages add a complex, highly integrated functionality to the editor.
 
+** Magit
+An interface to GIT (and the main reason I cannot quit using Emacs).
+#+BEGIN_SRC emacs-lisp
+  (use-package magit
+      :ensure t
+      :commands
+          (
+              magit-status
+              magit-commit
+              magit-push
+              magit-diff-dwim
+          )
+      :init
+          (add-hook 'evil-leader-mode-hook '(lambda ()
+              (evil-leader/set-key "gs" 'magit-status)
+              (evil-leader/set-key "gc" 'magit-commit)
+              (evil-leader/set-key "gp" 'magit-push)
+              (evil-leader/set-key "gd" 'magit-diff-dwim)
+              (evil-leader/set-key "gl" 'magit-log-all-branches)
+          ))
+  )
+#+END_SRC
+
 ** Evil
 A layer on top of Emacs which allows Vim to be emulated.
 - it requires undo-tree for linear undo and undo branches. (?)
@@ -65,5 +88,3 @@ Enable tpope's vim-surround port (globally)
       :init (add-hook 'prog-mode-hook #'evil-surround-mode)
   )
 #+END_SRC
-
-** Magit
