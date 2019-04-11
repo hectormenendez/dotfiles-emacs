@@ -1,0 +1,60 @@
+* Navigation Helpers
+These packages improve navigation within the editor and its parts.
+
+** Dired
+Extends upon bundled [[https://github.com/emacs-mirror/emacs/blob/master/lisp/dired.el][dired.el]] and adds more functionality.
+#+BEGIN_SRC emacs-lisp
+  (let
+      (;; local variable declarations
+          (_init (lambda ()
+              ;; Setup the key which will allow us to trigger dired mode
+              (add-hook 'evil-leader-mode-hook '(lambda ()
+                  (evil-leader/set-key "." 'dired-jump)
+              ))
+          ))
+          (_conf (lambda ()
+              ;; Improve default dired functionality
+              (use-package dired-x :demand t)
+              ;; When evil mode is available cerate a new key-map specially for dired-mode
+              (add-hook 'evil-local-mode-hook '(lambda ()
+                  (evil-make-overriding-map dired-mode-map 'normal t); the standard bindings
+                  (evil-define-key 'normal dired-mode-map
+                      "gg" 'evil-goto-first-line
+                      "G" 'evil-goto-line
+                      "h" 'evil-backward-char
+                      "j" 'evil-next-line
+                      "k" 'evil-previous-line
+                      "l" 'evil-forward-char
+                      "w" 'evil-forward-word-begin
+                      "b" 'evil-backward-word-begin
+                      "e" 'evil-forward-WORD-end
+                  )
+              ))
+              ;; Reuse the dired buffer when moving between directories
+              (diredp-toggle-find-file-reuse-dir 1)
+          ))
+      )
+      ;; once dired is available, load the package.
+      ;; Since dired+ is no longer available on melpa, use quelpa,
+      ;; but avoid checking for updates on every load.
+      (if (package-installed-p 'dired+)
+          (use-package dired+
+              :after dired
+              :init (funcall _init)
+              :config (funcall _conf)
+          )
+          (use-package dired+
+              :after dired
+              :quelpa (dired+ :fetcher github :repo "emacsmirror/dired-plus")
+              :init (funcall _init)
+              :config (funcall _conf)
+          )
+      )
+  )
+#+END_SRC
+
+# ;; (require 'elpa-neotree)
+# ;; (require 'elpa-helm)
+# ;; (require 'elpa-projectile)
+# ;; (require 'elpa-origami)
+# ;; (require 'elpa-ace-window)
