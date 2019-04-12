@@ -1,7 +1,7 @@
 * Navigation Helpers
 These packages improve navigation within the editor and its parts.
 
-** Dired
+** Dired Plus
 Extends upon bundled [[https://github.com/emacs-mirror/emacs/blob/master/lisp/dired.el][dired.el]] and adds more functionality.
 #+BEGIN_SRC emacs-lisp
   (let
@@ -50,6 +50,50 @@ Extends upon bundled [[https://github.com/emacs-mirror/emacs/blob/master/lisp/di
               :config (funcall _conf)
           )
       )
+  )
+#+END_SRC
+
+** Helm
+The CtrlP of Emacs, only waaaay better.
+#+BEGIN_SRC emacs-lisp
+  (use-package helm
+      :ensure t
+      :commands helm-mode
+      :delight helm-mode
+      :init
+          (add-hook 'after-init-hook (lambda ()
+              (ido-mode -1); Disable the "I Do" mode, we have helm for that now.
+              (helm-mode 1)
+          ))
+          (add-hook 'evil-leader-mode-hook (lambda ()
+              (evil-leader/set-key "DEL" 'helm-mini)
+              (evil-leader/set-key "SPC" 'helm-M-x)
+          ))
+      :config
+          (require 'helm-config); load defaults
+          (define-key global-map (kbd "M-d") 'helm-imenu-in-all-buffers)
+          (global-set-key (kbd "C-x c a") nil); The original helm-apropos binding
+          (global-set-key (kbd "C-h C-h") nil); The emacs help for help
+          (global-set-key (kbd "C-h C-h") 'helm-apropos)
+          (global-set-key (kbd "C-f") 'helm-do-ag)
+          ;; Map the dynamic kill-ring
+          (global-set-key (kbd "C-x c M-y") nil); The original helm-show-kill-ring
+          (global-set-key (kbd "M-v") 'helm-show-kill-ring); The scroll-down-command
+          (setq
+              helm-candidate-number-limit 100
+              helm-mode-fuzzy-match t
+              helm-completion-in-region-fuzzy-match t
+              helm-autoresize-mode t
+              helm-buffer-max-length 50
+              helm-follow-mode-persistent t
+              ;; Try to update faster when hitting RET too quickly
+              helm-idle-delay 0.0
+              helm-input-idle-delay 0.0
+              helm-yas-display-key-on-candidate t
+              helm-quick-update t
+              helm-M-x-requires-pattern nil
+              helm-ff-skip-boring-files t
+          )
   )
 #+END_SRC
 
