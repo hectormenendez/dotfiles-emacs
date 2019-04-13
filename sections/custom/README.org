@@ -94,3 +94,72 @@ Writes frame configuration settings to a file (so they can be later loaded).
 )   )
 
 #+END_SRC
+
+#+BEGIN_SRC emacs-lisp
+(defvar etor/projectile-dir
+        (expand-file-name "_projectile/" user-emacs-directory)
+    )
+(defun etor/projectile-buffers-get-filename ()
+    "Retrieve the location for the sevefile."
+    (expand-file-name
+        (replace-regexp-in-string "/" "#" (projectile-project-root))
+        etor/projectile-dir
+    )
+)
+
+#+END_SRC
+
+#+BEGIN_SRC emacs-lisp
+(defun etor/projectile-buffers-save-and-kill ()
+    "Save currently open buffers to a file."
+    (interactive)
+    (let
+        (
+            (_savefile (etor/projectile-buffers-get-filename))
+            (_filenames (list (buffer-file-name (current-buffer))))
+        )
+        (dolist (buffer (buffer-list))
+            (let
+                (
+                    (_path (buffer-file-name buffer))
+                    (_name (buffer-name buffer))
+                )
+                (when (and (not (string-match-p "^\\\s*\\*" _name)) _path)
+                    (add-to-list '_filenames _path)
+                )
+            )
+        )
+        (if (file-writable-p _savefile)
+            (with-temp-file _savefile
+                (insert (let (print-length) (prin1-to-string _filenames)))
+                (write-file _savefile)
+            )
+            (error "Could not write to projectile savefile")
+        )
+        (desktop-clear)
+        (print (concat "Saved " (number-to-string (length _filenames)) " buffers."))
+    )
+)
+#+END_SRC
+
+
+#+BEGIN_SRC emacs-lisp
+(defun etor/projectile-buffers-load ()
+    "Load previously open buffers from a file."
+    (interactive)
+    (let
+        (
+            (_currname (buffer-file-name (current-buffer)))
+            (_filename (etor/projectile-buffers-get-filename))
+        )
+        (when (file-exists-p _filename)
+            (with-temp-buffer (insert-file-contents _filename)
+                (dolist (_path (read (buffer-string)))
+                    (when (file-exists-p _path) (find-file _path))
+                )
+                (find-file _currname)
+            )
+        )
+    )
+)
+#+END_SRC

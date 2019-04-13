@@ -104,8 +104,43 @@ The CtrlP of Emacs, only waaaay better.
   )
 #+END_SRC
 
+** Projectile
+Write a description here
+#+BEGIN_SRC emacs-lisp
+  (use-package projectile
+      :ensure t
+      :delight projectile-mode
+      :commands projectile-mode
+      :init (add-hook 'helm-mode-hook #'projectile-mode)
+      :config
+          ;; If the projectile folder doesn't exist, create it.
+          ;;(unless (file-exists-p etor/projectile-dir) (make-directory etor/projectile-dir));
+          (setq
+              ;; use external tools for indexing for speed
+              projectile-indexing-method 'alien
+              ;; Setup custom filenames for autosaving.
+              projectile-cache-file
+                  (expand-file-name "cache" etor/projectile-dir)
+              projectile-known-projects-file
+                  (expand-file-name "known_projects" etor/projectile-dir)
+              ;; ignore these folders when trying to add as project
+              projectile-ignored-project-function (lambda (project-root)
+                  (f-descendant-of? project-root (expand-file-name ".git"))
+              )
+              ;; Determine how to locate the root folder for the project
+              projectile-project-root-files-functions '(
+                  projectile-root-local
+                  projectile-root-top-down
+                  projectile-root-bottom-up
+              )
+          )
+          ;; Everytime the project is changed, remove/restore projects
+          ;; (add-hook 'projectile-before-switch-project-hook 'etor/projectile-buffers-save-and-kill)
+          ;; (add-hook 'projectile-after-switch-project-hook 'etor/projectile-buffers-load)
+  )
+#+END_SRC
+
 # ;; (require 'elpa-neotree)
-# ;; (require 'elpa-helm)
 # ;; (require 'elpa-projectile)
 # ;; (require 'elpa-origami)
 # ;; (require 'elpa-ace-window)
