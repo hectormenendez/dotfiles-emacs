@@ -1,26 +1,36 @@
-* My emacs configuration.
+#+TITLE: My emacs configuration.
+#+AUTHOR: Hector Menendez
+
 This is just a description which eventually is going to make sense.
 
-** [[./sections/editor#editor-features][Editor features]]
-These features add new capabilities to Emacs, they don't depend on specific syntax/modes.
-#+BEGIN_SRC emacs-lisp
-  (org-babel-load-file (concat etor/path:editor etor/init:index))
-#+END_SRC
+** [[./sections/bundled#bundled-features][Bundled features]]
+These features come bundled with Emacs, so they have to be configured first.
+#+INCLUDE: ./sections/bundled/README.org
 
-** [[./sections/content#content-features][Content features]]
-These add functionality to the content, depending on its type.
-#+BEGIN_SRC emacs-lisp
-  (org-babel-load-file (concat etor/path:content etor/init:index))
-#+END_SRC
+# #+BEGIN_SRC emacs-lisp
+#   ;; Add the sections bundled directory to the path list and load its index.
+#   (etor/path:put "sections-bundled" "sections:bundled")
+#   (org-babel-load-file (concat (etor/path:get "sections-bundled") etor/init:index))
+#   (message "Hola fucking mundo!)
+# #+END_SRC
 
-** [[./sections/system#system-integration][System integration]]
-These are some external features available on the system that will be integrated to Emacs.
-#+BEGIN_SRC emacs-lisp
-  (org-babel-load-file (concat etor/path:system etor/init:index))
-#+END_SRC
+# (etor/path:put "sections-packages" "sections:packages")
+# (etor/path:put "sections-custom" "sections:custom")
 
-** [[./custom#customization][Customization]]
-Variables, functions and commands that should not be included if you're not me.
-#+BEGIN_SRC emacs-lisp
-  (org-babel-load-file (concat etor/path:custom etor/init:index))
-#+END_SRC
+# ** [[./sections/content#content-features][Content features]]
+# These add functionality to the content, depending on its type.
+# #+BEGIN_SRC emacs-lisp
+#   (org-babel-load-file (concat etor/path:content etor/init:index))
+# #+END_SRC
+
+# ** [[./sections/system#system-integration][System integration]]
+# These are some external features available on the system that will be integrated to Emacs.
+# #+BEGIN_SRC emacs-lisp
+#   (org-babel-load-file (concat etor/path:system etor/init:index))
+# #+END_SRC
+
+# ** [[./custom#customization][Customization]]
+# Variables, functions and commands that should not be included if you're not me.
+# #+BEGIN_SRC emacs-lisp
+#   (org-babel-load-file (concat etor/path:custom etor/init:index))
+# #+END_SRC

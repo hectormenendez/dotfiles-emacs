@@ -1,0 +1,82 @@
+#+TITLE: Look and Feel
+#+AUTHOR: Hector Menendez
+
+Control how the editor looks.
+
+** [[https://github.com/emacs-mirror/emacs/blob/master/lisp/frame.el][frame.el]]
+Everything related to the frame (window in OS' terms)
+#+BEGIN_SRC emacs-lisp
+  (use-package frame
+      :bind (
+          ("M-RET" . toggle-frame-fullscreen)
+      )
+      :config (setq frame-title-format "emacs")
+  )
+#+END_SRC
+
+** [[https://github.com/emacs-mirror/emacs/blob/master/lisp/display-line-numbers.el][display-line-numbers.el]]
+Handles line-numbers display on the editor.
+#+BEGIN_SRC emacs-lisp
+  (use-package display-line-numbers
+      :commands display-line-numbers-mode
+      :init (add-hook 'prog-mode-hook #'display-line-numbers-mode)
+      :config
+          (setq
+              ;; Format the numbers bar
+              display-line-numbers "%4d \u2502 "
+              ;; Use relative numbers
+              display-line-numbers-type 'relative
+          )
+  )
+#+END_SRC
+** [[https://github.com/emacs-mirror/emacs/blob/master/lisp/tool-bar.el][tool-bar.el]]
+Shouldn't this be part of the frame? well it isn't.
+#+BEGIN_SRC emacs-lisp
+  (use-package tool-bar
+      :commands tool-bar-mode
+      :init (add-hook 'after-init-hook #'(lambda () (tool-bar-mode -1)))
+  )
+#+END_SRC
+
+*** [[https://github.com/emacs-mirror/emacs/blob/master/lisp/scroll-bar.el][scroll-bar.el]]
+Yeah, this is most definitely part of the frame. 🙄
+#+BEGIN_SRC emacs-lisp
+  (use-package scroll-bar
+      :commands scroll-bar-mode
+      :init (add-hook 'after-init-hook #'(lambda () (scroll-bar-mode -1)))
+  )
+#+END_SRC
+
+** [[https://github.com/emacs-mirror/emacs/blob/master/lisp/menu-bar.el][menu-bar.el]]
+You've got to be kidding, this is a part of the frame!
+#+BEGIN_SRC emacs-lisp
+  (use-package menu-bar
+      :commands menu-bar-mode
+      :init (add-hook 'after-init-hook #'(lambda () (menu-bar-mode -1)))
+      ;; this is as good place as any to put this bindings.
+      ;; TODO: think of a better place to put these.
+      :config
+          ;; File > Close
+          (define-key global-map (kbd "M-w") 'kill-this-buffer)
+
+          ;; File > Save
+          (define-key global-map (kbd "C-x C-s") nil)
+          (define-key global-map (kbd "M-s") 'save-buffer); orig: isearch prefix
+
+          ;; File > Save As ...
+          (define-key global-map (kbd "C-x C-w") nil)
+          (define-key global-map (kbd "M-S") 'write-file); orig: same as M-s
+
+          ;; File > Quit
+          (define-key global-map (kbd "C-x C-c") nil)
+          (define-key global-map (kbd "M-q") 'save-buffers-kill-terminal); orig: fill-paragraph
+
+          ;; Edit > Undo
+          (define-key global-map (kbd "C-_") nil)
+          (define-key global-map (kbd "M-z") 'undo-tree-undo); orig: zap-to-char
+
+          ;; Edit > Undo
+          (define-key global-map (kbd "M-_") nil)
+          (define-key global-map (kbd "M-Z") 'undo-tree-redo); orig: same as M-z
+  )
+#+END_SRC

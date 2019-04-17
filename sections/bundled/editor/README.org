@@ -1,0 +1,52 @@
+#+TITLE: Bundled editor features
+#+AUTHOR: Hector Menendez
+
+Controls how the editor works and handles native functionality.
+
+** General
+*** [[https://github.com/emacs-mirror/emacs/blob/master/lisp/simple.el][simple.el]]
+Emacs commands not specifically related to some major mode or to file-handling.
+#+BEGIN_SRC emacs-lisp
+  (use-package simple
+      :demand t
+      :config
+          (auto-save-mode 1); Enable auto saving files
+          (column-number-mode 1); Show the current-column number
+          (global-hl-line-mode 1); Highlight the current line
+  )
+#+END_SRC
+
+*** [[https://github.com/emacs-mirror/emacs/blob/master/lisp/help.el][help.el]]
+Controls what to do with the help buffer.
+#+BEGIN_SRC emacs-lisp
+  (use-package help
+      :commands help-mode
+      :config
+          (setq help-window-select t); whenever the help buffer appears, select it.
+  )
+#+END_SRC
+
+*** [[https://github.com/emacs-mirror/emacs/blob/master/lisp/server.el][server.el]]
+Once it finishes loading, enable Emacs server so other instances can connect to it.
+#+BEGIN_SRC emacs-lisp
+  (use-package server
+      :demand t
+      :disable t
+      :init
+          (add-hook 'after-init-hook (lambda ()
+              (unless (server-running-p) (server-start))
+          ))
+  )
+#+END_SRC
+
+# ** File handling
+# Control various aspects of how files are handled in the editor.
+# #+BEGIN_SRC emacs-lisp
+#   (org-babel-load-file (concat (file-name-as-directory "file-handling") etor/init:index))
+# #+END_SRC
+
+# ** Look and Feel
+# Control how the editor looks.
+# #+BEGIN_SRC emacs-lisp
+#   (org-babel-load-file (concat (file-name-as-directory "look-and-feel") etor/init:index))
+# #+END_SRC

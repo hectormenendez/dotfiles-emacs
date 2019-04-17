@@ -1,0 +1,91 @@
+#+TITLE: File handling
+#+AUTHOR: Hector Menendez
+
+Control various aspects of how files are handled in the editor.
+
+** [[https://github.com/emacs-mirror/emacs/blob/master/lisp/files.el][files.el]]
+Defines most of Emacs's file-handling functions.
+#+BEGIN_SRC emacs-lisp
+  (use-package files
+      :demand t
+      :config
+          (setq
+              ;; Handle backups
+              make-backup-files t
+              delete-old-versions t
+              backup-directory-alist (list
+                  (cons "." (expand-file-name "_backups/" user-emacs-directory))
+              )
+              ;; Handle backup version control
+              version-control t; Keep control of backups
+              vc-follow-symlinks t; Don't ask to follow symlinks, just do it.
+              ;; Handle AutoSave
+              auto-save-default nil; Disable auto-saving
+              auto-save-file-name-transforms (list
+                  (list ".*" (expand-file-name "_auto-save-list" user-emacs-directory) t)
+              )
+              ;; Misc
+              require-final-newline nil; Don't end files with newline
+          )
+  )
+
+#+END_SRC
+
+** [[https://github.com/emacs-mirror/emacs/blob/master/lisp/recentf.el][recentf.el]]
+Maintains a menu for visiting files that were operated on recently.
+The recentf file list automatically saved across Emacs sessions.
+#+BEGIN_SRC emacs-lisp
+  (use-package recentf
+      :commands recentf-mode
+      :init (add-hook 'after-init-hook #'recentf-mode)
+      :config
+          (setq
+              recentf-save-file (expand-file-name "_recentf" user-emacs-directory)
+              recentf-filename-handlers '(abbreviate-file-name)
+          )
+  )
+#+END_SRC
+
+** [[https://github.com/emacs-mirror/emacs/blob/master/lisp/savehist.el][savehist.el]]
+Many editors (e.g. Vim) have the feature of saving minibuffer history to an external
+file after exit.  This package provides the same feature in Emacs.
+#+BEGIN_SRC emacs-lisp
+  (use-package savehist
+      :commands savehist-mode
+      :init (add-hook 'after-init-hook #'savehist-mode)
+      :config
+          (setq
+              savehist-file (expand-file-name "_history" user-emacs-directory)
+              savehist-save-minibuffer-history 1
+              history-length t
+              history-delete-duplicates t
+          )
+  )
+#+END_SRC
+
+** [[https://github.com/emacs-mirror/emacs/blob/master/lisp/saveplace.el][saveplace.el]]
+Automatically save place in files, so that visiting them later automatically moves point
+to the saved position, when the file is first found.
+#+BEGIN_SRC emacs-lisp
+  (use-package saveplace
+      :commands save-place-mode
+      :init (add-hook 'after-init-hook #'save-place-mode)
+      :config (setq save-place-file (expand-file-name "_saveplace" user-emacs-directory))
+  )
+#+END_SRC
+
+** [[https://github.com/emacs-mirror/emacs/blob/master/lisp/autorevert.el][autorevert.el]]
+Whenever a file is changed externally, auto update it if it's opened.
+#+BEGIN_SRC emacs-lisp
+  (use-package autorevert
+      :commands auto-revert-mode
+      :delight (auto-revert-mode); don't show the mode-line
+      :init (add-hook 'after-init-hook #'global-auto-revert-mode)
+      :config
+          (setq
+              auto-revert-verbose nil; no need of advertise the revert
+              global-auto-revert-non-file-buffers t; Enable autorevert on dired buffers
+          )
+  )
+#+END_SRC
+

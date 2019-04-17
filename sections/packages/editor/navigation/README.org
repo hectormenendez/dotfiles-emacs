@@ -80,8 +80,6 @@ The CtrlP of Emacs, only waaaay better.
           (define-key global-map (kbd "C-h C-h") nil); The emacs help for help
           (define-key global-map (kbd "C-x c a") nil); The original helm-apropos binding
           (define-key global-map (kbd "C-h C-h") 'helm-apropos)
-          ;; Enable fuzzy-search of content
-          (define-key global-map (kbd "C-f") 'helm-do-ag)
           ;; Map the dynamic kill-ring
           (define-key global-map (kbd "C-x c M-y") nil); The original helm-show-kill-ring
           (define-key global-map (kbd "M-v") 'helm-show-kill-ring); The scroll-down-command
@@ -116,17 +114,20 @@ Write a description here
           ;; If the projectile folder doesn't exist, create it.
           ;;(unless (file-exists-p etor/projectile-dir) (make-directory etor/projectile-dir));
           (setq
+              ;; TODO: find out more about this action.
+              projectile-switch-project-action 'projectile-find-file
               ;; use external tools for indexing for speed
               projectile-indexing-method 'alien
               ;; Setup custom filenames for autosaving.
-              projectile-cache-file
-                  (expand-file-name "cache" etor/projectile-dir)
-              projectile-known-projects-file
-                  (expand-file-name "known_projects" etor/projectile-dir)
+              ;; projectile-cache-file
+              ;;     (expand-file-name "cache" etor/projectile-dir)
+              ;; projectile-known-projects-file
+              ;;     (expand-file-name "known_projects" etor/projectile-dir)
               ;; ignore these folders when trying to add as project
-              projectile-ignored-project-function (lambda (project-root)
-                  (f-descendant-of? project-root (expand-file-name ".git"))
-              )
+              ;; TODO: Throws an error
+              ;; projectile-ignored-project-function (lambda (project-root)
+              ;;     (f-descendant-of? project-root (expand-file-name ".git"))
+              ;; )
               ;; Determine how to locate the root folder for the project
               projectile-project-root-files-functions '(
                   projectile-root-local
@@ -140,7 +141,38 @@ Write a description here
   )
 #+END_SRC
 
+** Projectile & Helm Integration
+This connects boths modes so they work together.
+#+BEGIN_SRC emacs-lisp
+  (use-package helm-projectile
+      :ensure t
+      :after (helm projectile)
+      :config
+          ;; Enable helm-projectile
+          (define-key global-map [(meta f)] 'helm-projectile-find-file); forward-word
+          ;; Enable finding directories
+          (define-key global-map [(meta shift f)] 'helm-projectile-find-dir)
+          ;; Enable finding buffers
+          (define-key global-map (kbd "M-b") 'helm-projectile-switch-to-buffer); orig: backward-char
+          ;; Enable finding projects
+          (define-key global-map (kbd "M-p") 'helm-projectile-switch-project);
+          ;; replace Ctrl-F with Helm file search
+          (eval-after-load 'evil-maps (lambda ()
+              (define-key evil-normal-state-map (kbd "C-f") nil)
+              (define-key evil-emacs-state-map (kbd "C-f") nil)
+              (define-key evil-motion-state-map (kbd "C-f") nil)
+              (define-key evil-operator-state-map (kbd "C-f") nil)
+              (define-key evil-visual-state-map (kbd "C-f") nil)
+              (define-key evil-replace-state-map (kbd "C-f") nil)
+              (define-key global-map [(ctrl f)] nil)
+              (define-key global-map [(ctrl shift f)] nil)
+              (define-key global-map [(ctrl f)] 'helm-do-ag)
+              (define-key global-map [(ctrl shift f)] 'projectile-replace-regexp)
+          ))
+
+      )
+#+END_SRC
+
 # ;; (require 'elpa-neotree)
-# ;; (require 'elpa-projectile)
 # ;; (require 'elpa-origami)
 # ;; (require 'elpa-ace-window)
