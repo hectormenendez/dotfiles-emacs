@@ -1,5 +1,15 @@
-* [[./custom#customization][Customization]]
-Variables, functions and commands that should not be included if you're not me.
+#+TITLE: This is a title, will it show?
+
+*** [[./declarations-path.org][Path managemement]]
+    Functions that allow to centralise path management througout the config.
+    #+INCLUDE: ./declarations-path.org
+
+#+BEGIN_SRC emacs-lisp
+  ;; ------------------------------------------------------------------ Minimal Vars & Funcs
+  ;; These are the minimal custom variables and functions needed to startup the config.
+  (defvar etor/init:flag "_DELME-TO-UPDATE.flag")
+
+#+END_SRC
 
 ** window-toggle
 Toggle current buffer using the whole screen.

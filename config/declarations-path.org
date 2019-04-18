@@ -1,0 +1,52 @@
+#+TITLE: Path management declarations
+
+*** Variables
+
+- Path:List
+  this variable will hold all available paths, it's used by both Path:Get and Path:Put
+  #+BEGIN_SRC emacs-lisp
+    (defvar etor/path:list '())
+  #+END_SRC
+
+- Path:Slash
+  this variable holds the "/" character on *nix systems and I assume the "\" on Windows.
+  #+BEGIN_SRC emacs-lisp
+    (defvar etor/path:slash (substring user-emacs-directory -1))
+  #+END_SRC
+
+#+BEGIN_SRC emacs-lisp
+  (defun etor/path:get (key)
+      "Return a path declared on the etor/paths list.  (KEY)."
+      (interactive)
+      (cdr (assoc key etor/path:list))
+  )
+
+  (defun etor/path:put (key val)
+      "Set a new path to the etor/paths list.  (KEY, VAL)."
+      (interactive)
+      (let ((parts (split-string val ":")))
+          (if (= (length parts) 1)
+              ;; an identifier couldn't be found, insert the predicate as is.
+              (push (cons key (file-name-as-directory val)) etor/path:list)
+              (let*
+                  (
+                      (target (etor/path:get (car parts)))
+                      (route (file-name-as-directory (mapconcat 'identity (cdr parts) "/")))
+                  )
+                  (push (cons key (concat target route)) etor/path:list)
+              )
+          )
+      )
+  )
+
+  (defun etor/path:print ()
+      "Output to Messages the contents of the path variable."
+      (interactive)
+      (let (( list etor/path:list ))
+          (while
+              (print (car list))
+              (setq list (cdr list))
+          )
+      )
+  )
+#+END_SRC

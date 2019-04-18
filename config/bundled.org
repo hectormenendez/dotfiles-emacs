@@ -1,7 +1,9 @@
 #+TITLE: Bundled features
 #+AUTHOR: Hector Menendez
 
-These features come bundled with Emacs, so they have to be configured first.
+** [[./bundled-startup.org][Startup]]
+   The bare minimum setup to startup.
+   #+INCLUDE: ./bundled-startup.org
 
 ** Editor
    These features control how the Editor looks and behaves.
@@ -10,4 +12,3 @@ These features come bundled with Emacs, so they have to be configured first.
   ;; (org-babel-load-file (concat (etor/path:get "sections-bundled-editor") etor/init:index))
   (message "!!!! a huevoputo")
 #+END_SRC
-
