@@ -1,4 +1,4 @@
-#+TITLE: Frame State
+#+TITLE: Frame State declarations
 
 ** Restore Frame
    Loads frame configuration settings from file (if available).

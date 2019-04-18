@@ -61,6 +61,7 @@
   ;; Also, install quelpa-use-package so those packages can be loaded using "use-package"
   ;; (use-package is a dependecy so it won't be necessary to explicitly install it)
 
+  (defvar etor/init:flag "_DELME-TO-UPDATE.flag")
   (let ((file (concat (etor/path:get "emacs") etor/init:flag)))
       (unless (file-exists-p file) (progn
           ; make sure packages are up-to-date
