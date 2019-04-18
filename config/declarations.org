@@ -1,8 +1,12 @@
-#+TITLE: This is a title, will it show?
+#+TITLE: Declarations
 
-*** [[./declarations-path.org][Path managemement]]
-    Functions that allow to centralise path management througout the config.
-    #+INCLUDE: ./declarations-path.org
+** [[./declarations-path.org][Path managemement]]
+   Functions that allow to centralise path management througout the config.
+   #+INCLUDE: ./declarations-path.org
+
+** [[./declarations-frame.org][Frame State]]
+   Functions that allow to manage state for frame position and shape.
+   #+INCLUDE: ./declarations-frame.org
 
 #+BEGIN_SRC emacs-lisp
   ;; ------------------------------------------------------------------ Minimal Vars & Funcs
@@ -27,53 +31,7 @@ Toggle current buffer using the whole screen.
   )
 #+END_SRC
 
-** frame-load
-Loads frame configuration settings from file (if available).
 #+BEGIN_SRC emacs-lisp
-  (defun etor/frame-load ()
-      "Load last frame geometry from a a file."
-      (interactive)
-      (let
-          (
-              (framesave-file (expand-file-name "_framesave" user-emacs-directory))
-          )
-          (when (file-readable-p framesave-file) (load-file framesave-file))
-      )
-  )
-
-#+END_SRC
-
-** frame-save
-Writes frame configuration settings to a file (so they can be later loaded).
-#+BEGIN_SRC emacs-lisp
-  ;; TODO: In Mac, save Desktop Name (or identifier)
-  (defun etor/frame-save ()
-      "Save current frame geometry to a file."
-      (interactive)
-      (let
-          (
-              (framesave-left (frame-parameter (selected-frame) 'left))
-              (framesave-top (frame-parameter (selected-frame) 'top))
-              (framesave-width (frame-parameter (selected-frame) 'width))
-              (framesave-height (frame-parameter (selected-frame) 'height))
-              (framesave-file (expand-file-name "_framesave" user-emacs-directory))
-          )
-          (when (not (number-or-marker-p framesave-left)) (setq framesave-left 0))
-          (when (not (number-or-marker-p framesave-top)) (setq framesave-top 0))
-          (when (not (number-or-marker-p framesave-width)) (setq framesave-width 0))
-          (when (not (number-or-marker-p framesave-height)) (setq framesave-height 0))
-          (with-temp-buffer
-              (insert
-                  "(setq initial-frame-alist '(\n"
-                  (format "    (top . %d)\n" (max framesave-top 0))
-                  (format "    (left . %d)\n" (max framesave-left 0))
-                  (format "    (width . %d)\n" (max framesave-width 0))
-                  (format "    (height . %d)\n" (max framesave-height 0))
-                  "))\n"
-              )
-              (when (file-writable-p framesave-file) (write-file framesave-file))
-          )
-      )
 
 (defun etor/backspace-to-tab-stop ()
     "Delete whitespace backwards to the next tab-stop, otherwise delete one character."

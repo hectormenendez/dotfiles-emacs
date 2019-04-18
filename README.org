@@ -12,9 +12,7 @@ This is just a description which eventually is going to make sense.
    #+INCLUDE: ./config/bundled.org
 
 ** Roadmap
-*** TODO Rename README.org to config.org
-*** TODO Generte a README.md using config.org
-*** TODO Find a way to validate that anything inside the "config" folder changed.
+**** TODO Find a way to validate that anything inside the "config" folder changed.
 
 # #+BEGIN_SRC emacs-lisp
 #   ;; Add the sections bundled directory to the path list and load its index.
