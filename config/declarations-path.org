@@ -1,26 +1,26 @@
-#+TITLE: Path management declarations
+#+TITLE: Path declarations
 
 *** Variables
+#+BEGIN_SRC emacs-lisp
+  ;; Holds all available paths, it's used by both path:get and path:put.
+  (defvar etor/path:list '())
 
-- Path:List
-  this variable will hold all available paths, it's used by both Path:Get and Path:Put
-  #+BEGIN_SRC emacs-lisp
-    (defvar etor/path:list '())
-  #+END_SRC
+  ;; Holds the "/" character on *nix systems and I assume the "\" on Windows.
+  (defvar etor/path:slash (substring user-emacs-directory -1))
+#+END_SRC
 
-- Path:Slash
-  this variable holds the "/" character on *nix systems and I assume the "\" on Windows.
-  #+BEGIN_SRC emacs-lisp
-    (defvar etor/path:slash (substring user-emacs-directory -1))
-  #+END_SRC
-
+*** Functions
+**** Get Path by key
 #+BEGIN_SRC emacs-lisp
   (defun etor/path:get (key)
       "Return a path declared on the etor/paths list.  (KEY)."
       (interactive)
       (cdr (assoc key etor/path:list))
   )
+#+END_SRC
 
+**** Put new Path
+#+BEGIN_SRC emacs-lisp
   (defun etor/path:put (key val)
       "Set a new path to the etor/paths list.  (KEY, VAL)."
       (interactive)
@@ -38,7 +38,10 @@
           )
       )
   )
+#+END_SRC
 
+**** Print current Paths
+#+BEGIN_SRC emacs-lisp
   (defun etor/path:print ()
       "Output to Messages the contents of the path variable."
       (interactive)
