@@ -7,6 +7,14 @@ This is just a description which eventually is going to make sense.
    These are custom functions and vars needed for some functionality to work.
    #+INCLUDE: ./config/declarations.org
 
+** [[./config/startup-bundled.org][Startup]]
+   The bare minimum setup to startup.
+   #+INCLUDE: ./config/startup-bundled.org
+
+** [[./config/startup-packages.org][Package Management]]
+   Optimize loading time by using ~use-package~ and ~quelpa-use-package~ to load packages.
+   #+INCLUDE: ./config/startup-packages.org
+
 ** [[./config/bundled.org][Bundled features]]
    These features come bundled with Emacs, so they have to be configured first.
    #+INCLUDE: ./config/bundled.org

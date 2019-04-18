@@ -1,0 +1,43 @@
+#+TITLE: Bundled Startup
+
+***** Setup path management and its minimal requirements.
+#+INCLUDE: ./declarations-path.org
+#+BEGIN_SRC emacs-lisp
+  (etor/path:put "emacs" (expand-file-name user-emacs-directory))
+  (etor/path:put "config" "emacs:config")
+  (etor/path:put "autosave" "emacs:_autosave")
+#+END_SRC
+
+***** Core Settings
+These settings are set directly in the "C Source Code" so let's consider them Core.
+#+BEGIN_SRC emacs-lisp
+  (setq
+      create-lockfiles nil; Don't create ".#" files
+      ring-bell-function 'ignore; don't run any function when alerting
+      visible-bell nil; don't show the visual que when alerting
+      message-log-max 10000; max number of lines to keep in logfile.
+      load-prefer-newer t; Don't load outdated byte code
+      max-mini-window-height 0.5; Use up to 50% of frame height for mini-buffer window.
+  )
+#+END_SRC
+
+***** Startup Settings
+These are defined in [[https://github.com/emacs-mirror/emacs/blob/master/lisp/startup.el][startup.el]]
+#+BEGIN_SRC emacs-lisp
+  (setq
+      inhibit-startup-screen 1; Don't show the welcome screen
+      initial-scratch-message nil; Don't show a message on *scratch* mode
+      ; the location for auto-save files
+      auto-save-list-file-prefix (etor/path:get "autosave")
+  )
+
+  ;; TODO: These should be set on custom.el
+  (setq-default
+      tab-width 4; Use 4 spaces for indentation
+      fill-column 90; word-wrap after the 90th character
+      line-spacing 1; The spacing between lines vertically
+  )
+
+  ; Ask for just one letter when confirmation needed
+  (defalias 'yes-or-no-p 'y-or-n-p)
+#+END_SRC

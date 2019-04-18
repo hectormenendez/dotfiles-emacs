@@ -1,21 +1,24 @@
 #+TITLE: Declarations
 
-** [[./declarations-path.org][Path managemement]]
+These declarations will be included by the corresponding requiring library.
+
+** [[./declarations-path.org][Path managemement]] :startup-bundled:
    Functions that allow to centralise path management througout the config.
-   #+INCLUDE: ./declarations-path.org
 
 ** [[./declarations-frame.org][Frame State]]
    Functions that allow to manage state for frame position and shape.
-   #+INCLUDE: ./declarations-frame.org
 
 ** [[./declarations-projectile.org][Projectile helpers]]
    Functions that give extra functionality to Projectile
-   #+BEGIN_COMMENT
-   This will be included when setting up projectile.
-   #+END_COMMENT
 
 ** [[./declarations-evil.org][Evil mode]]
    Add functionlity when evil mode is enabled.
-   #+BEGIN_COMMENT
-   This will be loaded when evil mode is setup.
-   #+END_COMMENT
+
+***** Overwrite the default echo-area-message.
+      Show how much time it took to Emacs to initialized.
+#+BEGIN_SRC emacs-lisp
+  (defun display-startup-echo-area-message ()
+      "The default message shown in the echo area message"
+      (message (concat "Emacs took " (emacs-init-time) " to load."))
+  )
+#+END_SRC

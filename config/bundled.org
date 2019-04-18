@@ -1,10 +1,6 @@
 #+TITLE: Bundled features
 #+AUTHOR: Hector Menendez
 
-** [[./bundled-startup.org][Startup]]
-   The bare minimum setup to startup.
-   #+INCLUDE: ./bundled-startup.org
-
 ** Editor
    These features control how the Editor looks and behaves.
 #+BEGIN_SRC emacs-lisp tangle: README.li

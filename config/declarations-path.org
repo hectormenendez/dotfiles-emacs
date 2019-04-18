@@ -10,7 +10,7 @@
 #+END_SRC
 
 *** Functions
-**** Get Path by key
+***** Returns a path declared on ~etor/paths:list~.
 #+BEGIN_SRC emacs-lisp
   (defun etor/path:get (key)
       "Return a path declared on the etor/paths list.  (KEY)."
@@ -19,7 +19,7 @@
   )
 #+END_SRC
 
-**** Put new Path
+***** Set a new path to ~etor/path:list~.
 #+BEGIN_SRC emacs-lisp
   (defun etor/path:put (key val)
       "Set a new path to the etor/paths list.  (KEY, VAL)."
@@ -40,7 +40,7 @@
   )
 #+END_SRC
 
-**** Print current Paths
+***** Output to Messages the contents of ~etor/path:list~.
 #+BEGIN_SRC emacs-lisp
   (defun etor/path:print ()
       "Output to Messages the contents of the path variable."

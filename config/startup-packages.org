@@ -1,0 +1,66 @@
+#+TITLE: Package Management
+
+***** Prepare package manager to support ~use-package~ and ~quelpa-use-package~.
+#+BEGIN_SRC emacs-lisp
+  (require 'package)
+
+  ;; Don't activate installed packages at startup, let use-package enable them.
+  (setq package-enable-at-startup nil)
+
+  ;; Store packages in these folders
+  (etor/path:put "packages" "emacs:_packages")
+  (etor/path:put "packages-elpa" "packages:elpa")
+  (etor/path:put "packages-quelpa" "packages:quelpa")
+
+  (setq package-user-dir (etor/path:get "packages-elpa"))
+  (setq-default quelpa-dir (etor/path:get "packages-quelpa"))
+
+  ;; The repositories to fetch packages-from.
+  (add-to-list 'package-archives '("melpa" . "http://melpa.org/packages/"))
+  (add-to-list 'package-archives '("org" . "https://orgmode.org/elpa/") t)
+
+  ;; This will be added to this file no matter what, so, add it.
+  (package-initialize)
+#+END_SRC
+
+***** Make sure ~quelpa-use-package~ is installed.
+if quelpa not present, download and install it so packages can be compiled from source.
+Also, install quelpa-use-package so those packages can be loaded using "use-package"
+(use-package is a dependecy so it won't be necessary to explicitly declare it)
+#+BEGIN_SRC emacs-lisp
+  (let
+      (
+          (file (concat (etor/path:get "emacs") "_DELME-TO-UPDATE.flag"))
+      )
+      (unless (file-exists-p file) (progn
+          ; make sure packages are up-to-date
+          (package-refresh-contents)
+          ; Install quelpa for additional packages
+          (if (require 'quelpa nil t)
+              ;; only upgrade if already fetched
+              (quelpa-self-upgrade)
+              ;; not installed, fetch and install.
+              (with-temp-buffer
+                  (url-insert-file-contents
+                      "https://framagit.org/steckerhalter/quelpa/raw/master/bootstrap.el")
+                  (eval-buffer)
+              )
+          )
+          ;; Add use-package with quelpa support
+          (quelpa '(quelpa-use-package
+              :fetcher git
+              :url "https://framagit.org/steckerhalter/quelpa-use-package.git"
+          ))
+          ;; Write file so this doesn't run again until the file is deleted
+          (write-region "" nil file)
+      ))
+  )
+#+END_SRC
+
+***** Initialize ~use-package~ with ~quelpa~ support.
+#+BEGIN_SRC emacs-lisp
+  (require 'quelpa-use-package)
+
+  (use-package bind-key :ensure t); Enables :bind (key binding) on use-package
+  (use-package delight :ensure t); Enables :delight (custom mode name) on use-package
+#+END_SRC
