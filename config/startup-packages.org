@@ -8,12 +8,17 @@ Prepare package manager to support ~use-package~ and ~quelpa-use-package~.
   ;; Don't activate installed packages at startup, let use-package enable them.
   (setq package-enable-at-startup nil)
 
-  ;; Store packages in these folders
+  ;;  Add these routes to the path list.
   (etor/path:put "packages" "emacs:_packages")
   (etor/path:put "packages-elpa" "packages:elpa")
   (etor/path:put "packages-quelpa" "packages:quelpa")
 
-  (setq package-user-dir (etor/path:get "packages-elpa"))
+  ;; Store packages in these folders
+  (setq
+      package-user-dir (etor/path:get "packages-elpa")
+      package-gnupghome-dir; the location for the GNU PG keyring.
+          (concat (etor/path:get "packages-elpa") (file-name-as-directory "gnupg"))
+  )
   (setq-default quelpa-dir (etor/path:get "packages-quelpa"))
 
   ;; The repositories to fetch packages-from.
