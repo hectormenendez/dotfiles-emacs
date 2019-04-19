@@ -1,6 +1,6 @@
 #+TITLE: File handling
 
-**** [[https://github.com/emacs-mirror/emacs/blob/master/lisp/files.el][files.el]]
+*** [[https://github.com/emacs-mirror/emacs/blob/master/lisp/files.el][files.el]]
 Defines most of Emacs's file-handling functions.
 #+BEGIN_SRC emacs-lisp
   (use-package files
@@ -26,7 +26,7 @@ Defines most of Emacs's file-handling functions.
   )
 #+END_SRC
 
-**** [[https://github.com/emacs-mirror/emacs/blob/master/lisp/recentf.el][recentf.el]]
+*** [[https://github.com/emacs-mirror/emacs/blob/master/lisp/recentf.el][recentf.el]]
 Maintains a menu for visiting files that were operated on recently.
 The recentf file list automatically saved across Emacs sessions.
 #+BEGIN_SRC emacs-lisp
@@ -41,7 +41,7 @@ The recentf file list automatically saved across Emacs sessions.
   )
 #+END_SRC
 
-**** [[https://github.com/emacs-mirror/emacs/blob/master/lisp/savehist.el][savehist.el]]
+*** [[https://github.com/emacs-mirror/emacs/blob/master/lisp/savehist.el][savehist.el]]
 Many editors (e.g. Vim) have the feature of saving minibuffer history to an external
 file after exit.  This package provides the same feature in Emacs.
 #+BEGIN_SRC emacs-lisp
@@ -58,7 +58,7 @@ file after exit.  This package provides the same feature in Emacs.
   )
 #+END_SRC
 
-**** [[https://github.com/emacs-mirror/emacs/blob/master/lisp/saveplace.el][saveplace.el]]
+*** [[https://github.com/emacs-mirror/emacs/blob/master/lisp/saveplace.el][saveplace.el]]
 Automatically save place in files, so that visiting them later automatically moves point
 to the saved position, when the file is first found.
 #+BEGIN_SRC emacs-lisp
@@ -69,7 +69,7 @@ to the saved position, when the file is first found.
   )
 #+END_SRC
 
-**** [[https://github.com/emacs-mirror/emacs/blob/master/lisp/autorevert.el][autorevert.el]]
+*** [[https://github.com/emacs-mirror/emacs/blob/master/lisp/autorevert.el][autorevert.el]]
 Whenever a file is changed externally, auto update it if it's opened.
 #+BEGIN_SRC emacs-lisp
   (use-package autorevert
@@ -84,7 +84,7 @@ Whenever a file is changed externally, auto update it if it's opened.
   )
 #+END_SRC
 
-**** [[https://github.com/emacs-mirror/emacs/blob/master/lisp/vc-hooks.el][vc-hooks.el]]
+*** [[https://github.com/emacs-mirror/emacs/blob/master/lisp/vc-hooks.el][vc-hooks.el]]
 #+BEGIN_SRC emacs-lisp
   (use-package vc-hooks
       :demand t
