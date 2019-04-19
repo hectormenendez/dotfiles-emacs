@@ -34,7 +34,7 @@
     #+BEGIN_SRC emacs-lisp
       (use-package recentf
           :commands recentf-mode
-          :init (add-hook 'after-init-hook #'recentf-mode)
+          :init (add-hook 'find-file-hook #'recentf-mode)
           :config
               (setq
                   ;; The file where to save the recent files list.
@@ -51,7 +51,7 @@
     #+BEGIN_SRC emacs-lisp
       (use-package savehist
           :commands savehist-mode
-          :init (add-hook 'after-init-hook #'savehist-mode)
+          :init (add-hook 'find-file-hook #'savehist-mode)
           :config
               (setq
                   ;; The location for the file containing the history list.
@@ -69,7 +69,7 @@
     #+BEGIN_SRC emacs-lisp
       (use-package saveplace
           :commands save-place-mode
-          :init (add-hook ' #'save-place-mode)
+          :init (add-hook 'find-file-hook #'save-place-mode)
           :config
           (setq
               save-place-file (concat (etor/path:get "emacs") "_saveplace")
