@@ -14,11 +14,3 @@ These declarations will be included by the corresponding requiring library.
 ** [[./declarations-evil.org][Evil mode]]
    Add functionlity when evil mode is enabled.
 
-***** Overwrite the default echo-area-message.
-      Show how much time it took to Emacs to initialized.
-#+BEGIN_SRC emacs-lisp
-  (defun display-startup-echo-area-message ()
-      "The default message shown in the echo area message"
-      (message (concat "Emacs took " (emacs-init-time) " to load."))
-  )
-#+END_SRC

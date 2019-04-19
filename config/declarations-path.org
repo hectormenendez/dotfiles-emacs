@@ -1,64 +1,70 @@
 #+TITLE: Path declarations
 
-*** Variables
-#+BEGIN_SRC emacs-lisp
-  ;; Holds all available paths, it's used by both path:get and path:put.
-  (defvar etor/path:list '())
+** Variables
 
-  ;; Holds the "/" character on *nix systems and I assume the "\" on Windows.
-  (defvar etor/path:slash (substring user-emacs-directory -1))
+*** Path container
+    Holds all available paths, it's used by both path:get and path:put.
+    #+BEGIN_SRC emacs-lisp
+      (defvar etor/path:list '())
+    #+END_SRC
 
-#+END_SRC
+*** Operating System separator
+    ;; Holds the "/" character on *nix systems and I assume the "\" on Windows.
+    #+BEGIN_SRC emacs-lisp
+      (defvar etor/path:slash (substring user-emacs-directory -1))
+    #+END_SRC
 
-*** Functions
-***** Returns a path declared on ~etor/paths:list~.
-#+BEGIN_SRC emacs-lisp
-  (defun etor/path:get (key)
-      "Return a path declared on the etor/paths list.  (KEY)."
-      (interactive)
-      (cdr (assoc key etor/path:list))
-  )
-#+END_SRC
 
-***** Set a new path to ~etor/path:list~.
-#+BEGIN_SRC emacs-lisp
-  (defun etor/path:put (key val)
-      "Set a new path to the etor/paths list.  (KEY, VAL)."
-      (interactive)
-      (let ((parts (split-string val ":")))
-          (if (= (length parts) 1)
-              ;; an identifier couldn't be found, insert the predicate as is.
-              (push (cons key (file-name-as-directory val)) etor/path:list)
-              (let*
-                  (
-                      (target (etor/path:get (car parts)))
-                      (route (file-name-as-directory (mapconcat 'identity (cdr parts) "/")))
+** Functions
+
+*** Returns a path declared on ~etor/paths:list~.
+    #+BEGIN_SRC emacs-lisp
+      (defun etor/path:get (key)
+          "Return a path declared on the etor/paths list.  (KEY)."
+          (interactive)
+          (cdr (assoc key etor/path:list))
+      )
+    #+END_SRC
+
+*** Set a new path to ~etor/path:list~.
+    #+BEGIN_SRC emacs-lisp
+      (defun etor/path:put (key val)
+          "Set a new path to the etor/paths list.  (KEY, VAL)."
+          (interactive)
+          (let ((parts (split-string val ":")))
+              (if (= (length parts) 1)
+                  ;; an identifier couldn't be found, insert the predicate as is.
+                  (push (cons key (file-name-as-directory val)) etor/path:list)
+                  (let*
+                      (
+                          (target (etor/path:get (car parts)))
+                          (route (file-name-as-directory (mapconcat 'identity (cdr parts) "/")))
+                      )
+                      (push (cons key (concat target route)) etor/path:list)
                   )
-                  (push (cons key (concat target route)) etor/path:list)
               )
           )
       )
-  )
-#+END_SRC
+    #+END_SRC
 
-***** Output to Messages the contents of ~etor/path:list~.
-#+BEGIN_SRC emacs-lisp
-  (defun etor/path:print ()
-      "Output to Messages the contents of the path variable."
-      (interactive)
-      (let (( list etor/path:list ))
-          (while
-              (print (car list))
-              (setq list (cdr list))
+*** Output to Messages the contents of ~etor/path:list~.
+    #+BEGIN_SRC emacs-lisp
+      (defun etor/path:print ()
+          "Output to Messages the contents of the path variable."
+          (interactive)
+          (let (( list etor/path:list ))
+              (while
+                  (print (car list))
+                  (setq list (cdr list))
+              )
           )
       )
-  )
-#+END_SRC
+    #+END_SRC
 
 *** Path Setup
-#+BEGIN_SRC emacs-lisp
-  (etor/path:put "emacs" (expand-file-name user-emacs-directory))
-  (etor/path:put "config" "emacs:config")
-  (etor/path:put "autosave" "emacs:_autosave")
-  (etor/path:put "backups" "emacs:_backups")
-#+END_SRC
+    #+BEGIN_SRC emacs-lisp
+      (etor/path:put "emacs" (expand-file-name user-emacs-directory))
+      (etor/path:put "config" "emacs:config")
+      (etor/path:put "autosave" "emacs:_autosave")
+      (etor/path:put "backups" "emacs:_backups")
+    #+END_SRC

@@ -1,5 +1,5 @@
 #+TITLE: Bundled features
 
 ** [[./bundled-editor.org][Editor]]
-   These features control how the Editor looks and behaves.
-   #+INCLUDE: ./bundled-editor.org
+These features control how the Editor looks and behaves.
+#+INCLUDE: ./bundled-editor.org

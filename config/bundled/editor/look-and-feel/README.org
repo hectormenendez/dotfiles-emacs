@@ -34,6 +34,7 @@ Shouldn't this be part of the frame? well it isn't.
 #+BEGIN_SRC emacs-lisp
   (use-package tool-bar
       :commands tool-bar-mode
+      :init (add-hok 'after-init-hook (apply-partially #'tool-bar-mode -1))
       :init (add-hook 'after-init-hook #'(lambda () (tool-bar-mode -1)))
   )
 #+END_SRC

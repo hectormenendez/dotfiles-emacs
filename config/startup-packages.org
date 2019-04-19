@@ -1,6 +1,7 @@
 #+TITLE: Package Management
 
-***** Prepare package manager to support ~use-package~ and ~quelpa-use-package~.
+** Setup
+Prepare package manager to support ~use-package~ and ~quelpa-use-package~.
 #+BEGIN_SRC emacs-lisp
   (require 'package)
 
@@ -23,7 +24,8 @@
   (package-initialize)
 #+END_SRC
 
-***** Make sure ~quelpa-use-package~ is installed.
+** Installation (if not installed already)
+Make sure ~quelpa-use-package~ is installed.
 if quelpa not present, download and install it so packages can be compiled from source.
 Also, install quelpa-use-package so those packages can be loaded using "use-package"
 (use-package is a dependecy so it won't be necessary to explicitly declare it)
@@ -57,10 +59,10 @@ Also, install quelpa-use-package so those packages can be loaded using "use-pack
   )
 #+END_SRC
 
-***** Initialize ~use-package~ with ~quelpa~ support.
+** Initialization
+Initialize ~use-package~ with ~quelpa~ support.
 #+BEGIN_SRC emacs-lisp
   (require 'quelpa-use-package)
-
   (use-package bind-key :ensure t); Enables :bind (key binding) on use-package
   (use-package delight :ensure t); Enables :delight (custom mode name) on use-package
 #+END_SRC
