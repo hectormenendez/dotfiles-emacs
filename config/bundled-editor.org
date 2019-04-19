@@ -4,7 +4,7 @@
 Controls how the editor works and handles native functionality.
 
 ** General
-*** [[https://github.com/emacs-mirror/emacs/blob/master/lisp/simple.el][simple.el]]
+***** [[https://github.com/emacs-mirror/emacs/blob/master/lisp/simple.el][simple.el]]
 Emacs commands not specifically related to some major mode or to file-handling.
 #+BEGIN_SRC emacs-lisp
   (use-package simple
@@ -16,7 +16,7 @@ Emacs commands not specifically related to some major mode or to file-handling.
   )
 #+END_SRC
 
-*** [[https://github.com/emacs-mirror/emacs/blob/master/lisp/help.el][help.el]]
+***** [[https://github.com/emacs-mirror/emacs/blob/master/lisp/help.el][help.el]]
 Controls what to do with the help buffer.
 #+BEGIN_SRC emacs-lisp
   (use-package help
@@ -26,12 +26,12 @@ Controls what to do with the help buffer.
   )
 #+END_SRC
 
-*** [[https://github.com/emacs-mirror/emacs/blob/master/lisp/server.el][server.el]]
+***** [[https://github.com/emacs-mirror/emacs/blob/master/lisp/server.el][server.el]]
 Once it finishes loading, enable Emacs server so other instances can connect to it.
 #+BEGIN_SRC emacs-lisp
   (use-package server
       :demand t
-      :disable t
+      :disabled
       :init
           (add-hook 'after-init-hook (lambda ()
               (unless (server-running-p) (server-start))
@@ -39,11 +39,10 @@ Once it finishes loading, enable Emacs server so other instances can connect to 
   )
 #+END_SRC
 
-# ** File handling
-# Control various aspects of how files are handled in the editor.
-# #+BEGIN_SRC emacs-lisp
-#   (org-babel-load-file (concat (file-name-as-directory "file-handling") etor/init:index))
-# #+END_SRC
+
+** [[./bundled-editor-files.org][File handling]]
+   Control various aspects of how files are handled in the editor.
+   #+INCLUDE: ./bundled-editor-files.org
 
 # ** Look and Feel
 # Control how the editor looks.

@@ -2,11 +2,6 @@
 
 ***** Setup path management and its minimal requirements.
 #+INCLUDE: ./declarations-path.org
-#+BEGIN_SRC emacs-lisp
-  (etor/path:put "emacs" (expand-file-name user-emacs-directory))
-  (etor/path:put "config" "emacs:config")
-  (etor/path:put "autosave" "emacs:_autosave")
-#+END_SRC
 
 ***** Core Settings
 These settings are set directly in the "C Source Code" so let's consider them Core.

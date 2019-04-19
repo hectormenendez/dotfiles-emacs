@@ -1,37 +1,32 @@
 #+TITLE: File handling
-#+AUTHOR: Hector Menendez
 
-Control various aspects of how files are handled in the editor.
-
-** [[https://github.com/emacs-mirror/emacs/blob/master/lisp/files.el][files.el]]
+**** [[https://github.com/emacs-mirror/emacs/blob/master/lisp/files.el][files.el]]
 Defines most of Emacs's file-handling functions.
 #+BEGIN_SRC emacs-lisp
   (use-package files
       :demand t
       :config
           (setq
-              ;; Handle backups
-              make-backup-files t
-              delete-old-versions t
-              backup-directory-alist (list
-                  (cons "." (expand-file-name "_backups/" user-emacs-directory))
-              )
-              ;; Handle backup version control
-              version-control t; Keep control of backups
-              vc-follow-symlinks t; Don't ask to follow symlinks, just do it.
-              ;; Handle AutoSave
-              auto-save-default nil; Disable auto-saving
-              auto-save-file-name-transforms (list
-                  (list ".*" (expand-file-name "_auto-save-list" user-emacs-directory) t)
-              )
-              ;; Misc
-              require-final-newline nil; Don't end files with newline
+              ;; Backups
+              make-backup-files t; make a backup the first time a file is saved
+              backup-by-copying t; copy file into backup then write buffer on top of it
+              delete-old-versions t; delete excess backup files silently
+              version-control t; always make numeric backups for each save
+              backup-directory-alist; Save all backups in a single directory
+                  (list (cons "." (etor/path:get "backups")))
+
+              ;; AutoSave
+              auto-save-default nil; Disable autosaving alltogether
+              auto-save-file-name-transforms; if ever enabled, save'em all to a folder.
+                  (list (list ".*" (etor/path:get "autosave") t))
+
+              ;; Content
+              require-final-newline nil; Wether to add a newline to the end of files.
           )
   )
-
 #+END_SRC
 
-** [[https://github.com/emacs-mirror/emacs/blob/master/lisp/recentf.el][recentf.el]]
+**** [[https://github.com/emacs-mirror/emacs/blob/master/lisp/recentf.el][recentf.el]]
 Maintains a menu for visiting files that were operated on recently.
 The recentf file list automatically saved across Emacs sessions.
 #+BEGIN_SRC emacs-lisp
@@ -46,7 +41,7 @@ The recentf file list automatically saved across Emacs sessions.
   )
 #+END_SRC
 
-** [[https://github.com/emacs-mirror/emacs/blob/master/lisp/savehist.el][savehist.el]]
+**** [[https://github.com/emacs-mirror/emacs/blob/master/lisp/savehist.el][savehist.el]]
 Many editors (e.g. Vim) have the feature of saving minibuffer history to an external
 file after exit.  This package provides the same feature in Emacs.
 #+BEGIN_SRC emacs-lisp
@@ -63,7 +58,7 @@ file after exit.  This package provides the same feature in Emacs.
   )
 #+END_SRC
 
-** [[https://github.com/emacs-mirror/emacs/blob/master/lisp/saveplace.el][saveplace.el]]
+**** [[https://github.com/emacs-mirror/emacs/blob/master/lisp/saveplace.el][saveplace.el]]
 Automatically save place in files, so that visiting them later automatically moves point
 to the saved position, when the file is first found.
 #+BEGIN_SRC emacs-lisp
@@ -74,7 +69,7 @@ to the saved position, when the file is first found.
   )
 #+END_SRC
 
-** [[https://github.com/emacs-mirror/emacs/blob/master/lisp/autorevert.el][autorevert.el]]
+**** [[https://github.com/emacs-mirror/emacs/blob/master/lisp/autorevert.el][autorevert.el]]
 Whenever a file is changed externally, auto update it if it's opened.
 #+BEGIN_SRC emacs-lisp
   (use-package autorevert
@@ -89,3 +84,13 @@ Whenever a file is changed externally, auto update it if it's opened.
   )
 #+END_SRC
 
+**** [[https://github.com/emacs-mirror/emacs/blob/master/lisp/vc-hooks.el][vc-hooks.el]]
+#+BEGIN_SRC emacs-lisp
+  (use-package vc-hooks
+      :demand t
+      :config
+          (setq
+              vc-follow-symlinks t; Don't ask to follow symlinks, just do it.
+          )
+  )
+#+END_SRC

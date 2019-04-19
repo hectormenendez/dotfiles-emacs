@@ -1,10 +1,5 @@
 #+TITLE: Bundled features
-#+AUTHOR: Hector Menendez
 
-** Editor
+** [[./bundled-editor.org][Editor]]
    These features control how the Editor looks and behaves.
-#+BEGIN_SRC emacs-lisp tangle: README.li
-  (etor/path:put "sections-bundled-editor" "sections-bundled:editor")
-  ;; (org-babel-load-file (concat (etor/path:get "sections-bundled-editor") etor/init:index))
-  (message "!!!! a huevoputo")
-#+END_SRC
+   #+INCLUDE: ./bundled-editor.org
