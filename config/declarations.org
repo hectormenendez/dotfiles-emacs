@@ -3,14 +3,14 @@
 These declarations will be included by the corresponding requiring library.
 
 ** [[./declarations-path.org][Path managemement]] :startup-bundled:
-   Functions that allow to centralise path management througout the config.
+Functions that allow to centralise path management througout the config.
 
 ** [[./declarations-frame.org][Frame State]]
-   Functions that allow to manage state for frame position and shape.
+Functions that allow to manage state for frame position and shape.
 
 ** [[./declarations-projectile.org][Projectile helpers]]
-   Functions that give extra functionality to Projectile
+Functions that give extra functionality to Projectile
 
 ** [[./declarations-evil.org][Evil mode]]
-   Add functionlity when evil mode is enabled.
+Add functionlity when evil mode is enabled.
 

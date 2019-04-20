@@ -1,9 +1,9 @@
 #+TITLE: Bundled Startup
 
-*** Setup path management and its minimal requirements.
+*** Setup Path management
 #+INCLUDE: ./declarations-path.org
 
-*** Core Settings
+*** Setup Core settings
 These settings are set directly in the "C Source Code" so let's consider them Core.
 #+BEGIN_SRC emacs-lisp
   (setq
@@ -16,8 +16,8 @@ These settings are set directly in the "C Source Code" so let's consider them Co
   )
 #+END_SRC
 
-*** Startup Settings
-These are defined in [[https://github.com/emacs-mirror/emacs/blob/master/lisp/startup.el][startup.el]]
+*** Setup Startup Settings
+These settings are initially defined in [[https://github.com/emacs-mirror/emacs/blob/master/lisp/startup.el][startup.el]]
 #+BEGIN_SRC emacs-lisp
   (setq
       inhibit-startup-screen 1; Don't show the welcome screen
@@ -38,10 +38,10 @@ These are defined in [[https://github.com/emacs-mirror/emacs/blob/master/lisp/st
 #+END_SRC
 
 *** Overwrite the default echo-area-message.
-Show how much time it took to Emacs to initialized.
+Show how much time it took to Emacs to initialize
 #+BEGIN_SRC emacs-lisp
-    (defun display-startup-echo-area-message ()
-        "The default message shown in the echo area message"
-        (message (concat "Emacs took " (emacs-init-time) " to load."))
-    )
+  (defun display-startup-echo-area-message ()
+      "The default message shown in the echo area message"
+      (message (concat "Emacs took " (emacs-init-time) " to load."))
+  )
 #+END_SRC

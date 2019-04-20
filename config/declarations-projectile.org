@@ -1,16 +1,16 @@
 #+TITLE: Projectile declarations
 
-*** Variables
+** Variables
+*** The location for projectile paths
 #+BEGIN_SRC emacs-lisp
-  ;; The location for projectile files
   (etor/path:put "projectile" "emacs:_projectile")
 #+END_SRC
 
-*** Functions
-***** Get current's project's autosave file path
+** Functions
+*** Get buffer savefile path
 #+BEGIN_SRC emacs-lisp
   (defun etor/projectile:buffers-get-path ()
-      "Retrieve the location for the savefile."
+      "Retrieve the location for current's project buffers savefile."
       (expand-file-name
           (replace-regexp-in-string "/" "#" (projectile-project-root))
           (etor/path:get "projectile")
@@ -18,10 +18,10 @@
   )
 #+END_SRC
 
-***** Save opened buffers in project and close them
+*** Save and kill buffers
 #+BEGIN_SRC emacs-lisp
   (defun etor/projectile:buffers-save-and-kill ()
-      "Save currently open buffers to a file."
+      "Save opened buffers in project to a file and close them"
       (interactive)
       (let
           (
@@ -52,10 +52,10 @@
   )
 #+END_SRC
 
-***** Open current's project saved buffers
+*** Load saved buffers
 #+BEGIN_SRC emacs-lisp
   (defun etor/projectile:buffers-load ()
-      "Load previously open buffers from a file."
+      "Open current's project saved buffers"
       (interactive)
       (let
           (

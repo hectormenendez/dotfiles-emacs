@@ -1,6 +1,6 @@
 #+TITLE: Evil mode declarations
 
-***** Toggle making current buffer use the whole window.               :test:
+*** Window toggle
 #+BEGIN_SRC emacs-lisp
   (defun etor/evil:window-toggle ()
       "Toggle making current buffer use the whole window."
@@ -15,9 +15,9 @@
   )
 #+END_SRC
 
-***** Delete whitespace backwards to the next tab-stop, otherwise delete one character.
+*** Smart backspace
 #+BEGIN_SRC emacs-lisp
-  (defun etor/backspace-to-tab-stop ()
+  (defun etor/evil:backspace ()
       "Delete whitespace backwards to the next tab-stop, otherwise delete one character."
       (interactive)
       (if
