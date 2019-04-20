@@ -1,9 +1,41 @@
 #+TITLE: Look and Feel
-#+AUTHOR: Hector Menendez
 
-Control how the editor looks.
+** General
 
-** [[https://github.com/emacs-mirror/emacs/blob/master/lisp/frame.el][frame.el]]
+*** [[https://github.com/emacs-mirror/emacs/blob/master/lisp/simple.el][simple.el]]
+Emacs commands not specifically related to some major mode or to file-handling.
+#+BEGIN_SRC emacs-lisp
+  (use-package simple
+      :demand t
+      :config
+          (line-number-mode 1); Show the current-row number on mode-line
+          (column-number-mode 1); Show the current-column number on mode-line
+          (global-hl-line-mode 1); Highlight the current line
+  )
+#+END_SRC
+
+*** [[https://github.com/emacs-mirror/emacs/blob/master/lisp/display-line-numbers.el][display-line-numbers.el]]
+Handles line-numbers display on the editor.
+#+BEGIN_SRC emacs-lisp
+  (use-package display-line-numbers
+      :commands display-line-numbers-mode
+      :init
+          (add-hook 'prog-mode-hook #'display-line-numbers-mode)
+          (add-hook 'org-mode-hook #'display-line-numbers-mode)
+      :config
+          (setq
+              ;; Format the numbers bar
+              display-line-numbers "%4d \u2502 "
+              ;; Use relative numbers
+              display-line-numbers-type 'relative
+          )
+  )
+#+END_SRC
+
+
+** Frame
+
+*** [[https://github.com/emacs-mirror/emacs/blob/master/lisp/frame.el][frame.el]]
 Everything related to the frame (window in OS' terms)
 #+BEGIN_SRC emacs-lisp
   (use-package frame
@@ -14,27 +46,12 @@ Everything related to the frame (window in OS' terms)
   )
 #+END_SRC
 
-** [[https://github.com/emacs-mirror/emacs/blob/master/lisp/display-line-numbers.el][display-line-numbers.el]]
-Handles line-numbers display on the editor.
-#+BEGIN_SRC emacs-lisp
-  (use-package display-line-numbers
-      :commands display-line-numbers-mode
-      :init (add-hook 'prog-mode-hook #'display-line-numbers-mode)
-      :config
-          (setq
-              ;; Format the numbers bar
-              display-line-numbers "%4d \u2502 "
-              ;; Use relative numbers
-              display-line-numbers-type 'relative
-          )
-  )
-#+END_SRC
-** [[https://github.com/emacs-mirror/emacs/blob/master/lisp/tool-bar.el][tool-bar.el]]
+*** [[https://github.com/emacs-mirror/emacs/blob/master/lisp/tool-bar.el][tool-bar.el]]
 Shouldn't this be part of the frame? well it isn't.
 #+BEGIN_SRC emacs-lisp
   (use-package tool-bar
       :commands tool-bar-mode
-      :init (add-hok 'after-init-hook (apply-partially #'tool-bar-mode -1))
+      :init (add-hook 'after-init-hook (apply-partially #'tool-bar-mode -1))
       :init (add-hook 'after-init-hook #'(lambda () (tool-bar-mode -1)))
   )
 #+END_SRC
@@ -48,7 +65,7 @@ Yeah, this is most definitely part of the frame. 🙄
   )
 #+END_SRC
 
-** [[https://github.com/emacs-mirror/emacs/blob/master/lisp/menu-bar.el][menu-bar.el]]
+*** [[https://github.com/emacs-mirror/emacs/blob/master/lisp/menu-bar.el][menu-bar.el]]
 You've got to be kidding, this is a part of the frame!
 #+BEGIN_SRC emacs-lisp
   (use-package menu-bar
@@ -81,3 +98,4 @@ You've got to be kidding, this is a part of the frame!
           (define-key global-map (kbd "M-Z") 'undo-tree-redo); orig: same as M-z
   )
 #+END_SRC
+

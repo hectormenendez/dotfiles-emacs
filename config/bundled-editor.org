@@ -1,24 +1,10 @@
 #+TITLE: Bundled editor features
 
-** General
-
-*** [[https://github.com/emacs-mirror/emacs/blob/master/lisp/simple.el][simple.el]]
-Emacs commands not specifically related to some major mode or to file-handling.
-#+BEGIN_SRC emacs-lisp
-  (use-package simple
-      :demand t
-      :config
-          ;; TODO: This should be on the look and feel section.
-          (column-number-mode 1); Show the current-column number
-          (global-hl-line-mode 1); Highlight the current line
-  )
-#+END_SRC
-
 ** [[./bundled-editor-files.org][File handling]]
 Control various aspects of how files are handled in the editor.
 #+INCLUDE: ./bundled-editor-files.org
 
 
-# ** [[./bundled-editor-visual.org][Look and Feel]]
-# Control how the editor looks.
-# #+INCLUDE: ./bundled-editor-visual.org
+** [[./bundled-editor-visual.org][Look and Feel]]
+Control how the editor looks.
+#+INCLUDE: ./bundled-editor-visual.org
