@@ -3,3 +3,7 @@
 ** [[./bundled-editor.org][Editor]]
 These features control how the Editor looks and behaves.
 #+INCLUDE: ./bundled-editor.org
+
+** [[./bundled-modes.org][Modes]]
+Additional features bundled with the editor.
+#+INCLUDE: ./bundled-modes.org

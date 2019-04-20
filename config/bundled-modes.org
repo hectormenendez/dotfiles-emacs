@@ -1,0 +1,27 @@
+#+TITLE: Bundled modes
+
+*** Help buffers
+These are the buffers that appear when browsing the Emacs help.
+#+BEGIN_SRC emacs-lisp
+  (use-package help
+      :commands help-mode
+      :config
+          (setq help-window-select t); whenever the help buffer appears, select it.
+  )
+#+END_SRC
+
+*** Server
+Allows you to run the instance of Emacs as a server, so EmacsClient can connect without
+having to reload the init file. *Right now I have it disabled.*
+#+BEGIN_SRC emacs-lisp
+  (use-package server
+      :demand t
+      :disabled
+      :init
+          (add-hook 'after-init-hook (lambda ()
+              (unless (server-running-p) (server-start))
+          ))
+  )
+#+END_SRC
+
+
