@@ -68,6 +68,11 @@ Also, install quelpa-use-package so those packages can be loaded using "use-pack
 Initialize ~use-package~ with ~quelpa~ support.
 #+BEGIN_SRC emacs-lisp
   (require 'quelpa-use-package)
+
+  ;; Uncomment the following to generate statistics about the loaded packages
+  ;; (super useful when profiling) after init run (use-package-report)
+  ;; (setq use-package-compute-statistics t)
+
   (use-package bind-key :ensure t); Enables :bind (key binding) on use-package
   (use-package delight :ensure t); Enables :delight (custom mode name) on use-package
 #+END_SRC

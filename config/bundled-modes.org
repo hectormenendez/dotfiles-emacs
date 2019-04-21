@@ -27,11 +27,6 @@ having to reload the init file. *Right now I have it disabled.*
 Editor major mode which englobes all programming languages.
 #+BEGIN_SRC emacs-lisp
   (use-package prog-mode
-    :commands prog-mode
-    :config
-        ()
-  )
-  (use-package prog-mode
       :commands prog-mode
       :config
           (setq
@@ -53,6 +48,7 @@ authoring documents (like this one).
       :config
           (setq
               org-hide-leading-stars t; Don't show the stars on headings.
+              org-return-follows-link t; When RET is pressed over a link, it opens it.
               org-startup-folded t; make headings fold on startup
               org-startup-indented t; Automatically indent according to headings.
           )

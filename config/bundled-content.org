@@ -1,0 +1,110 @@
+#+TITLE: Bundled content features
+
+** [[https://github.com/emacs-mirror/emacs/blob/master/lisp/international/mule.el][mule.el]]
+Internationalization package. Set everything to UTF-8.
+#+BEGIN_SRC emacs-lisp
+  (use-package mule
+      :init
+          (defun use-package/mule-hook ()
+              (setq
+                  locale-coding-system 'utf-8
+                  buffer-file-coding-system 'utf-8
+              )
+              (prefer-coding-system 'utf-8)
+              (set-charset-priority 'unicode)
+              (set-language-environment 'utf-8)
+              (set-default-coding-systems 'utf-8)
+              (set-terminal-coding-system 'utf-8)
+              (set-keyboard-coding-system 'utf-8)
+              (set-selection-coding-system 'utf-8)
+          )
+          (add-hook 'after-init-hook #'use-package/mule-hook)
+  )
+#+END_SRC
+
+** [[https://github.com/emacs-mirror/emacs/blob/master/lisp/paren.el][paren.el]]
+Shows matching parenthesis.
+#+BEGIN_SRC emacs-lisp
+  (use-package paren
+      :commands show-paren-mode
+      :init
+          ; it only makes sese to enable this wile programming.
+          (add-hook 'prog-mode-hook #'show-paren-mode)
+  )
+#+END_SRC
+
+** [[https://github.com/emacs-mirror/emacs/blob/master/lisp/electric.el][electric.el]]
+Automates content insertion / adaptation. it only makes sense to enable it when programming.
+#+BEGIN_SRC emacs-lisp
+  (use-package electric
+      :commands (
+          electric-indent-mode
+          electric-quote-mode
+          electric-pair-mode
+      )
+      :init
+          (defun use-package/electric-hook ()
+              (electric-indent-mode 1)
+              (electric-quote-mode 1)
+              (electric-pair-mode 1)
+          )
+          (add-hook 'prog-mode-hook #'use-package/electric-hook)
+  )
+#+END_SRC
+
+** [[https://github.com/emacs-mirror/emacs/blob/master/lisp/whitespace.el][whitespace.el]]
+Manages whitespace behaviour and setup.
+#+BEGIN_SRC emacs-lisp
+  (use-package whitespace
+      :delight whitespace-mode
+      :commands whitespace-mode
+      :init
+          (add-hook 'prog-mode-hook #'whitespace-mode)
+      :config
+          (setq
+              whitespace-style '(face tabs tab-mark trailing lines-tail); Highlight these
+              whitespace-line-column fill-column; Use the fill-column to mark overflowed
+              whitespace-display-mappings '(; Customize the look for these characters
+                  (tab-mark ?\t [?› ?\t])
+                  (newline-mark 10  [36 10])
+              )
+          )
+  )
+#+END_SRC
+
+** [[https://github.com/emacs-mirror/emacs/blob/master/lisp/register.el][register.el]]
+Enables register extensions, allowing saving several pieces of of buffer state
+to named variables.
+#+BEGIN_SRC emacs-lisp
+  (use-package register :demand t)
+#+END_SRC
+
+** indent.el
+Indentation setup.  This was a head scratcher for me, ~indent.el~ does not have a
+~(provide 'indent)~ statement at the end, making it impossible (AFAIK) to use
+it with ~use-package~, after lots and lots of testing, I can't find the exact
+moment where the file is loaded, I even tried to check it at the beginning of
+the init file, but it seems to be loaded already, I'm tired of dealing with
+this so my solution is going to be to disable the requiring of the library
+via ~use-package~ and just set hooks assuming the package is already there.
+#+BEGIN_SRC emacs-lisp
+  (use-package indent
+      :no-require t; impedes requiring this library and runs config immediately.
+      :init
+          (defun use-package/indent-hook ()
+              (setq
+                  indent-tabs-mode nil; Always use spaces, not tabs.
+                  indent-line-function 'indent-relative; indent relative to last line.
+                  tab-always-indent t; The tab key will always indent (duh)
+                  tab-stop-list '(4 8 12 16 20 24 28 32 36 40 44 48 52 56 60 64 68 72 76 80 84)
+              )
+          )
+          (defun use-package/indent-elisp-hook ()
+              ;; I don't follow Lisp indenting guidelines, so the default indentation
+              ;; it's hard to follow, indent normally.
+              (setq-local lisp-body-indent tab-width)
+          )
+          (add-hook 'emacs-lisp-mode-hook #'use-package/indent-elisp-hook)
+          (add-hook 'prog-mode-hook #'use-package/indent-hook)
+  )
+#+END_SRC
