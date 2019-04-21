@@ -59,4 +59,3 @@ authoring documents (like this one).
   )
 #+END_SRC
 
-

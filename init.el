@@ -66,6 +66,8 @@
                 (apply 'insert (reverse contents))
             )
             (message "> TRANSPILED %s ..." file-el)
+            ;; TODO: Byte-compile the file for further speed, it's not working tho.
+            ;; (byte-compile-file file-el)
             (load-file file-el)
         ))
     )
