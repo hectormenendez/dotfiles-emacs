@@ -15,7 +15,6 @@ Allows you to run the instance of Emacs as a server, so EmacsClient can connect 
 having to reload the init file. *Right now I have it disabled.*
 #+BEGIN_SRC emacs-lisp
   (use-package server
-      :demand t
       :disabled
       :init
           (add-hook 'after-init-hook (lambda ()
@@ -27,48 +26,37 @@ having to reload the init file. *Right now I have it disabled.*
 *** Programming Mode
 Editor major mode which englobes all programming languages.
 #+BEGIN_SRC emacs-lisp
-(use-package prog-mode
+  (use-package prog-mode
     :commands prog-mode
     :config
-        ;; Normally prettify-symbols makes a good work replacing symbols, sadly,
-        ;; this breaks the ligature functionallity of fonts that have it (like Fira Code).
-        ;; instead, disable it and setup ligatures manually.
-        (global-prettify-symbols-mode 0)
-        (let
-            ((alist '(
-                (33 . ".\\(?:\\(?:==\\|!!\\)\\|[!=]\\)")
-                (35 . ".\\(?:###\\|##\\|_(\\|[#(?[_{]\\)")
-                (36 . ".\\(?:>\\)")
-                (37 . ".\\(?:\\(?:%%\\)\\|%\\)")
-                (38 . ".\\(?:\\(?:&&\\)\\|&\\)")
-                (42 . ".\\(?:\\(?:\\*\\*/\\)\\|\\(?:\\*[*/]\\)\\|[*/>]\\)")
-                (43 . ".\\(?:\\(?:\\+\\+\\)\\|[+>]\\)")
-                (45 . ".\\(?:\\(?:-[>-]\\|<<\\|>>\\)\\|[<>}~-]\\)")
-                (46 . ".\\(?:\\(?:\\.[.<]\\)\\|[.=-]\\)")
-                (47 . ".\\(?:\\(?:\\*\\*\\|//\\|==\\)\\|[*/=>]\\)")
-                (48 . ".\\(?:x[a-zA-Z]\\)")
-                (58 . ".\\(?:::\\|[:=]\\)")
-                (59 . ".\\(?:;;\\|;\\)")
-                (60 . ".\\(?:\\(?:!--\\)\\|\\(?:~~\\|->\\|\\$>\\|\\*>\\|\\+>\\|--\\|<[<=-]\\|=[<=>]\\||>\\)\\|[*$+~/<=>|-]\\)")
-                (61 . ".\\(?:\\(?:/=\\|:=\\|<<\\|=[=>]\\|>>\\)\\|[<=>~]\\)")
-                (62 . ".\\(?:\\(?:=>\\|>[=>-]\\)\\|[=>-]\\)")
-                (63 . ".\\(?:\\(\\?\\?\\)\\|[:=?]\\)")
-                (91 . ".\\(?:]\\)")
-                (92 . ".\\(?:\\(?:\\\\\\\\\\)\\|\\\\\\)")
-                (94 . ".\\(?:=\\)")
-                (119 . ".\\(?:ww\\)")
-                (123 . ".\\(?:-\\)")
-                (124 . ".\\(?:\\(?:|[=|]\\)\\|[=>|]\\)")
-                (126 . ".\\(?:~>\\|~~\\|[>=@~-]\\)")
-            )))
-            (dolist
-                (char-regexp alist)
-                (set-char-table-range composition-function-table
-                    (car char-regexp)
-                    `([,(cdr char-regexp) 0 font-shape-gstring])
-                )
-            )
-        )
-)
+        ()
+  )
+  (use-package prog-mode
+      :commands prog-mode
+      :config
+          (setq
+              ; Tell Emacs to replace certain character combinations with special ligatures
+              prettify-symbols-alist (append prettify-symbols-alist etor/ligature-alist)
+          )
+          (global-prettify-symbols-mode 1)
+  )
 #+END_SRC
+
+*** ORG Mode
+A major mode which allows you to keep notes, maintain TODO list, plan projects and
+authoring documents (like this one).
+#+BEGIN_SRC emacs-lisp
+  (use-package org
+      :ensure org-plus-contrib; Use the latest version from repository instead of bundled
+      :pin org
+      :commands org-mode
+      :config
+          (setq
+              org-hide-leading-stars t; Don't show the stars on headings.
+              org-startup-folded t; make headings fold on startup
+              org-startup-indented t; Automatically indent according to headings.
+          )
+  )
+#+END_SRC
+
 
